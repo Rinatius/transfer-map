@@ -8,12 +8,16 @@ import {
 
 import {
   csv,
-  json
+  json,
+  nest,
+  sum,
+  extent,
+  scaleLinear
 } from 'd3'
 
 const { Set } = require('immutable');
 
-const configURL = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmap_config.json?alt=media&token=dd4882b0-08e6-4111-b5f1-143019a7a962'
+const configURL = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmap_config.json?alt=media&token=8b5d742a-6f81-46ef-9c61-79ef09e714e6'
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 
 
@@ -21,12 +25,16 @@ class App extends Component {
 
   config = {};
   countries = Set([]);
+  pairs = [];
+  capitals = {};
+  dataScaler = null;
 
   state = {
     ready: false,
     conf: {},
     data: [],
-    visibleCountries: Set([])
+    visibleCountries: Set([]),
+    visiblePairs: []
   }
 
   extractCountries = (table) => {
@@ -34,6 +42,19 @@ class App extends Component {
       this.countries = this.countries.add(row.from_country)
       this.countries = this.countries.add(row.to_country)
     })
+  }
+
+  nestPairs = (data) => {
+    return nest()
+      .key(d => d.from_country)
+      .key(d => d.to_country)
+      .rollup(value => {
+        return {
+          count: value.length,
+          total: sum(value, d => d.amount)
+        }
+    })
+      .entries(data)
   }
 
   showAllHandler = () => this.setState({visibleCountries: this.countries});
@@ -47,23 +68,37 @@ class App extends Component {
   }
 
   componentDidMount() {
-    json(configURL, config => config)
+    json(configURL, c => c)
       .then(conf => {
-        this.config = conf;
-        csv(conf.csvUrl, data => {
+        this.config = conf
+        const table = csv(conf.csvUrl, row => {
           return {
-            from_country: data[conf.from_country],
-            to_country: data[conf.to_country],
-            amount: data[conf.amount]
+            from_country: row[conf.from_country],
+            to_country: row[conf.to_country],
+            amount: row[conf.amount]
           }
         })
-          .then(table => {
+        const capitals = json(conf.capitals, c => c)
+        Promise.all([table, capitals])
+          .then(data => {
+            const [table, capitals] = data
             this.extractCountries(table)
-            console.log(this.countries)
+            this.pairs = this.nestPairs(table);
+            const totals = []
+            this.pairs.forEach(d => d.values.forEach(t => {
+              totals.push(t.value.total)
+            }))
+            this.dataScaler = scaleLinear()
+              .domain(extent(totals))
+              .range([0, 100])
+            this.capitals = nest()
+              .key(d => d.name)
+              .map(capitals)
             this.setState({
               data: table,
               ready: true,
-              visibleCountries: this.countries
+              visibleCountries: this.countries,
+              visiblePairs: this.pairs
             })
           })
       })
