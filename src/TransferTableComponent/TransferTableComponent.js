@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MaterialTable from 'material-table';
-import doJSON from '../DoJSON';
+import config from '../DoJSON';
 import { csv, nest, csvParse } from 'd3';
 // import { ReactComponent as Icon} from '';
 import FilterRow from './m-table-filter-row'
 
 
+const objColumns = Object.values(config.columns)
 
-const objJSON = JSON.parse(doJSON)
-const objColumns = Object.values(objJSON.columns)
-
-const csvUrl = objJSON.csvUrl
+const csvUrl = config.csvUrl
 
 
 
