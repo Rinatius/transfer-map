@@ -1,0 +1,33 @@
+transactionDate,paidBy,paidTo,amount,country,purpose,type,bankSender,confidence,proof
+02-26-2010,Egor,James,15000,Tunis,Transfer,Bank,Citibank,confirmed,internal
+04-01-2015,Farrukh,Anton,10000,Russia,Land,Bank,HBSC,confirmed,bank
+01-10-2020,Almaz,Vlad,40000,China,Land,Bank,Citibank,unconfirmed,electronic
+07-10-2003,Nurislam,Ilya,15898,USA,Transfer,Bank,Wells Fargo,confirmed,electronic
+02-04-2012,Egor,James,10000,Argentina,Travel,Bank,Citibank,unconfirmed,internal
+09-14-2020,Farrukh,Vlad,9990,USA,Transfer,Bank,Credit Suisse,confirmed,customs
+02-12-2017,Almaz,James,300500,Russia,Transfer,Bank,Wells Fargo,confirmed,internal
+11-17-2020,Nurislam,Anton,79289,Russia,Textiles,Bank,HBSC,unconfirmed,internal
+02-26-2010,Egor,James,15000,Tunis,Transfer,Bank,Citibank,confirmed,internal
+04-01-2015,Farrukh,Anton,10000,Russia,Land,Bank,HBSC,confirmed,bank
+01-10-2020,Almaz,Vlad,40000,China,Land,Bank,Citibank,unconfirmed,electronic
+07-10-2003,Nurislam,Ilya,15898,USA,Transfer,Bank,Wells Fargo,confirmed,electronic
+02-04-2012,Egor,James,10000,Argentina,Travel,Bank,Citibank,unconfirmed,internal
+09-14-2020,Farrukh,Vlad,9990,USA,Transfer,Bank,Credit Suisse,confirmed,customs
+02-12-2017,Almaz,James,300500,Russia,Transfer,Bank,Wells Fargo,confirmed,internal
+11-17-2020,Nurislam,Anton,79289,Russia,Textiles,Bank,HBSC,unconfirmed,internal
+02-26-2010,Egor,James,15000,Tunis,Transfer,Bank,Citibank,confirmed,internal
+04-01-2015,Farrukh,Anton,10000,Russia,Land,Bank,HBSC,confirmed,bank
+01-10-2020,Almaz,Vlad,40000,China,Land,Bank,Citibank,unconfirmed,electronic
+07-10-2003,Nurislam,Ilya,15898,USA,Transfer,Bank,Wells Fargo,confirmed,electronic
+02-04-2012,Egor,James,10000,Argentina,Travel,Bank,Citibank,unconfirmed,internal
+09-14-2020,Farrukh,Vlad,9990,USA,Transfer,Bank,Credit Suisse,confirmed,customs
+02-12-2017,Almaz,James,300500,Russia,Transfer,Bank,Wells Fargo,confirmed,internal
+11-17-2020,Nurislam,Anton,79289,Russia,Textiles,Bank,HBSC,unconfirmed,internal
+02-26-2010,Egor,James,15000,Tunis,Transfer,Bank,Citibank,confirmed,internal
+04-01-2015,Farrukh,Anton,10000,Russia,Land,Bank,HBSC,confirmed,bank
+01-10-2020,Almaz,Vlad,40000,China,Land,Bank,Citibank,unconfirmed,electronic
+07-10-2003,Nurislam,Ilya,15898,USA,Transfer,Bank,Wells Fargo,confirmed,electronic
+02-04-2012,Egor,James,10000,Argentina,Travel,Bank,Citibank,unconfirmed,internal
+09-14-2020,Farrukh,Vlad,9990,USA,Transfer,Bank,Credit Suisse,confirmed,customs
+02-12-2017,Almaz,James,300500,Russia,Transfer,Bank,Wells Fargo,confirmed,internal
+11-17-2020,Nurislam,Anton,79289,Russia,Textiles,Bank,HBSC,unconfirmed,internal
