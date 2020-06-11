@@ -1,7 +1,8 @@
 
 const tableOptions = {
 
-    csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2Fmockup.csv?alt=media&token=3cf441b4-9082-467d-9cdc-eb8322f68d26',
+    csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2Fmockup.csv?alt=media&token=82d1e6d6-e634-492d-a7a7-32223735c25f',
+    
     columns: {
         transactionDate: {
             title: "Transaction date",

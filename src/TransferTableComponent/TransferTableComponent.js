@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MaterialTable from 'material-table';
-import doJSON from './DoJSON';
+import doJSON from '../DoJSON';
 import { csv, nest, csvParse } from 'd3';
 // import { ReactComponent as Icon} from '';
 import FilterRow from './m-table-filter-row'
