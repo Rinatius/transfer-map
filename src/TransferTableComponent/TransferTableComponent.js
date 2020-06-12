@@ -18,6 +18,14 @@ class TransferTableComponent extends Component {
 		this.setData()
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.filterCountry !== this.props.filterCountry) {
+			if (this.props.filterCountry !== '') {
+				this.filterCountry(this.props.filterCountry)
+			}
+		}
+	}
+
 	setData = () => {
 		this.setState({ data: this.props.data })
 		let newData = this.getLookupData(this.props.data)
@@ -63,7 +71,15 @@ class TransferTableComponent extends Component {
 			})
 		})
 	}
-
+	
+	filterCountry = (country) => {
+		objColumns.forEach(col => {
+			if (col.field === "country") {
+				col.tableData.filterValue = [country]
+			}
+		})
+		this.setState({columns: objColumns})
+	}
 
 	resetFilters = () => {
 		objColumns.forEach(col => {
@@ -81,9 +97,9 @@ class TransferTableComponent extends Component {
 			<MaterialTable
 				columns={this.state.columns}
 				data={this.state.data}
-
 				components={{
-					FilterRow: props => <FilterRow {...props} />,
+				FilterRow: props => {
+					return	<FilterRow {...props}/>},
 					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>
 				}}
 

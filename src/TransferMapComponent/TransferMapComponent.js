@@ -18,7 +18,6 @@ import {
 } from 'd3'
 
 import config from '../config';
-//import styles from './TransferMapComponent.module.css'
 
 const { Set } = require('immutable');
 
@@ -67,10 +66,10 @@ class TransferMapComponent extends Component {
 
   countryClickHandler = (country) => {
     if (this.countries.has(country)) {
-
       this.setState({
         focusCountry: country
       })
+      this.props.handleCountryClick(country)
     }
   }
 
@@ -117,7 +116,8 @@ class TransferMapComponent extends Component {
             scale: 230,
             xOffset: 1000,
             yOffset: 50
-          }}>
+          }}
+          handleCountryClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map(geo => {
@@ -145,7 +145,7 @@ class TransferMapComponent extends Component {
               fromCountry.values.map(toCountry => {
                 //console.log(this.capitals)
                 //console.log(this.capitals.get(fromCountry.key))
-                console.log(toCountry)
+                // console.log(toCountry)
                 return <Line
                   from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
                   to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
