@@ -198,27 +198,15 @@ class TransferMapComponent extends Component {
 
                   <text
                     textAnchor="middle"
-                     y={-30}
-                    style={{
-                      color: '#ffffff',
-                      font_family: 'Open Sans',
-                      font_size: '12px',
-                      font_weight: 700,
-                      letter_spacing: '-0.26px'
-                    }}
+                    y={-30}
+                    style={config.mapOptions.label_text_style}
                   >
                     {('$' + toCountry.value.total + '\n')}
                   </text>
                   <text
                     textAnchor="middle"
                     y={-15}
-                    style={{
-                      color: '#ffffff',
-                      font_family: 'Open Sans',
-                      font_size: '10px',
-                      font_weight: 700,
-                      letter_spacing: '-0.26px'
-                    }}
+                    style={config.mapOptions.label_text_style}
                   >
                     {(toCountry.value.count + ' ' + 'transactions')}
                   </text>
