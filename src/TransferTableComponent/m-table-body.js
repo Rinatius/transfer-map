@@ -122,13 +122,6 @@ class MTableBody extends React.Component {
     ));
   }
 
-  ///////////Здесь был Атай///////////
-  resetFilters = () => {
-
-    console.log(this.props.components.FilterRow.props.columns)
-    
-  }
-  ///////////Атай был здесь///////////
 
   render() {
     let renderData = this.props.renderData;
@@ -156,7 +149,7 @@ class MTableBody extends React.Component {
             isTreeData={this.props.isTreeData}
             filterCellStyle={this.props.options.filterCellStyle}
             hideFilterIcons={this.props.options.hideFilterIcons}
-            resetFilters={this.resetFilters} // И тут был Атай
+            resetFilters={this.props.resetFilters} // И тут был Атай
           />
         }
 

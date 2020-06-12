@@ -207,7 +207,7 @@ class MTableFilterRow extends React.Component {
   //   })
   // }
 
-    columns.splice(-1, 0, 
+    columns.splice(-1, 1, 
     <TableCell key="key-action-column">
       <Button 
           onClick={this.props.resetFilters}

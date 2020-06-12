@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import MaterialTable from 'material-table';
 import config from '../config';
-import { csv, nest, csvParse } from 'd3';
-// import { ReactComponent as Icon} from '';
+import { csv } from 'd3';
 import FilterRow from './m-table-filter-row'
+import MTBody from './m-table-body'
 
 
 const objColumns = Object.values(config.columns)
@@ -14,7 +13,6 @@ const csvUrl = config.csvUrl
 
 
 class TransferTableComponent extends Component {
-
 	state = {
 		columns: [],
 		data: []
@@ -25,8 +23,6 @@ class TransferTableComponent extends Component {
 
 	componentDidMount() {
 		this.setData()
-		this.loadImage()
-		
 	}
 
 	setData = () => {
@@ -36,12 +32,13 @@ class TransferTableComponent extends Component {
 				this.setState({ data: this.tmpData })
 				let newData = this.getLookupData(this.state.data)	
 				this.initLookup(newData)
+				this.loadImage()
 			})
 	}
 
 	loadImage = () => {
 		objColumns.map(obj => {
-			if (obj.lookup !== '') {
+			if (obj.type === 'image' && obj.lookup !== '') {
 				let keys = Object.keys(obj.lookup)
 				keys.map(key => {
 					obj.lookup[key] = <img src={obj.lookup[key]} alt={key} />
@@ -49,6 +46,7 @@ class TransferTableComponent extends Component {
 				obj.cellStyle = { textAlign: 'center' }
 			}
 		})
+		this.setState({columns: objColumns})
 	}
 
 	
@@ -62,7 +60,6 @@ class TransferTableComponent extends Component {
 				newData[col][val] = val
 			})
 		})	
-		// console.log(newData)
 		return [newData, cols]
 	}
 
@@ -72,13 +69,18 @@ class TransferTableComponent extends Component {
 
 		keys.map(key => {
 			objColumns.forEach(col => {
-				if (col.field === key && col.lookup === '' && col.type === '') {
+				if (col.field === key && col.lookup === '' && (col.type === '' || col.type === 'numeric')) {
 					col.lookup = newData[key]
-					// console.log(col.lookup)
 				}
 			})
 		})
-		// console.log(objColumns)
+	}
+
+
+	resetFilters = () => {
+		objColumns.forEach(col => {
+			col.tableData.filterValue = ""
+		})
 		this.setState({columns: objColumns})
 	}
 
@@ -88,20 +90,12 @@ class TransferTableComponent extends Component {
 	render() {
 		return (
 			<MaterialTable
-				// columns={[
-				//   objJSON.column1,
-				//   objJSON.column2,
-				//   // { title: 'Surname', field: 'surname', grouping:true, filtering: true },
-				//   { title: 'Birth Year', field: 'birthYear', type: 'date', filtering: true },
-				//   { title: 'Birth City', field: 'birthCity', lookup: { confirmed: <DoneIcon/>, unconfirmed: 'Şanlıurfa' } }
-				// ]}
 				columns={this.state.columns}
-				// data={[{ transactionDate: '02-10-2020', paidBy: 'Baran', paidTo: 'James', amount: '10000', country: 'Russia', purpose:'Transfer', type:'Bank', bankSender:'Citibank', confidence:'confirmed', proof:'internal' },
-				// { transactionDate: '02-10-2020', paidBy: 'Baran', paidTo: 'James', amount: '10000', country: 'Russia', purpose:'Transfer', type:'Bank', bankSender:'Citibank', confidence:'', proof:'internal' }]}
 				data={this.state.data}
 
 				components={{
-					FilterRow: props => <FilterRow {...props} />
+					FilterRow: props => <FilterRow {...props} />,
+					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>
 				}}
 
 				localization={{
