@@ -4,9 +4,6 @@ const tableOptions = {
     csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2Fmockup.csv?alt=media&token=82d1e6d6-e634-492d-a7a7-32223735c25f',
 
     mapOptions: {
-        "from_country": "country_from",
-        "to_country": "country_to",
-        "amount": "sum",
         "active_color": "#FFC0CB",
         "passive_color": "#DDD",
         "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json"
