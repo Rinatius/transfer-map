@@ -151,7 +151,7 @@ class TransferMapComponent extends Component {
                   from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
                   to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
                   preserveMarkerAspect={false}
-                  stroke="#FF5533"
+                  stroke="#931e1d"
                   strokeWidth={this.dataScaler(toCountry.value.total)}
                   strokeLinecap="round"
                 />
