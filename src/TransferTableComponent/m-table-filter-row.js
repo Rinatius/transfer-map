@@ -215,8 +215,6 @@ class MTableFilterRow extends React.Component {
       </Button>
     </TableCell>
     );
-    
-    ///////////Атай был здесь///////////
 
     this.props.columns
       .filter(columnDef => columnDef.tableData.groupOrder > -1)

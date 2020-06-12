@@ -4,7 +4,8 @@ import {
   ZoomableGroup,
   Geographies,
   Geography,
-  Line
+  Line,
+  Marker
 } from 'react-simple-maps'
 
 import {
@@ -17,6 +18,7 @@ import {
 } from 'd3'
 
 import config from '../config';
+//import styles from './TransferMapComponent.module.css'
 
 const { Set } = require('immutable');
 
@@ -37,7 +39,8 @@ class TransferMapComponent extends Component {
     conf: {},
     data: [],
     visibleCountries: Set([]),
-    visiblePairs: []
+    visiblePairs: [],
+    focusCountry: null
   }
 
   extractCountries = (table) => {
@@ -66,7 +69,7 @@ class TransferMapComponent extends Component {
     if (this.countries.has(country)) {
 
       this.setState({
-        visibleCountries: Set([country])
+        focusCountry: country
       })
     }
   }
@@ -119,17 +122,25 @@ class TransferMapComponent extends Component {
               {({ geographies }) =>
                 geographies.map(geo => {
                 const c = this.state.visibleCountries.has(geo.properties.name);
+                const focusCountry = (this.state.focusCountry === geo.properties.name);
+                let countryFill = config.mapOptions.passive_color;
+                if (focusCountry) {
+                  countryFill = config.mapOptions.focus_color
+                } else if (c) {
+                  countryFill = config.mapOptions.active_color
+                };
                 return (
                   <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  onClick={() => this.countryClickHandler(geo.properties.name)}
-                  stroke='#FFF'
-                  fill={c ? config.mapOptions.active_color : config.mapOptions.passive_color }/>
+                    key={geo.rsmKey}
+                    geography={geo}
+                    onClick={() => this.countryClickHandler(geo.properties.name)}
+                    stroke='#FFF'
+                    fill={countryFill}
+                  />
                 )
               })}
             </Geographies>
-
+           
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 //console.log(this.capitals)
@@ -143,6 +154,37 @@ class TransferMapComponent extends Component {
                   strokeLinecap="round"
                 />
             })
+            )}
+            {this.state.visiblePairs.map(fromCountry =>
+              fromCountry.values.map(toCountry => {
+                return <Marker 
+                  coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
+                  >
+
+                    <defs>
+                      <mask id="k4zgb" width="2" height="2" x="-1" y="-1">
+                        <path fill="#fff" d="M2 1h104v39H2z" />
+                        <path d="M2 1h104v34H59l-5 5-5-5H2z" />
+                      </mask>
+                      <filter id="k4zga" width="128" height="64" x="-10" y="-11" filterUnits="userSpaceOnUse">
+                        <feOffset dy="1" in="SourceGraphic" result="FeOffset1023Out" />
+                        <feGaussianBlur in="FeOffset1023Out" result="FeGaussianBlur1024Out" stdDeviation="0.8 0.8" />
+                      </filter>
+                      <clipPath id="k4zgc">
+                        <path fill="#fff" d="M2 1h104v34H59l-5 5-5-5H2z" />
+                      </clipPath>
+                    </defs>
+                    <g
+                      transform="translate(-53, -40)"
+                      ><g><g filter="url(#k4zga)">
+                      <path fill="none" d="M2 1h104v34H59l-5 5-5-5H2z" mask="url(&quot;#k4zgb&quot;)" />
+                      <path fill-opacity=".35" d="M2 1h104v34H59l-5 5-5-5H2z" />
+                    </g>
+                      <path fill="#931e1d" d="M2 1h104v34H59l-5 5-5-5H2z" />
+                      <path fill="none" stroke="#fff" stroke-miterlimit="20" stroke-width="2" d="M2 1h104v34H59l-5 5-5-5H2z" clip-path="url(&quot;#k4zgc&quot;)" />
+                    </g></g>
+                </Marker>
+              })
             )}
           </ComposableMap>
           <div onClick={this.showAllHandler}>Show All</div>
