@@ -72,6 +72,12 @@ class TransferMapComponent extends Component {
       this.props.handleCountryClick(country)
     }
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.resetMap !== this.props.resetMap && this.props.resetMap) {
+      this.setState({focusCountry: null})
+    }
+
+  }
 
   componentDidMount() {
     json(config.mapOptions.capitals, c => c)
@@ -121,14 +127,14 @@ class TransferMapComponent extends Component {
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map(geo => {
-                const c = this.state.visibleCountries.has(geo.properties.name);
-                const focusCountry = (this.state.focusCountry === geo.properties.name);
-                let countryFill = config.mapOptions.passive_color;
-                if (focusCountry) {
-                  countryFill = config.mapOptions.focus_color
-                } else if (c) {
-                  countryFill = config.mapOptions.active_color
-                };
+                  const c = this.state.visibleCountries.has(geo.properties.name);
+                  const focusCountry = (this.state.focusCountry === geo.properties.name);
+                  let countryFill = config.mapOptions.passive_color;
+                  if (focusCountry) {
+                    countryFill = config.mapOptions.focus_color
+                  } else if (c) {
+                    countryFill = config.mapOptions.active_color
+                  };
                 return (
                   <Geography
                     key={geo.rsmKey}
