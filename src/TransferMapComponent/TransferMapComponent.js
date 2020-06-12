@@ -65,6 +65,7 @@ class TransferMapComponent extends Component {
   showAllHandler = () => this.setState({visibleCountries: this.countries});
 
   countryClickHandler = (country) => {
+    console.log('country click')
     if (this.countries.has(country)) {
       this.setState({
         focusCountry: country

@@ -11,7 +11,8 @@ const objColumns = Object.values(config.columns)
 class TransferTableComponent extends Component {
 	state = {
 		columns: [],
-		data: []
+		data: [],
+		filterCountry: ''
 	}
 
 	componentDidMount() {
@@ -19,9 +20,16 @@ class TransferTableComponent extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.filterCountry !== this.props.filterCountry) {
+		console.log('reset map: ' + prevProps.resetMap + '=> ' + this.props.resetMap )
+		console.log('country' + prevProps.filterCountry + '=> ' + this.props.filterCountry )
+		
+		if (prevProps.filterCountry !== this.props.filterCountry || 
+			 (prevProps.resetMap !== this.props.resetMap)) {
+				console.log('update')
 			if (this.props.filterCountry !== '') {
+				// this.setState({filterCountry: this.props.filterCountry})
 				this.filterCountry(this.props.filterCountry)
+				// this.
 			}
 		}
 	}
@@ -85,8 +93,9 @@ class TransferTableComponent extends Component {
 		objColumns.forEach(col => {
 			col.tableData.filterValue = ""
 		})
+		console.log('reset click')
 		this.setState({columns: objColumns})
-		this.props.resetMap()
+		this.props.handleResetMap()
 	}
 
 	

@@ -24,7 +24,8 @@ class App extends Component {
                    resetMap: false})
   }
   handleResetMap = () => {
-    this.setState({resetMap: true})
+    this.setState({resetMap: true,
+                   filterCountry: ''})
   }
 
   render() {
@@ -39,7 +40,8 @@ class App extends Component {
           <TransferTableComponent 
             data={this.state.data}
             filterCountry={this.state.filterCountry}
-            resetMap={this.handleResetMap} />
+            resetMap={this.state.resetMap}
+            handleResetMap={this.handleResetMap} />
         </div>
       );
     }
