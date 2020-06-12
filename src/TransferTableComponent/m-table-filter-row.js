@@ -203,18 +203,28 @@ class MTableFilterRow extends React.Component {
 
     columns.splice(-1, 1, 
     <TableCell key={"filters-reset-button"}>
-      <Button 
+      <button 
           onClick={this.props.resetFilters}
-          disableRipple={true} style={{
-          width: "96px",
-          margin: -16,
-          color: "#515151",
-          fontFamily: "Open Sans",
-          fontSize: "14px",
-          textDecoration: "underline"}} >Reset all filters
-      </Button>
+          style={{
+            width: "30",
+            color: "#515151",
+            fontFamily: "Open Sans', sans-serif",
+            fontSize: "14px",
+            textDecoration: "underline",
+            backgroundColor: 'Transparent',
+            backgroundRepeat:'no-repeat',
+            border: 'none',
+            cursor:'pointer',
+            overflow: 'hidden',
+            outline:'none',
+          }} >Reset all filters
+    </button>
     </TableCell>
     );
+    
+    ///////////Атай был здесь///////////
+    
+
 
     this.props.columns
       .filter(columnDef => columnDef.tableData.groupOrder > -1)

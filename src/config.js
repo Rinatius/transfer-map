@@ -203,7 +203,7 @@ const tableOptions = {
             lookup: {confirmed: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c'},
             defaultFilter: '',
             type: 'image',
-            cellStyle: { textAlign: 'left' }
+            cellStyle: { textAlign: 'center',}
         },
         proof: {
             title: "Proof",
@@ -219,7 +219,7 @@ const tableOptions = {
                     customs: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d'},
             defaultFilter: '',
             type: 'image',
-            cellStyle: { textAlign: 'left' }
+            cellStyle: { textAlign: 'center' }
         },
     },
     table: {
