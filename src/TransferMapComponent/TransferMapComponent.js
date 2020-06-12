@@ -72,41 +72,35 @@ class TransferMapComponent extends Component {
   }
 
   componentDidMount() {
-    json(configURL, c => c)
-      .then(conf => {
-        this.config = conf
-        const table = csv(conf.csvUrl, row => {
+    json(config.mapOptions.capitals, c => c)
+      .then(capitals => {
+        const table = this.props.data.map(row => {
           return {
-            from_country: row[conf.from_country],
-            to_country: row[conf.to_country],
-            amount: row[conf.amount]
+            from_country: row[config.columns.fromCountry.field],
+            to_country: row[config.columns.country.field],
+            amount: row[config.columns.amount.field]
           }
         })
-        const capitals = json(conf.capitals, c => c)
-        Promise.all([table, capitals])
-          .then(data => {
-            const [table, capitals] = data
-            this.extractCountries(table)
-            this.pairs = this.nestPairs(table);
-            const totals = []
-            this.pairs.forEach(d => d.values.forEach(t => {
-              totals.push(t.value.total)
-            }))
-            console.log(this.pairs)
-            this.dataScaler = scaleLinear()
-              .domain(extent(totals))
-              .range([0.5, 5])
-            this.capitals = nest()
-              .key(d => d.name)
-              .map(capitals)
-            console.log(this.capitals)
-            this.setState({
-              data: table,
-              ready: true,
-              visibleCountries: this.countries,
-              visiblePairs: this.pairs
-            })
-          })
+        this.extractCountries(table)
+        this.pairs = this.nestPairs(table);
+        const totals = []
+        this.pairs.forEach(d => d.values.forEach(t => {
+          totals.push(t.value.total)
+        }))
+        console.log(this.pairs)
+        this.dataScaler = scaleLinear()
+          .domain(extent(totals))
+          .range([0.5, 5])
+        this.capitals = nest()
+          .key(d => d.name)
+          .map(capitals)
+        console.log(this.capitals)
+        this.setState({
+          data: table,
+          ready: true,
+          visibleCountries: this.countries,
+          visiblePairs: this.pairs
+        })
       })
   }
 
@@ -131,7 +125,7 @@ class TransferMapComponent extends Component {
                   geography={geo}
                   onClick={() => this.countryClickHandler(geo.properties.name)}
                   stroke='#FFF'
-                  fill={c ? this.config.active_color : this.config.passive_color }/>
+                  fill={c ? config.mapOptions.active_color : config.mapOptions.passive_color }/>
                 )
               })}
             </Geographies>

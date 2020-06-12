@@ -17,7 +17,7 @@ class TransferTableComponent extends Component {
 		columns: [],
 		data: []
 	}
-	
+
 	componentDidMount() {
 		this.setData()
 	}
