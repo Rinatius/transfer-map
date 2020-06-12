@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import MaterialTable from 'material-table';
 import config from '../config';
-import { csv } from 'd3';
 import FilterRow from './m-table-filter-row'
 import MTBody from './m-table-body'
 
 
 const objColumns = Object.values(config.columns)
-
-const csvUrl = config.csvUrl
-
 
 
 class TransferTableComponent extends Component {
@@ -96,27 +92,7 @@ class TransferTableComponent extends Component {
 				}}
 
 				options={{
-					headerStyle: {
-						borderWidth: 0,
-						borderTopWidth: 2,
-						borderBottomWidth: 2,
-						borderColor: '#931e1d',
-						borderStyle: 'solid',
-					},
-					pageSize: 20,
-					hideFilterIcons: true,
-					showTitle: false,
-					filtering: true,
-					pageSizeOptions: [],
-					paginationType: 'stepped',
-					padding: 'dense',
-					searchFieldAlignment: 'left',
-					// searchFieldStyle: {
-					//                   width: '100%',
-					//                   height: '35px',
-					//                   boxShadow: 'inset 1px 2px 4px rgba(0, 0, 0, 0.35)',
-					//                   border: '1px solid #979797',
-					//                   backgroundColor: '#ffffff'},
+					...config.table,
 					rowStyle: (data, index) => {
 						if (index % 2 === 0) {
 							return { backgroundColor: "#e5e5e5" }

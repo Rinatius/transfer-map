@@ -155,7 +155,29 @@ const tableOptions = {
         filtering: true,
         grouping: false,
         paging: true,
-        pageSize: 20
+        pageSize: 20,
+
+        hideFilterIcons: true,
+        showTitle: false,
+        pageSizeOptions: [],
+        paginationType: 'stepped',
+        padding: 'dense',
+        searchFieldAlignment: 'left',
+
+        searchFieldStyle: {
+            width: '100%',
+            height: '35px',
+            boxShadow: 'inset 1px 2px 4px rgba(0, 0, 0, 0.35)',
+            border: '1px solid #979797',
+            backgroundColor: '#ffffff'},
+
+        headerStyle: {
+            borderWidth: 0,
+            borderTopWidth: 2,
+            borderBottomWidth: 2,
+            borderColor: '#931e1d',
+            borderStyle: 'solid',
+        },
     }
 }
 

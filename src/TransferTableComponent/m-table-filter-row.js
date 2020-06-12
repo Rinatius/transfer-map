@@ -201,19 +201,13 @@ class MTableFilterRow extends React.Component {
 
     ///////////Здесь был Атай///////////
 
-  //   const resetFilter = () => {
-  //     columns.array.forEach(columnDef => {
-  //     columnDef.tableData.filterValue = ''
-  //   })
-  // }
-
     columns.splice(-1, 1, 
-    <TableCell key="key-action-column">
+    <TableCell key={"filters-reset-button"}>
       <Button 
           onClick={this.props.resetFilters}
           disableRipple={true} style={{
           width: "96px",
-          // height: "43px",
+          margin: -16,
           color: "#515151",
           fontFamily: "Open Sans",
           fontSize: "14px",
