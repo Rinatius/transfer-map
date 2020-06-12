@@ -18,7 +18,7 @@ import {
 } from 'd3'
 
 import config from '../config';
-import styles from './TransferMapComponent.module.css'
+//import styles from './TransferMapComponent.module.css'
 
 const { Set } = require('immutable');
 
@@ -160,8 +160,7 @@ class TransferMapComponent extends Component {
                 return <Marker 
                   coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
                   >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="108" height="43" viewBox="0 0 108 43"
-                  >
+
                     <defs>
                       <mask id="k4zgb" width="2" height="2" x="-1" y="-1">
                         <path fill="#fff" d="M2 1h104v39H2z" />
@@ -176,7 +175,7 @@ class TransferMapComponent extends Component {
                       </clipPath>
                     </defs>
                     <g
-                      // transform="translate(10, -20)"
+                      transform="translate(-53, -40)"
                       ><g><g filter="url(#k4zga)">
                       <path fill="none" d="M2 1h104v34H59l-5 5-5-5H2z" mask="url(&quot;#k4zgb&quot;)" />
                       <path fill-opacity=".35" d="M2 1h104v34H59l-5 5-5-5H2z" />
@@ -184,7 +183,6 @@ class TransferMapComponent extends Component {
                       <path fill="#931e1d" d="M2 1h104v34H59l-5 5-5-5H2z" />
                       <path fill="none" stroke="#fff" stroke-miterlimit="20" stroke-width="2" d="M2 1h104v34H59l-5 5-5-5H2z" clip-path="url(&quot;#k4zgc&quot;)" />
                     </g></g>
-                  </svg>
                 </Marker>
               })
             )}
