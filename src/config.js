@@ -226,6 +226,20 @@ const tableOptions = {
             type: 'image',
             cellStyle: { textAlign: 'center' }
         },
+        story: {
+            title: "Story",
+            field: "story",
+            hidden: true,
+            searchable: true,
+            sorting: true,
+            grouping: true,
+            filtering: true,
+            lookup: '',
+            defaultFilter: '',
+            type: '',
+            filterPlaceholder: 'Story...',
+            cellStyle: { textAlign: 'center' }
+        },
     },
     table: {
         search: true,
