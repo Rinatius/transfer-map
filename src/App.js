@@ -3,21 +3,27 @@ import React, { Component } from 'react';
 import TransferMapComponent from "./TransferMapComponent/TransferMapComponent";
 import TransferTableComponent from "./TransferTableComponent/TransferTableComponent";
 import config from "./config";
+import {csv} from "d3";
 
 
 class App extends Component {
   state = {
-    ready: true
+    ready: false,
+    data: {}
   }
 
-  render() {
+  componentDidMount() {
+    csv(config.csvUrl)
+      .then(d => this.setState({data: d, ready: true}))
+	}
 
+  render() {
     let all = null;
     if (this.state.ready) {
       all = (
         <div>
-          <TransferMapComponent />
-          <TransferTableComponent />
+          <TransferMapComponent data={this.state.data} />
+          <TransferTableComponent data={this.state.data} />
         </div>
       );
     }

@@ -17,23 +17,16 @@ class TransferTableComponent extends Component {
 		columns: [],
 		data: []
 	}
-	tmpData = []
 	
-	
-
 	componentDidMount() {
 		this.setData()
 	}
 
 	setData = () => {
-		csv(csvUrl, data => this.tmpData.push(data))
-			.then(() => 
-			{
-				this.setState({ data: this.tmpData })
-				let newData = this.getLookupData(this.state.data)	
-				this.initLookup(newData)
-				this.loadImage()
-			})
+		this.setState({ data: this.props.data })
+		let newData = this.getLookupData(this.props.data)
+		this.initLookup(newData)
+		this.loadImage()
 	}
 
 	loadImage = () => {
@@ -53,7 +46,7 @@ class TransferTableComponent extends Component {
 	getLookupData =(data)=> {
 	let cols = Object.keys(data[0])
 	let newData = cols.reduce((a,b)=> (a[b]={},a),{});
-	this.tmpData.map(row => 
+	this.props.data.map(row =>
 		{
 			cols.map(col => {
 				let val = row[col]
