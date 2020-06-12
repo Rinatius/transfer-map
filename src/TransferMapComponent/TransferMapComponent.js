@@ -201,7 +201,7 @@ class TransferMapComponent extends Component {
                     y={-30}
                     style={config.mapOptions.label_text_style}
                   >
-                    {('$' + toCountry.value.total + '\n')}
+                    {('$' + toCountry.value.total.toLocaleString(('en-US')) + '\n')}
                   </text>
                   <text
                     textAnchor="middle"
