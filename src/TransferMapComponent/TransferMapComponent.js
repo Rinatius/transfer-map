@@ -151,6 +151,7 @@ class TransferMapComponent extends Component {
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 //console.log(this.capitals)
+<<<<<<< HEAD
                 //console.log(this.capitals.get(fromCountry.key))
                 // console.log(toCountry)
                 return <Line
@@ -162,8 +163,33 @@ class TransferMapComponent extends Component {
                   strokeWidth={this.dataScaler(toCountry.value.total)}
                   strokeLinecap="round"
                 />
+=======
+
+                return <Line
+                    from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
+                    to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
+                    stroke="#FF5533"
+                    strokeWidth={this.dataScaler(toCountry.value.total)}
+                    strokeLinecap="round"
+                  />               
+                         
+>>>>>>> Add circle image
             })
             )}
+            
+            {this.state.visiblePairs.map(fromCountry =>
+              fromCountry.values.map(toCountry => {
+                let x = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[0] - 2
+                let y = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[1] + 0.5
+                return <Marker 
+                    
+                    coordinates={[x, y]} >
+                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="15" height="11" viewBox="0 0 15 11"><g><g><image width="17" height="11" transform="translate(-1)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/></g><g><path fill="#fff" d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874"/></g><g><path fill="none" stroke="#666" stroke-miterlimit="20" stroke-width=".25" d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874z"/></g></g></svg>
+                  </Marker>               
+                         
+            })
+            )}
+
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 return <Marker
