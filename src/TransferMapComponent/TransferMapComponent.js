@@ -151,7 +151,6 @@ class TransferMapComponent extends Component {
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 //console.log(this.capitals)
-<<<<<<< HEAD
                 //console.log(this.capitals.get(fromCountry.key))
                 // console.log(toCountry)
                 return <Line
@@ -163,17 +162,6 @@ class TransferMapComponent extends Component {
                   strokeWidth={this.dataScaler(toCountry.value.total)}
                   strokeLinecap="round"
                 />
-=======
-
-                return <Line
-                    from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
-                    to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-                    stroke="#FF5533"
-                    strokeWidth={this.dataScaler(toCountry.value.total)}
-                    strokeLinecap="round"
-                  />               
-                         
->>>>>>> Add circle image
             })
             )}
             
