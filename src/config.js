@@ -24,6 +24,15 @@ const tableOptions = {
             type: 'date',
             defaultFilter: '',
             lookup: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
+     
         },
         paidBy: {
             title: "Paid by",
@@ -36,6 +45,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         paidTo: {
             title: "Paid to",
@@ -48,6 +65,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         amount: {
             title: "Amount",
@@ -60,6 +85,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: 'numeric',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         fromCountry: {
             title: "From Country",
@@ -72,6 +105,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         country: {
             title: "Country",
@@ -84,6 +125,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         purpose: {
             title: "Purpose",
@@ -96,6 +145,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         type: {
             title: "Type",
@@ -108,6 +165,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '50px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         bankSender: {
             title: "Bank sender",
@@ -120,6 +185,14 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            cellStyle: {
+                width: '114px',
+                height: '19px',
+                color: '#515151',
+                fontFamily: "Open Sans",
+                fontSize: '14px',
+                letterSpacing: '-0.3px',
+              },
         },
         confidence: {
             title: "Confidence",
@@ -178,6 +251,10 @@ const tableOptions = {
             borderColor: '#931e1d',
             borderStyle: 'solid',
         },
+
+        rowStyle: {
+            height: '37px',
+        }
     }
 }
 

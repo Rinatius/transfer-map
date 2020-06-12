@@ -95,8 +95,9 @@ class TransferTableComponent extends Component {
 					...config.table,
 					rowStyle: (data, index) => {
 						if (index % 2 === 0) {
-							return { backgroundColor: "#e5e5e5" }
+							return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
 						}
+						else {return {...config.table.rowStyle}}
 					},
 				}}
 			/>
