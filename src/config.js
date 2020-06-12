@@ -82,7 +82,7 @@ const tableOptions = {
             filtering: true,
             defaultFilter: '',
             lookup: '',
-            type: 'numeric',
+            type: 'currency',
             cellStyle: {
                 width: '114px',
                 height: '19px',
