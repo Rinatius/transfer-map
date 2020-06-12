@@ -84,9 +84,9 @@ class TransferTableComponent extends Component {
 	resetFilters = () => {
 		objColumns.forEach(col => {
 			col.tableData.filterValue = ""
-			console.log(col.tableData)
 		})
 		this.setState({columns: objColumns})
+		this.props.resetMap()
 	}
 
 	

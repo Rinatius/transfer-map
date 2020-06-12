@@ -10,7 +10,8 @@ class App extends Component {
   state = {
     ready: false,
     data: {},
-    filterCountry: ''
+    filterCountry: '',
+    resetMap: false
   }
 
   componentDidMount() {
@@ -19,9 +20,11 @@ class App extends Component {
   }
   
   handleCountryClick = (country) => {
-    console.log(country)
-    this.setState({filterCountry: country})
-    console.log(this.state.filterCountry)
+    this.setState({filterCountry: country,
+                   resetMap: false})
+  }
+  handleResetMap = () => {
+    this.setState({resetMap: true})
   }
 
   render() {
@@ -29,8 +32,14 @@ class App extends Component {
     if (this.state.ready) {
       all = (
         <div>
-          <TransferMapComponent data={this.state.data} handleCountryClick={this.handleCountryClick} />
-          <TransferTableComponent data={this.state.data} filterCountry={this.state.filterCountry} />
+          <TransferMapComponent 
+            data={this.state.data}
+            handleCountryClick={this.handleCountryClick}
+            resetMap={this.state.resetMap} />
+          <TransferTableComponent 
+            data={this.state.data}
+            filterCountry={this.state.filterCountry}
+            resetMap={this.handleResetMap} />
         </div>
       );
     }
