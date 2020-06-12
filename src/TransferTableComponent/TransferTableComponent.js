@@ -3,6 +3,7 @@ import MaterialTable from 'material-table';
 import config from '../config';
 import FilterRow from './m-table-filter-row'
 import MTBody from './m-table-body'
+import MToolBar from './m-table-toolbar'
 
 
 const objColumns = Object.values(config.columns)
@@ -98,9 +99,9 @@ class TransferTableComponent extends Component {
 				columns={this.state.columns}
 				data={this.state.data}
 				components={{
-				FilterRow: props => {
-					return	<FilterRow {...props}/>},
-					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>
+					FilterRow: props => <FilterRow {...props}/>,
+					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>,
+					Toolbar: props => <MToolBar {...props}/>
 				}}
 
 				localization={{

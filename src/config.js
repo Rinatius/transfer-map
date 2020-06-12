@@ -241,6 +241,8 @@ const tableOptions = {
         paginationType: 'stepped',
         padding: 'dense',
         searchFieldAlignment: 'left',
+        searchFieldVariant: 'standard',
+        loadingType: 'overlay',
 
         searchFieldStyle: {
             width: '100%',

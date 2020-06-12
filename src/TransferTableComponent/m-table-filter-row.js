@@ -162,7 +162,7 @@ class MTableFilterRow extends React.Component {
 
   render() {
     const columns = this.props.columns
-      .filter(columnDef => !(columnDef.tableData.groupOrder > -1))
+      .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map(columnDef => (
         <TableCell key={columnDef.tableData.id} style={{ ...this.props.filterCellStyle, ...columnDef.filterCellStyle }}>
@@ -201,24 +201,26 @@ class MTableFilterRow extends React.Component {
 
     ///////////Здесь был Атай///////////
 
-    columns.splice(-1, 1, 
+    columns.push(
     <TableCell key={"filters-reset-button"}>
       <button 
-          onClick={this.props.resetFilters}
-          style={{
-            width: "30",
-            color: "#515151",
-            fontFamily: "Open Sans', sans-serif",
-            fontSize: "14px",
-            textDecoration: "underline",
-            backgroundColor: 'Transparent',
-            backgroundRepeat:'no-repeat',
-            border: 'none',
-            cursor:'pointer',
-            overflow: 'hidden',
-            outline:'none',
-          }} >Reset all filters
-    </button>
+        onClick={this.props.resetFilters}
+        style={{
+          width: "30",
+          color: "#515151",
+          fontFamily: "Open Sans', sans-serif",
+          fontSize: "14px",
+          textDecoration: "underline",
+          backgroundColor: 'Transparent',
+          backgroundRepeat:'no-repeat',
+          border: 'none',
+          cursor:'pointer',
+          overflow: 'hidden',
+          outline:'none',
+          // position: 'absolute',
+          // right: 0,
+        }} >Reset all filters
+      </button>
     </TableCell>
     );
     
