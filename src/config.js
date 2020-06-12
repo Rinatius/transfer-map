@@ -22,6 +22,7 @@ const tableOptions = {
             type: 'date',
             defaultFilter: '',
             lookup: '',
+            filterPlaceholder: 'Transaction date',
             cellStyle: {
                 width: '114px',
                 height: '19px',
@@ -30,7 +31,6 @@ const tableOptions = {
                 fontSize: '14px',
                 letterSpacing: '-0.3px',
               },
-     
         },
         paidBy: {
             title: "Paid by",
@@ -43,6 +43,7 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            filterPlaceholder: 'Payer...',
             cellStyle: {
                 width: '114px',
                 height: '19px',
@@ -63,6 +64,7 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            filterPlaceholder: 'Recipient...',
             cellStyle: {
                 width: '114px',
                 height: '19px',
@@ -103,6 +105,7 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            filterPlaceholder: 'From country',
             cellStyle: {
                 width: '114px',
                 height: '19px',
@@ -123,6 +126,7 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            filterPlaceholder: 'To country...',
             cellStyle: {
                 width: '114px',
                 height: '19px',
@@ -183,6 +187,7 @@ const tableOptions = {
             defaultFilter: '',
             lookup: '',
             type: '',
+            filterPlaceholder: 'Bank...',
             cellStyle: {
                 width: '114px',
                 height: '19px',
