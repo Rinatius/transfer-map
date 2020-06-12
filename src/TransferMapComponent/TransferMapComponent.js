@@ -16,6 +16,8 @@ import {
   scaleLinear
 } from 'd3'
 
+import config from '../config';
+
 const { Set } = require('immutable');
 
 const configURL = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmap_config.json?alt=media&token=170acf67-7f33-4da3-ba43-e01b6620469a'
