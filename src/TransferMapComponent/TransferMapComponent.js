@@ -147,8 +147,10 @@ class TransferMapComponent extends Component {
                 //console.log(this.capitals.get(fromCountry.key))
                 // console.log(toCountry)
                 return <Line
+                  //line={{ coordinates: { start: this.capitals.get(fromCountry.key)[0].latlng.slice().reverse(), end: this.capitals.get(toCountry.key)[0].latlng.slice().reverse() }, curveStyle: "forceUp" }}
                   from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
                   to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
+                  preserveMarkerAspect={false}
                   stroke="#FF5533"
                   strokeWidth={this.dataScaler(toCountry.value.total)}
                   strokeLinecap="round"
@@ -157,33 +159,65 @@ class TransferMapComponent extends Component {
             )}
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
-                return <Marker 
+                return <Marker
                   coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-                  >
+                >
 
-                    <defs>
-                      <mask id="k4zgb" width="2" height="2" x="-1" y="-1">
-                        <path fill="#fff" d="M2 1h104v39H2z" />
-                        <path d="M2 1h104v34H59l-5 5-5-5H2z" />
-                      </mask>
-                      <filter id="k4zga" width="128" height="64" x="-10" y="-11" filterUnits="userSpaceOnUse">
-                        <feOffset dy="1" in="SourceGraphic" result="FeOffset1023Out" />
-                        <feGaussianBlur in="FeOffset1023Out" result="FeGaussianBlur1024Out" stdDeviation="0.8 0.8" />
-                      </filter>
-                      <clipPath id="k4zgc">
-                        <path fill="#fff" d="M2 1h104v34H59l-5 5-5-5H2z" />
-                      </clipPath>
-                    </defs>
-                    <g
-                      transform="translate(-53, -40)"
-                      ><g><g filter="url(#k4zga)">
-                      <path fill="none" d="M2 1h104v34H59l-5 5-5-5H2z" mask="url(&quot;#k4zgb&quot;)" />
-                      <path fill-opacity=".35" d="M2 1h104v34H59l-5 5-5-5H2z" />
+                  <defs>
+                    <mask id="k4zgb" width="2" height="2" x="-1" y="-1">
+                      <path fill="#fff" d="M2 1h104v39H2z"/>
+                      <path d="M2 1h104v34H59l-5 5-5-5H2z"/>
+                    </mask>
+                    <filter id="k4zga" width="128" height="64" x="-10" y="-11" filterUnits="userSpaceOnUse">
+                      <feOffset dy="1" in="SourceGraphic" result="FeOffset1023Out"/>
+                      <feGaussianBlur in="FeOffset1023Out" result="FeGaussianBlur1024Out" stdDeviation="0.8 0.8"/>
+                    </filter>
+                    <clipPath id="k4zgc">
+                      <path fill="#fff" d="M2 1h104v34H59l-5 5-5-5H2z"/>
+                    </clipPath>
+                  </defs>
+                  <g
+                    transform="translate(-53, -45)"
+                  >
+                    <g>
+                      <g filter="url(#k4zga)">
+                        <path fill="none" d="M2 1h104v34H59l-5 5-5-5H2z" mask="url(&quot;#k4zgb&quot;)"/>
+                        <path fill-opacity=".35" d="M2 1h104v34H59l-5 5-5-5H2z"/>
+                      </g>
+                      <path fill="#931e1d" d="M2 1h104v34H59l-5 5-5-5H2z"/>
+                      <path fill="none" stroke="#fff" stroke-miterlimit="20" stroke-width="2"
+                            d="M2 1h104v34H59l-5 5-5-5H2z" clip-path="url(&quot;#k4zgc&quot;)"/>
                     </g>
-                      <path fill="#931e1d" d="M2 1h104v34H59l-5 5-5-5H2z" />
-                      <path fill="none" stroke="#fff" stroke-miterlimit="20" stroke-width="2" d="M2 1h104v34H59l-5 5-5-5H2z" clip-path="url(&quot;#k4zgc&quot;)" />
-                    </g></g>
+                  </g>
+
+                  <text
+                    textAnchor="middle"
+                     y={-30}
+                    style={{
+                      color: '#ffffff',
+                      font_family: 'Open Sans',
+                      font_size: '12px',
+                      font_weight: 700,
+                      letter_spacing: '-0.26px'
+                    }}
+                  >
+                    {('$' + toCountry.value.total + '\n')}
+                  </text>
+                  <text
+                    textAnchor="middle"
+                    y={-15}
+                    style={{
+                      color: '#ffffff',
+                      font_family: 'Open Sans',
+                      font_size: '10px',
+                      font_weight: 700,
+                      letter_spacing: '-0.26px'
+                    }}
+                  >
+                    {(toCountry.value.count + ' ' + 'transactions')}
+                  </text>
                 </Marker>
+
               })
             )}
           </ComposableMap>
