@@ -32,7 +32,6 @@ class TransferTableComponent extends Component {
 				keys.map(key => {
 					obj.lookup[key] = <img src={obj.lookup[key]} alt={key} />
 				})
-				obj.cellStyle = { textAlign: 'center' }
 			}
 		})
 		this.setState({columns: objColumns})
@@ -94,7 +93,7 @@ class TransferTableComponent extends Component {
 				options={{
 					...config.table,
 					rowStyle: (data, index) => {
-						if (index % 2 === 0) {
+						if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
 							return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
 						}
 						else {return {...config.table.rowStyle}}
