@@ -39,7 +39,8 @@ class TransferMapComponent extends Component {
     conf: {},
     data: [],
     visibleCountries: Set([]),
-    visiblePairs: []
+    visiblePairs: [],
+    focusCountry: null
   }
 
   extractCountries = (table) => {
@@ -68,7 +69,7 @@ class TransferMapComponent extends Component {
     if (this.countries.has(country)) {
 
       this.setState({
-        visibleCountries: Set([country])
+        focusCountry: country
       })
     }
   }
@@ -121,13 +122,21 @@ class TransferMapComponent extends Component {
               {({ geographies }) =>
                 geographies.map(geo => {
                 const c = this.state.visibleCountries.has(geo.properties.name);
+                const focusCountry = (this.state.focusCountry === geo.properties.name);
+                let countryFill = config.mapOptions.passive_color;
+                if (focusCountry) {
+                  countryFill = config.mapOptions.focus_color
+                } else if (c) {
+                  countryFill = config.mapOptions.active_color
+                };
                 return (
                   <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  onClick={() => this.countryClickHandler(geo.properties.name)}
-                  stroke='#FFF'
-                  fill={c ? config.mapOptions.active_color : config.mapOptions.passive_color }/>
+                    key={geo.rsmKey}
+                    geography={geo}
+                    onClick={() => this.countryClickHandler(geo.properties.name)}
+                    stroke='#FFF'
+                    fill={countryFill}
+                  />
                 )
               })}
             </Geographies>
