@@ -5,6 +5,8 @@ import TransferTableComponent from "./TransferTableComponent/TransferTableCompon
 import config from "./config";
 import {csv} from "d3";
 
+import './styles.css'
+
 
 class App extends Component {
   state = {

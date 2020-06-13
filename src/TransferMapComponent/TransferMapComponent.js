@@ -62,7 +62,7 @@ class TransferMapComponent extends Component {
       .entries(data)
   }
 
-  showAllHandler = () => this.setState({visibleCountries: this.countries});
+  // showAllHandler = () => this.setState({visibleCountries: this.countries});
 
   countryClickHandler = (country) => {
     console.log('country click')
@@ -230,7 +230,7 @@ class TransferMapComponent extends Component {
               })
             )}
           </ComposableMap>
-          <div onClick={this.showAllHandler}>Show All</div>
+          {/* <div onClick={this.showAllHandler}>Show All</div> */}
         </div>
       );
     }

@@ -4,6 +4,8 @@ import config from '../config';
 import FilterRow from './m-table-filter-row'
 import MTBody from './m-table-body'
 import MToolBar from './m-table-toolbar'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography';
 
 
 const objColumns = Object.values(config.columns)
@@ -110,7 +112,7 @@ class TransferTableComponent extends Component {
 				components={{
 					FilterRow: props => <FilterRow {...props}/>,
 					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>,
-					Toolbar: props => <MToolBar {...props}/>
+					Toolbar: props => <div><Typography variant="body" className='explore'>{config.table.textBody}</Typography><MToolBar {...props}/></div>
 				}}
 
 				icons={{ Search: () => <div /> }} 

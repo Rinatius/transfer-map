@@ -255,6 +255,8 @@ const tableOptions = {
     paging: true,
     pageSize: 20,
 
+    textBody: 'Explore the dataset of transactions below:',
+
     hideFilterIcons: true,
     showTitle: false,
     pageSizeOptions: [],
@@ -269,7 +271,7 @@ const tableOptions = {
       height: '35px',
       boxShadow: 'inset 1px 2px 4px rgba(0, 0, 0, 0.35)',
       border: '1px solid #979797',
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
     },
 
     headerStyle: {
