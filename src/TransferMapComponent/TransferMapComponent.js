@@ -143,6 +143,11 @@ class TransferMapComponent extends Component {
                     onClick={() => this.countryClickHandler(geo.properties.name)}
                     stroke='#FFF'
                     fill={countryFill}
+                    style={{
+                      default: {outline: "none"},
+                      hover: {outline: "none"},
+                      pressed: {outline: "none"},
+                    }}
                   />
                 )
               })}
