@@ -62,8 +62,6 @@ class TransferMapComponent extends Component {
       .entries(data)
   }
 
-  // showAllHandler = () => this.setState({visibleCountries: this.countries});
-
   countryClickHandler = (country) => {
     console.log('country click')
     if (this.countries.has(country)) {
@@ -118,11 +116,14 @@ class TransferMapComponent extends Component {
     let all = null;
     if (this.state.ready) {
       all = (
-        <div>
+        <div style={{
+          borderTop: '2px solid #931e1d',
+          paddingTop: '25px'
+        }}>
           <ComposableMap projectionConfig={{
-            scale: 230,
-            xOffset: 1000,
-            yOffset: 50
+            scale: 220,
+            xOffset: 0,
+            yOffset: 500
           }}
           onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
@@ -234,7 +235,6 @@ class TransferMapComponent extends Component {
               })
             )}
           </ComposableMap>
-          {/* <div onClick={this.showAllHandler}>Show All</div> */}
         </div>
       );
     }
