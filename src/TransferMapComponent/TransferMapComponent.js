@@ -124,7 +124,7 @@ class TransferMapComponent extends Component {
             xOffset: 1000,
             yOffset: 50
           }}
-          handleCountryClick={this.handleCountryClick}>
+          onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map(geo => {
@@ -158,10 +158,9 @@ class TransferMapComponent extends Component {
                 //console.log(this.capitals)
 
                 return <Line
-                //line={{ coordinates: { start: this.capitals.get(fromCountry.key)[0].latlng.slice().reverse(), end: this.capitals.get(toCountry.key)[0].latlng.slice().reverse() }, curveStyle: "forceUp" }}
+                key={fromCountry.key + toCountry.key}
                 from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
                 to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-                preserveMarkerAspect={false}
                 stroke="#931e1d"
                 strokeWidth={this.dataScaler(toCountry.value.total)}
                 strokeLinecap="round"
