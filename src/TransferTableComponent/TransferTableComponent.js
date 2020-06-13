@@ -113,6 +113,8 @@ class TransferTableComponent extends Component {
 					Toolbar: props => <MToolBar {...props}/>
 				}}
 
+				icons={{ Search: () => <div /> }} 
+
 				localization={{
 					toolbar: { searchPlaceholder: "Search the data…" },
 				}}
