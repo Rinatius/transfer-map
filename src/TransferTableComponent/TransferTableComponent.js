@@ -4,8 +4,8 @@ import config from '../config';
 import FilterRow from './m-table-filter-row'
 import MTBody from './m-table-body'
 import MToolBar from './m-table-toolbar'
-import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography';
+import MTPagination from './m-table-stepped-pagination'
 
 
 const objColumns = Object.values(config.columns)
@@ -17,6 +17,8 @@ class TransferTableComponent extends Component {
 		data: [],
 		filterCountry: ''
 	}
+
+	toolbarRef = React.createRef()
 
 	componentDidMount() {
 		this.setData()
@@ -99,6 +101,7 @@ class TransferTableComponent extends Component {
 		console.log('reset click')
 		this.setState({columns: objColumns})
 		this.props.handleResetMap()
+		this.toolbarRef.current.onSearchChange("");
 	}
 
 	
@@ -112,7 +115,13 @@ class TransferTableComponent extends Component {
 				components={{
 					FilterRow: props => <FilterRow {...props}/>,
 					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>,
-					Toolbar: props => <div><Typography variant="body" className='explore'>{config.table.textBody}</Typography><MToolBar {...props}/></div>
+					Toolbar: props => (
+					<div>
+						<Typography variant="body" className='explore'>{config.table.textBody}</Typography>
+						<MToolBar {...props} ref={this.toolbarRef}/>
+					</div>
+					),
+					Pagination: props => <MTPagination {...props} />
 				}}
 
 				icons={{ Search: () => <div /> }} 
