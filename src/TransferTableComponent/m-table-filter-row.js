@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import FilterIcon from '@material-ui/icons/FilterList';
+import * as _ from 'lodash';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
@@ -137,6 +140,60 @@ class MTableFilterRow extends React.Component {
       </MuiPickersUtilsProvider>
     );
   }
+  renderDateRangeTypeFilter = (columnDef) => {
+    return (
+      <>
+      <TextField
+        style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
+        type={columnDef.type === 'numeric' ? 'number' : 'search'}
+        value={_.get(columnDef, ['tableData', 'filterValue', 'greaterThan']) || ''}
+        placeholder={columnDef.filterPlaceholder || ''}
+        onChange={(event) => {
+          console.log('on change')
+          const value = {...columnDef.tableData.filterValue};
+          console.log(value)
+          value.greaterThan = event.target.value;
+          this.props.onFilterChanged(columnDef.tableData.id, value);
+        }}
+        InputProps={columnDef.hideFilterIcon ? undefined : {
+          startAdornment: (
+            <InputAdornment position="start">
+              <Tooltip title="Filter greater than">
+                <div style={{display: 'flex'}}>
+                  <FilterIcon />
+                  <Typography>{'>'}</Typography>
+                </div>
+              </Tooltip>
+            </InputAdornment>
+          )
+        }}
+      />
+      <TextField
+        style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
+        type={columnDef.type === 'numeric' ? 'number' : 'search'}
+        value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}
+        placeholder={columnDef.filterPlaceholder || ''}
+        onChange={(event) => {
+          const value = {...columnDef.tableData.filterValue};
+          value.lessThan = event.target.value;
+          this.props.onFilterChanged(columnDef.tableData.id, value);
+        }}
+        InputProps={columnDef.hideFilterIcon ? undefined : {
+          startAdornment: (
+            <InputAdornment position="start">
+              <Tooltip title="Filter less than">
+                <div style={{display: 'flex'}}>
+                  <FilterIcon />
+                  <Typography>{'<'}</Typography>
+                </div>
+              </Tooltip>
+            </InputAdornment>
+          )
+        }}
+      />
+      </>
+    );
+  }
 
   getComponentForColumn(columnDef) {
     if (columnDef.filtering === false) {
@@ -152,6 +209,8 @@ class MTableFilterRow extends React.Component {
         return this.renderBooleanFilter(columnDef);
       } else if (['date', 'datetime', 'time'].includes(columnDef.type)) {
         return this.renderDateTypeFilter(columnDef);
+      } else if (columnDef.type === 'number_range'){
+        return this.renderDateRangeTypeFilter(columnDef)
       } else {
         return this.renderDefaultFilter(columnDef);
       }

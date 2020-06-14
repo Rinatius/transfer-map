@@ -62,8 +62,6 @@ class TransferMapComponent extends Component {
       .entries(data)
   }
 
-  // showAllHandler = () => this.setState({visibleCountries: this.countries});
-
   countryClickHandler = (country) => {
     console.log('country click')
     if (this.countries.has(country)) {
@@ -118,13 +116,16 @@ class TransferMapComponent extends Component {
     let all = null;
     if (this.state.ready) {
       all = (
-        <div>
+        <div style={{
+          borderTop: '2px solid #931e1d',
+          paddingTop: '25px'
+        }}>
           <ComposableMap projectionConfig={{
-            scale: 230,
-            xOffset: 1000,
-            yOffset: 50
+            scale: 220,
+            xOffset: 0,
+            yOffset: 500
           }}
-          handleCountryClick={this.handleCountryClick}>
+          onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map(geo => {
@@ -158,10 +159,9 @@ class TransferMapComponent extends Component {
                 //console.log(this.capitals)
 
                 return <Line
-                //line={{ coordinates: { start: this.capitals.get(fromCountry.key)[0].latlng.slice().reverse(), end: this.capitals.get(toCountry.key)[0].latlng.slice().reverse() }, curveStyle: "forceUp" }}
+                key={fromCountry.key + toCountry.key}
                 from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
                 to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-                preserveMarkerAspect={false}
                 stroke="#931e1d"
                 strokeWidth={this.dataScaler(toCountry.value.total)}
                 strokeLinecap="round"
@@ -235,7 +235,6 @@ class TransferMapComponent extends Component {
               })
             )}
           </ComposableMap>
-          {/* <div onClick={this.showAllHandler}>Show All</div> */}
         </div>
       );
     }
