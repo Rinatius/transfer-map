@@ -16,43 +16,47 @@ const tableOptions = {
   },
 
   columns: {
-    // numberRange: {
-    //   title: "Amount range",
-    //   field: "amount",
-    //   hidden: false,
-    //   searchable: true,
-    //   sorting: true,
-    //   grouping: true,
-    //   filtering: true,
-    //   type: 'number_range',
-    //   defaultFilter: '',
-    //   lookup: '',
-    //   filterPlaceholder: '',
-    //   customFilterAndSearch: (term, rowData) => {
-    //     console.log('greater: ' + term.greaterThan)
-    //     console.log('less: ' + term.lessThan)
-    //     console.log('rowData: ' + rowData.amount)
-    //     // there must be a better way to compare
-    //     if (term.greaterThan != null && term.lessThan != null) {
-    //       return term.greaterThan <= parseInt(rowData.amount)
-    //         && term.lessThan >= parseInt(rowData.amount)
-    //     } else if (term.greaterThan != null && term.lessThan == null) {
-    //       return term.greaterThan <= parseInt(rowData.amount)
-    //     } else if (term.greaterThan == null && term.lessThan != null) {
-    //       return term.lessThan >= parseInt(rowData.amount)
-    //     } else {
-    //       return true
-    //     }
-    //   },
-    //   cellStyle: {
-    //     width: '114px',
-    //     height: '19px',
-    //     color: '#515151',
-    //     fontFamily: 'Open Sans, sans-serif',
-    //     fontSize: '14px',
-    //     letterSpacing: '-0.3px',
-    //   }
-    // },
+    numberRange: {
+      title: "Amount range",
+      field: "amount",
+      hidden: false,
+      searchable: true,
+      sorting: true,
+      grouping: true,
+      filtering: true,
+      type: 'number_range',
+      defaultFilter: '',
+      lookup: '',
+      filterPlaceholder: '',
+      customFilterAndSearch: (term, rowData) => {
+        console.log('greater: ' + term.greaterThan)
+        console.log('less: ' + term.lessThan)
+        console.log('rowData: ' + rowData.amount)
+        // this allows search to work
+        if (term[0] != null) {
+          return rowData[0] == term[0]
+        }
+        // there must be a better way to compare
+        if (term.greaterThan != null && term.lessThan != null) {
+          return term.greaterThan <= parseInt(rowData.amount)
+            && term.lessThan >= parseInt(rowData.amount)
+        } else if (term.greaterThan != null && term.lessThan == null) {
+          return term.greaterThan <= parseInt(rowData.amount)
+        } else if (term.greaterThan == null && term.lessThan != null) {
+          return term.lessThan >= parseInt(rowData.amount)
+        } else {
+          return true
+        }
+      },
+      cellStyle: {
+        width: '114px',
+        height: '19px',
+        color: '#515151',
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '14px',
+        letterSpacing: '-0.3px',
+      }
+    },
     transactionDate: {
       title: "Transaction date",
       field: "transactionDate",
