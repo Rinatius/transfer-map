@@ -10,6 +10,7 @@ import MTPagination from './m-table-stepped-pagination'
 
 const objColumns = Object.values(config.columns)
 let filteredData = []
+let numOfRows = 0
 
 class TransferTableComponent extends Component {
 	state = {
@@ -114,6 +115,10 @@ class TransferTableComponent extends Component {
 		this.paginationRef.current.setSum(sumOfFilteredData);
 	}
 
+	getNumOfRowsOnCurrentPage = (value) => {
+		numOfRows = value
+	}
+
 
 	render() {
 		return (
@@ -125,14 +130,14 @@ class TransferTableComponent extends Component {
 				data={this.state.data}
 				components={{
 					FilterRow: props => <FilterRow {...props}/>,
-					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} />,
+					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
 					Toolbar: props => (
 					<div>
 						<Typography variant="" className='explore'>{config.table.textBody}</Typography>
 						<MToolBar {...props} ref={this.toolbarRef}/>
 					</div>
 					),
-					Pagination: props => <MTPagination {...props} ref={this.paginationRef} />
+					Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>
 				}}
 
 				icons={{ Search: () => <div /> }} 

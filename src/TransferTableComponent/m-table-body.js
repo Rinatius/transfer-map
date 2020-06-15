@@ -14,6 +14,7 @@ class MTableBody extends React.Component {
     if (prevProps.renderData !== this.props.renderData)
     {
       this.props.getFilteredData()
+      this.props.getNumOfRowsOnPage(this.props.renderData.length)
     }
   } // Атай был до сих
 
