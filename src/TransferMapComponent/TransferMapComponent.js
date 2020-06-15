@@ -5,8 +5,10 @@ import {
   Geographies,
   Geography,
   Line,
-  Marker
+  Marker,
+  Annotation
 } from 'react-simple-maps'
+
 
 import {
   csv,
@@ -14,8 +16,12 @@ import {
   nest,
   sum,
   extent,
-  scaleLinear
+  scaleLinear,
+  line,
+  curveBasis
 } from 'd3'
+
+import * as d3Geo from "d3-geo"
 
 import config from '../config';
 
@@ -24,6 +30,7 @@ const { Set } = require('immutable');
 const configURL = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmap_config.json?alt=media&token=170acf67-7f33-4da3-ba43-e01b6620469a'
 const geoUrl = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20'
 
+const { geoPath, ...projections } = d3Geo
 
 class TransferMapComponent extends Component {
 
@@ -40,6 +47,34 @@ class TransferMapComponent extends Component {
     visibleCountries: Set([]),
     visiblePairs: [],
     focusCountry: null
+  }
+
+  makeProjection = ({
+                      projectionConfig = {},
+                      projection = "geoEqualEarth",
+                      width = 800,
+                      height = 600,
+                    }) => {
+    const isFunc = typeof projection === "function"
+
+    if (isFunc) return projection
+
+    let proj = projections[projection]()
+      .translate([width / 2, height / 2])
+
+    const supported = [
+      proj.center ? "center" : null,
+      proj.rotate ? "rotate" : null,
+      proj.scale ? "scale" : null,
+      proj.parallels ? "parallels" : null,
+    ]
+
+    supported.forEach(d => {
+      if (!d) return
+      proj = proj[d](projectionConfig[d] || proj[d]())
+    })
+
+    return proj
   }
 
   extractCountries = (table) => {
@@ -115,16 +150,13 @@ class TransferMapComponent extends Component {
 
     let all = null;
     if (this.state.ready) {
+      const proj = projections["geoEqualEarth"]().rotate([-40, 0]).scale(180)
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
           paddingTop: '25px'
         }}>
-          <ComposableMap projectionConfig={{
-            scale: 220,
-            xOffset: 0,
-            yOffset: 500
-          }}
+          <ComposableMap projection={proj}
           onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
@@ -153,33 +185,67 @@ class TransferMapComponent extends Component {
                 )
               })}
             </Geographies>
-           
-            {this.state.visiblePairs.map(fromCountry =>
-              fromCountry.values.map(toCountry => {
-                //console.log(this.capitals)
 
-                return <Line
-                key={fromCountry.key + toCountry.key}
-                from={this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()}
-                to={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-                stroke="#931e1d"
-                strokeWidth={this.dataScaler(toCountry.value.total)}
-                strokeLinecap="round"
-                />             
-                         
-            })
-            )}
-            
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 let x = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[0] - 2
                 let y = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[1] + 0.5
-                return <Marker 
-                    
-                    coordinates={[x, y]} >
-                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="15" height="11" viewBox="0 0 15 11"><g><g><image width="17" height="11" transform="translate(-1)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/></g><g><path fill="#fff" d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874"/></g><g><path fill="none" stroke="#666" stroke-miterlimit="20" stroke-width=".25" d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874z"/></g></g></svg>
-                  </Marker>               
-                         
+                return <Marker
+
+                  coordinates={[x, y]}>
+                  <g transform="translate(-2, -3)">
+                    <g>
+                      <image width="17" height="11" transform="translate(-1)"
+                             href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/>
+                    </g>
+                    <g>
+                      <path fill="#fff"
+                            d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874"/>
+                    </g>
+                    <g>
+                      <path fill="none" stroke="#666" stroke-miterlimit="20" stroke-width=".25"
+                            d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874z"/>
+                    </g>
+                  </g>
+                </Marker>
+
+            })
+            )}
+           
+            {this.state.visiblePairs.map(fromCountry =>
+              fromCountry.values.map(toCountry => {
+                const from=this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
+                const to=this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
+                const fromAbs = proj(from)
+                const toAbs = proj(to)
+                const dx = toAbs[0] - fromAbs[0]
+                const dy = toAbs[1] - fromAbs[1]
+                const connectorProps = {
+                  stroke: "#931e1d",
+                  strokeWidth: this.dataScaler(toCountry.value.total),
+                  strokeLinecap: "butt",
+                  markerStart: "url(#triangle)"
+                }
+                //const connectorPath = `M${0}, ${0} l${-dx},${-dy}`
+                return <Annotation
+                  subject={from}
+                  dx={dx}
+                  dy={dy}
+                  connectorProps={connectorProps}
+                >
+                  {/*<path d={connectorPath} {...connectorProps}/>*/}
+
+                  <defs>
+
+                    <marker id="triangle" viewBox="0 0 10 10"
+                            refX="3" refY="5"
+                            markerUnits="strokeWidth"
+                            markerWidth="2.5" markerHeight="5"
+                            orient="auto">
+                      <path d="M 10 0 L 10 10 L 0 5 z" fill="#931e1d"/>
+                    </marker>
+                  </defs>
+                </Annotation>
             })
             )}
 
@@ -203,7 +269,7 @@ class TransferMapComponent extends Component {
                     </clipPath>
                   </defs>
                   <g
-                    transform="translate(-53, -45)"
+                    transform="translate(-54, -45)"
                   >
                     <g>
                       <g filter="url(#k4zga)">
