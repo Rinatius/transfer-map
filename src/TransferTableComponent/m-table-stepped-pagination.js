@@ -6,9 +6,34 @@ import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import Typography from '@material-ui/core/Typography'
 /* eslint-enable no-unused-vars */
 
 class MTablePaginationInner extends React.Component {
+  state = {
+    sum: 0
+  }
+
+  setSum = (value) => {
+    this.setState({sum: value})
+  }
+
+  formatMoney = (amount, decimalCount = 2, decimal = ".", thousands = ",") => {
+    try {
+      decimalCount = Math.abs(decimalCount);
+      decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+  
+      const negativeSign = amount < 0 ? "-" : "";
+  
+      let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+      let j = (i.length > 3) ? i.length % 3 : 0;
+  
+      return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
   handleFirstPageButtonClick = event => {
     this.props.onChangePage(event, 0);
   };
@@ -67,7 +92,12 @@ class MTablePaginationInner extends React.Component {
     const pageEnd = Math.min(maxPages, page + 1);
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={{
+          display: "flex",
+          justifyContent: "center",
+          position: "relative",
+        }}>
+      <div style={{ }}>
       {showFirstLastPageButtons &&
         <Tooltip title={localization.firstTooltip}>
             <span>
@@ -119,6 +149,14 @@ class MTablePaginationInner extends React.Component {
             </span>
         </Tooltip>
       }
+      </div>
+      <div>
+        <Typography variant="" style={{
+          position: "absolute",
+          right: "5%",
+          marginTop: "12px"
+          }}>Total of filtered results: <span style={{fontWeight: "700"}}>$ {this.formatMoney(this.state.sum)}</span></Typography>
+      </div>
       </div>
     );
   }

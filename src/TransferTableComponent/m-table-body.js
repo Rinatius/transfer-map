@@ -7,6 +7,16 @@ import * as React from 'react';
 /* eslint-enable no-unused-vars */
 
 class MTableBody extends React.Component {
+
+  state = {dataForSum: this.props.renderData} // Атай был от сих
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.renderData !== this.props.renderData)
+    {
+      this.props.getFilteredData()
+    }
+  } // Атай был до сих
+
   renderEmpty(emptyRowCount, renderData) {
     const rowHeight = this.props.options.padding === 'default' ? 49 : 36;
     const localization = { ...MTableBody.defaultProps.localization, ...this.props.localization };

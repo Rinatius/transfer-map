@@ -9,16 +9,18 @@ import MTPagination from './m-table-stepped-pagination'
 
 
 const objColumns = Object.values(config.columns)
-
+let filteredData = []
 
 class TransferTableComponent extends Component {
 	state = {
 		columns: [],
 		data: [],
-		filterCountry: ''
+		filterCountry: '',
 	}
 
 	toolbarRef = React.createRef()
+	tableRef = React.createRef()
+	paginationRef = React.createRef()
 
 	componentDidMount() {
 		this.setData()
@@ -104,24 +106,33 @@ class TransferTableComponent extends Component {
 		this.toolbarRef.current.onSearchChange("");
 	}
 
-	
+	getFilteredData = () => {
+		filteredData = this.tableRef.current.state.data
+		console.log(this.tableRef.current.state.data)
+		let sumOfFilteredData = filteredData.reduce((a, b) => a + parseFloat(b.amount), 0)
+		console.log(sumOfFilteredData)
+		this.paginationRef.current.setSum(sumOfFilteredData);
+	}
 
 
 	render() {
 		return (
 			<MaterialTable
+				tableRef={this.tableRef}
+				onSearchChange={this.getFilteredData}
+				onFilterChange={this.getFilteredData}
 				columns={this.state.columns}
 				data={this.state.data}
 				components={{
 					FilterRow: props => <FilterRow {...props}/>,
-					Body: props => <MTBody {...props} resetFilters={this.resetFilters}/>,
+					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} />,
 					Toolbar: props => (
 					<div>
-						<Typography variant="body" className='explore'>{config.table.textBody}</Typography>
+						<Typography variant="" className='explore'>{config.table.textBody}</Typography>
 						<MToolBar {...props} ref={this.toolbarRef}/>
 					</div>
 					),
-					Pagination: props => <MTPagination {...props} />
+					Pagination: props => <MTPagination {...props} ref={this.paginationRef} />
 				}}
 
 				icons={{ Search: () => <div /> }} 
