@@ -9,17 +9,4 @@ master-cdn-deploy:
 	- master
 	tags:
 	- master
-	
-#   # production environment
-#   production-cdn-deploy:
-	# stage: deploy
-	# script:
-	# - yarn install
-	# - yarn seed
-	# - yarn build
-	# - rsync -av --delete ./dist/ /output/maya-riviera/
-	# only:
-	# - production
-	# tags:
-	# - production
   
