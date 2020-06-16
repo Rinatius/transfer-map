@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b95fe98417317f71b9e09a7539877dd2",
+    "revision": "0ecdd3fe69ba9eb48b34b35405f8a398",
     "url": "/transfer-map/index.html"
   },
   {
-    "revision": "4b4684c0c64f2f110cc4",
+    "revision": "9a30029c0bebe804f6f0",
     "url": "/transfer-map/static/css/main.5273e2f7.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/transfer-map/static/js/2.e15dd2b4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4b4684c0c64f2f110cc4",
-    "url": "/transfer-map/static/js/main.5abe7f90.chunk.js"
+    "revision": "9a30029c0bebe804f6f0",
+    "url": "/transfer-map/static/js/main.df64a2d5.chunk.js"
   },
   {
     "revision": "e420262724a31f209c4c",
