@@ -1,12 +1,12 @@
 # testing environment
 master-cdn-deploy:
-	stage: deploy
-	script:
-	- npm install
-	- npm run build
-	- rsync -av --delete ./build/ /output/plunder-transfer-map/
-	only:
-	- master
-	tags:
-	- master
+    stage: deploy
+    script:
+    - npm install
+    - npm run build
+    - rsync -av --delete ./build/ /output/plunder-transfer-map/
+    only:
+    - master
+    tags:
+    - master
   
