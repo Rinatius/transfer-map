@@ -243,7 +243,7 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'Bank...',
-      width: 115
+      width: 120
       // cellStyle: {
       //   width: '114px',
       //   height: '19px',
