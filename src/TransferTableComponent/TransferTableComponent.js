@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import MTPagination from './m-table-stepped-pagination';
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import MTHeader from './m-table-header'
 
 
 
@@ -33,6 +34,13 @@ const theme = createMuiTheme({
 		fontSize: "14px",
 		letterSpacing: "-0.3px",
 	  },
+	  overrides: {
+		MuiTableSortLabel: {
+			icon: {
+				opacity: 0.3
+			}
+		}
+	  }
 })
 
 class TransferTableComponent extends Component {
@@ -161,7 +169,8 @@ class TransferTableComponent extends Component {
 						<MToolBar {...props} ref={this.toolbarRef}/>
 					</div>
 					),
-					Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>
+					Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
+					Header: props => <MTHeader {...props} />
 				}}
 
 				icons={{ Search: () => <div /> }} 

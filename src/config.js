@@ -306,6 +306,7 @@ const tableOptions = {
     searchFieldAlignment: 'left',
     searchFieldVariant: 'standard',
     loadingType: 'overlay',
+    draggable: false,
 
     searchFieldStyle: {
       width: '100%',
