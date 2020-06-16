@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 /* eslint-enable no-unused-vars */
 
 class MTablePaginationInner extends React.Component {
@@ -93,7 +94,7 @@ class MTablePaginationInner extends React.Component {
 
     return (
       <div>
-      <div className={classes.root} style={{
+      <Box className={classes.root} style={{
           display: "flex",
           justifyContent: "center",
           position: "relative",
@@ -151,24 +152,24 @@ class MTablePaginationInner extends React.Component {
         </Tooltip>
       }
       </div>
-        <Typography variant="body2" style={{
+        <Typography variant="" style={{
           position: "absolute",
           right: "5%",
           marginTop: "12px",
           color: "#515151",
-          // fontFamily: "Open Sans, sans-serif",
-          // fontSize: "14px",
-          // letterSpacing: "-0.3px",
+          fontFamily: "'Open Sans', sans-serif",
+          fontSize: "14px",
+          letterSpacing: "-0.3px",
           }}>Total of filtered results: <span style={{fontWeight: "700"}}>$ {this.formatMoney(this.state.sum)}</span></Typography>
-      </div>
+      </Box>
       <Typography className={classes.root} variant="" style={{
           display: "flex",
           justifyContent: "center",
           position: "relative",
           color: "#515151",
-          // fontFamily: "Open Sans, sans-serif",
-          // fontSize: "14px",
-          // letterSpacing: "-0.3px",
+          fontFamily: "'Open Sans', sans-serif",
+          fontSize: "14px",
+          letterSpacing: "-0.3px",
         }}>Showing {this.props.page * this.props.rowsPerPage + 1} to {(this.props.count - (this.props.page + 1) * this.props.rowsPerPage > 0)
           ? ((this.props.page + 1) * this.props.rowsPerPage) 
           : (this.props.count)} of {this.props.count} ({this.props.totalNumOfRows})</Typography>

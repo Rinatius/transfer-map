@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
 import MaterialTable from 'material-table';
 import config from '../config';
-import FilterRow from './m-table-filter-row'
-import MTBody from './m-table-body'
-import MToolBar from './m-table-toolbar'
+import FilterRow from './m-table-filter-row';
+import MTBody from './m-table-body';
+import MToolBar from './m-table-toolbar';
 import Typography from '@material-ui/core/Typography';
-import MTPagination from './m-table-stepped-pagination'
+import MTPagination from './m-table-stepped-pagination';
+import { createMuiTheme } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+
 
 
 const objColumns = Object.values(config.columns)
 let filteredData = []
 let numOfRows = 0
+
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+		  main: '#931e1d;',
+		},
+		secondary: {
+		  main: '#931e1d;',
+		},
+	  },
+    typography: {
+		width: "241px",
+		height: "19px",
+		color: "#515151",
+		fontFamily: "Open Sans",
+		fontSize: "14px",
+		letterSpacing: "-0.3px",
+	  },
+})
 
 class TransferTableComponent extends Component {
 	state = {
@@ -122,6 +145,7 @@ class TransferTableComponent extends Component {
 
 	render() {
 		return (
+			<MuiThemeProvider theme={theme}>
 			<MaterialTable
 				tableRef={this.tableRef}
 				onSearchChange={this.getFilteredData}
@@ -155,7 +179,7 @@ class TransferTableComponent extends Component {
 						else {return {...config.table.rowStyle}}
 					},
 				}}
-			/>
+			/></MuiThemeProvider>
 		)
 	}
 }

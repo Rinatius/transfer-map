@@ -77,6 +77,7 @@ export class MTableToolbar extends React.Component {
           variant={this.props.searchFieldVariant}
           fullWidth
           InputProps={{
+            disableUnderline: true,
             startAdornment: (
               <InputAdornment position="start">
                 <Tooltip title={localization.searchTooltip}>

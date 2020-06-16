@@ -262,14 +262,9 @@ class MTableFilterRow extends React.Component {
 
     columns.push(
     <TableCell key={"filters-reset-button"}>
-      <button 
+      <button className={"filters-reset-button"} 
         onClick={this.props.resetFilters}
         style={{
-          width: "30",
-          color: "#515151",
-          fontFamily: "Open Sans', sans-serif",
-          fontSize: "14px",
-          textDecoration: "underline",
           backgroundColor: 'Transparent',
           backgroundRepeat:'no-repeat',
           border: 'none',
