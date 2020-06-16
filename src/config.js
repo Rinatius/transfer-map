@@ -28,6 +28,7 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: '',
+      width: 66,
       customFilterAndSearch: (term, rowData) => {
         console.log('greater: ' + term.greaterThan)
         console.log('less: ' + term.lessThan)
@@ -48,14 +49,14 @@ const tableOptions = {
           return true
         }
       },
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      }
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // }
     },
     transactionDate: {
       title: "Transaction date",
@@ -69,14 +70,15 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: 'Transaction date',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     paidBy: {
       title: "Paid by",
@@ -90,14 +92,15 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'Payer...',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     paidTo: {
       title: "Paid to",
@@ -111,14 +114,15 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'Recipient...',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     amount: {
       title: "Amount",
@@ -131,14 +135,15 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       type: 'currency',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     fromCountry: {
       title: "From Country",
@@ -152,14 +157,15 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'From country',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     country: {
       title: "Country",
@@ -173,14 +179,15 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'To country...',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 120,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     purpose: {
       title: "Purpose",
@@ -193,14 +200,15 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       type: '',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     type: {
       title: "Type",
@@ -213,14 +221,15 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       type: '',
-      cellStyle: {
-        width: '50px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 66,
+      // cellStyle: {
+      //   width: '50px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     bankSender: {
       title: "Bank sender",
@@ -234,14 +243,15 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'Bank...',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
-      },
+      width: 115
+      // cellStyle: {
+      //   width: '114px',
+      //   height: '19px',
+      //   color: '#515151',
+      //   fontFamily: 'Open Sans, sans-serif',
+      //   fontSize: '14px',
+      //   letterSpacing: '-0.3px',
+      // },
     },
     confidence: {
       title: "Confidence",
@@ -254,7 +264,8 @@ const tableOptions = {
       lookup: {confirmed: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c'},
       defaultFilter: '',
       type: 'image',
-      cellStyle: {textAlign: 'center',}
+      cellStyle: {textAlign: 'center'},
+      width: 66,
     },
     proof: {
       title: "Proof",
@@ -272,6 +283,7 @@ const tableOptions = {
       },
       defaultFilter: '',
       type: 'image',
+      width: 66,
       cellStyle: {textAlign: 'center'}
     },
     story: {
@@ -286,6 +298,7 @@ const tableOptions = {
         lookup: '',
         type: '',
         filterPlaceholder: 'Story...',
+        width: 66,
       },
   },
   table: {

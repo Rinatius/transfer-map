@@ -152,25 +152,23 @@ class MTablePaginationInner extends React.Component {
         </Tooltip>
       }
       </div>
-        <Typography variant="" style={{
+        <Typography style={{
           position: "absolute",
           right: "5%",
           marginTop: "12px",
+          fontSize: "16px",
           color: "#515151",
-          fontFamily: "'Open Sans', sans-serif",
-          fontSize: "14px",
-          letterSpacing: "-0.3px",
           }}>Total of filtered results: <span style={{fontWeight: "700"}}>$ {this.formatMoney(this.state.sum)}</span></Typography>
       </Box>
-      <Typography className={classes.root} variant="" style={{
+      <Typography className={classes.root}
+        style={{
           display: "flex",
           justifyContent: "center",
           position: "relative",
           color: "#515151",
-          fontFamily: "'Open Sans', sans-serif",
-          fontSize: "14px",
-          letterSpacing: "-0.3px",
-        }}>Showing {this.props.page * this.props.rowsPerPage + 1} to {(this.props.count - (this.props.page + 1) * this.props.rowsPerPage > 0)
+          fontSize: "16px",
+        }}
+        >Showing {this.props.page * this.props.rowsPerPage + 1} to {(this.props.count - (this.props.page + 1) * this.props.rowsPerPage > 0)
           ? ((this.props.page + 1) * this.props.rowsPerPage) 
           : (this.props.count)} of {this.props.count} ({this.props.totalNumOfRows})</Typography>
       </div>

@@ -273,7 +273,7 @@ class MTableFilterRow extends React.Component {
           outline:'none',
           // position: 'absolute',
           // right: 0,
-        }} >Reset all filters
+        }} ><Typography style={{width: "96px", fontSize: "15px"}}>Reset all filters</Typography>
       </button>
     </TableCell>
     );

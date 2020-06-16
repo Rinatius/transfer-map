@@ -22,22 +22,49 @@ const theme = createMuiTheme({
 		primary: {
 		  main: '#931e1d;',
 		},
+
 		secondary: {
 		  main: '#931e1d;',
 		},
 	  },
-    typography: {
-		width: "241px",
-		height: "19px",
-		color: "#515151",
-		fontFamily: "Open Sans",
-		fontSize: "14px",
-		letterSpacing: "-0.3px",
-	  },
+
+		typography: {
+			color: "#515151",
+			fontFamily: "Open Sans",
+			fontSize: "14px",
+			letterSpacing: "-0.3px",
+			width: "66px"
+		},
+
+		// props: {
+		// 	MuiTableCell: {
+		// 		align: "center"
+		// 	}
+		// },
+
 	  overrides: {
+		MuiTableCell: {
+			root: {
+				textAlign: 'center',
+				// padding: 'none'
+				padding: 10,
+			},
+		},
+
 		MuiTableSortLabel: {
 			icon: {
 				opacity: 0.3
+			}
+		},
+		MuiTableHead: {
+			root: {
+				borderWidth: 0,
+				borderTopWidth: 2,
+				borderBottomWidth: 2,
+				borderColor: '#931e1d',
+				borderStyle: 'solid',
+				// width: '80px',
+				// height: '29px',
 			}
 		}
 	  }
