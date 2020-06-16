@@ -1,0 +1,25 @@
+# testing environment
+master-cdn-deploy:
+	stage: deploy
+	script:
+	- npm install
+	- npm run build
+	- rsync -av --delete ./build/ /output/plunder-transfer-map/
+	only:
+	- master
+	tags:
+	- master
+	
+#   # production environment
+#   production-cdn-deploy:
+	# stage: deploy
+	# script:
+	# - yarn install
+	# - yarn seed
+	# - yarn build
+	# - rsync -av --delete ./dist/ /output/maya-riviera/
+	# only:
+	# - production
+	# tags:
+	# - production
+  
