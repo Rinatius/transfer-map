@@ -52,17 +52,12 @@ const theme = createMuiTheme({
 			},
 		},
 
-		MuiInputBase: {
-			input: {
-				width: 100
-			}
-		},
-
 		MuiTableSortLabel: {
 			icon: {
 				opacity: 0.3
 			}
 		},
+		
 		MuiTableHead: {
 			root: {
 				borderWidth: 0,
