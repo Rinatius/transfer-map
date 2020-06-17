@@ -16,6 +16,27 @@ const tableOptions = {
   },
 
   columns: {
+    transactionDateRange: {
+      title: "Transaction date range",
+      field: "transactionDate",
+      hidden: false,
+      searchable: true,
+      sorting: true,
+      grouping: true,
+      filtering: true,
+      type: 'date_range',
+      defaultFilter: '',
+      lookup: '',
+      filterPlaceholder: 'Transaction date range',
+      cellStyle: {
+        width: '114px',
+        height: '19px',
+        color: '#515151',
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '14px',
+        letterSpacing: '-0.3px',
+      },
+    },
     numberRange: {
       title: "Amount range",
       field: "amount",
