@@ -163,7 +163,7 @@ class MTablePaginationInner extends React.Component {
       <Box  display="flex" justifyContent="center" mb="50px">
       <Typography className={classes.root} variant="body2"
         style={{
-          width: "50%",
+          width: "241px",
           display: "flex",
           justifyContent: "center",
           position: "relative",
