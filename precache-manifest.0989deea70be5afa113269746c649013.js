@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d935ccd106c76e73262d82fe9879d551",
+    "revision": "0b5df1bc634c371f62fb7553d4ea1394",
     "url": "/transfer-map/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/transfer-map/static/css/2.294a05d7.chunk.css"
   },
   {
-    "revision": "4ae486b28e600b690b89",
+    "revision": "f6796fd2ea87a6555047",
     "url": "/transfer-map/static/css/main.456c1173.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/transfer-map/static/js/2.27e7f708.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4ae486b28e600b690b89",
-    "url": "/transfer-map/static/js/main.98e6ba28.chunk.js"
+    "revision": "f6796fd2ea87a6555047",
+    "url": "/transfer-map/static/js/main.2771bb30.chunk.js"
   },
   {
     "revision": "12d23e0ae028e733a23e",
