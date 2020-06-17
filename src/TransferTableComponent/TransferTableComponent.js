@@ -37,9 +37,9 @@ const theme = createMuiTheme({
 		},
 
 		// props: {
-		// 	MuiTableCell: {
-		// 		align: "center"
-		// 	}
+		// 	MuiPaper: {
+		// 	elevation: 0
+		// 	},
 		// },
 
 	  overrides: {
@@ -48,7 +48,14 @@ const theme = createMuiTheme({
 				textAlign: 'center',
 				// padding: 'none'
 				padding: 10,
+				// width: 66
 			},
+		},
+
+		MuiInputBase: {
+			input: {
+				width: 100
+			}
 		},
 
 		MuiTableSortLabel: {
