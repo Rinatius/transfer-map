@@ -21,13 +21,16 @@ const tableOptions = {
       field: "transactionDate",
       hidden: false,
       searchable: false,
-      sorting: false,
+      sorting: true,
       grouping: true,
       filtering: true,
       type: 'date_range',
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: 'Transaction date range',
+      customSort: (a, b) => {
+        return new Date(a.transactionDate) - new Date(b.transactionDate)
+      },
       customFilterAndSearch: (term, rowData) => {
         if (term.dateRange == null){
           return true
@@ -77,10 +80,10 @@ const tableOptions = {
       lookup: '',
       filterPlaceholder: '',
       width: 66,
+      customSort: (a, b) => {
+        return parseInt(a.amount) - parseInt(b.amount)
+      },
       customFilterAndSearch: (term, rowData) => {
-        console.log('greater: ' + term.greaterThan)
-        console.log('less: ' + term.lessThan)
-        console.log('rowData: ' + rowData.amount)
         // this allows search to work
         if (term[0] != null) {
           return rowData[0] == term[0]
