@@ -67,7 +67,7 @@ const tableOptions = {
       filterPlaceholder: 'Recipient...',
       width: 66,
     },
-    numberRange: {
+    amount: {
       title: "Amount range",
       field: "amount",
       hidden: false,
@@ -101,19 +101,19 @@ const tableOptions = {
         }
       },
     },
-    amount: {
-      title: "Amount",
-      field: "amount",
-      hidden: true,
-      searchable: true,
-      sorting: true,
-      grouping: true,
-      filtering: true,
-      defaultFilter: '',
-      lookup: '',
-      type: 'currency',
-      width: 66,
-    },
+    // amount: {
+    //   title: "Amount",
+    //   field: "amount",
+    //   hidden: true,
+    //   searchable: true,
+    //   sorting: true,
+    //   grouping: true,
+    //   filtering: true,
+    //   defaultFilter: '',
+    //   lookup: '',
+    //   type: 'currency',
+    //   width: 66,
+    // },
     fromCountry: {
       title: "From Country",
       field: "fromCountry",

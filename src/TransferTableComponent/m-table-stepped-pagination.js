@@ -93,13 +93,14 @@ class MTablePaginationInner extends React.Component {
     const pageEnd = Math.min(maxPages, page + 1);
 
     return (
-      <div>
+      <Box>
       <Box className={classes.root} style={{
+          width: "auto",
           display: "flex",
           justifyContent: "center",
           position: "relative",
         }}>
-      <div style={{ }}>
+      <Box style={{ }}>
       {showFirstLastPageButtons &&
         <Tooltip title={localization.firstTooltip}>
             <span>
@@ -151,16 +152,18 @@ class MTablePaginationInner extends React.Component {
             </span>
         </Tooltip>
       }
-      </div>
+      </Box>
         <Typography variant="body2" style={{
           position: "absolute",
           right: "5%",
-          marginTop: "12px",
+          marginTop: "13px",
           color: "#515151",
           }}>Total of filtered results: <span style={{fontWeight: "700"}}>$ {this.formatMoney(this.state.sum)}</span></Typography>
       </Box>
+      <Box  display="flex" justifyContent="center" mb="50px">
       <Typography className={classes.root} variant="body2"
         style={{
+          width: "50%",
           display: "flex",
           justifyContent: "center",
           position: "relative",
@@ -169,7 +172,8 @@ class MTablePaginationInner extends React.Component {
         >Showing {this.props.page * this.props.rowsPerPage + 1} to {(this.props.count - (this.props.page + 1) * this.props.rowsPerPage > 0)
           ? ((this.props.page + 1) * this.props.rowsPerPage) 
           : (this.props.count)} of {this.props.count} ({this.props.totalNumOfRows})</Typography>
-      </div>
+          </Box>
+      </Box>
     );
   }
 }
