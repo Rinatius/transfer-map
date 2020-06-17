@@ -31,9 +31,9 @@ const theme = createMuiTheme({
 		typography: {
 			color: "#515151",
 			fontFamily: "Open Sans",
-			fontSize: "14px",
-			letterSpacing: "-0.3px",
-			width: "66px"
+			fontSize: 14,
+			letterSpacing: -0.3,
+			width: 66
 		},
 
 		// props: {
@@ -63,8 +63,6 @@ const theme = createMuiTheme({
 				borderBottomWidth: 2,
 				borderColor: '#931e1d',
 				borderStyle: 'solid',
-				// width: '80px',
-				// height: '29px',
 			}
 		}
 	  }

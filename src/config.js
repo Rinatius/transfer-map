@@ -330,19 +330,8 @@ const tableOptions = {
     },
 
     headerStyle: {
-      borderWidth: 0,
-      borderTopWidth: 2,
-      borderBottomWidth: 2,
-      borderColor: '#931e1d',
-      borderStyle: 'solid',
-      width: '80px',
-      height: '29px',
-      color: '#515151',
-      fontFamily: 'Open Sans, sans-serif',
-      fontSize: '14px',
-      fontWeight: '700',
-      letterSpacing: '-0.3px',
-      lineHeight: '14px',
+      fontWeight: 700,
+      lineHeight: "14px"
     },
 
     rowStyle: {
