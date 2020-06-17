@@ -80,6 +80,7 @@ class TransferTableComponent extends Component {
 		columns: [],
 		data: [],
 		filterCountry: '',
+		dateRange: null
 	}
 
 	toolbarRef = React.createRef()
@@ -168,6 +169,7 @@ class TransferTableComponent extends Component {
 		this.setState({columns: objColumns})
 		this.props.handleResetMap()
 		this.toolbarRef.current.onSearchChange("");
+		this.setState({dateRange: null})
 	}
 
 	getFilteredData = () => {
@@ -182,6 +184,10 @@ class TransferTableComponent extends Component {
 		numOfRows = value
 	}
 
+	handleDateRange = (dateRange) => {
+		this.setState({dateRange: dateRange})
+	}
+
 
 	render() {
 		return (
@@ -193,7 +199,7 @@ class TransferTableComponent extends Component {
 				columns={this.state.columns}
 				data={this.state.data}
 				components={{
-					FilterRow: props => <FilterRow {...props}/>,
+					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
 					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
 					Toolbar: props => (
 					<div>

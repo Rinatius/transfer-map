@@ -20,7 +20,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
 import { Button } from '@material-ui/core';
-import { DateRangePicker, DateRange } from "@matharumanpreet00/react-daterange-picker";
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -145,8 +145,15 @@ class MTableFilterRow extends React.Component {
   renderDateRangeTypeFilter = (columnDef) => {
     return(
       <DateRangePicker
-				open={true}
-				onChange={range => {console.log(range)}}
+        onChange={(dateRange) => {
+          console.log('on change')
+          const value = {...columnDef.tableData.filterValue};
+          console.log(value)
+          value.dateRange = dateRange
+          this.props.dateRangeChange(dateRange)
+          this.props.onFilterChanged(columnDef.tableData.id, value);
+        }}
+        value={this.props.dateRange}
 			/>
     )
   }
