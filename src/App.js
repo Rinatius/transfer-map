@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TransferMapComponent from "./TransferMapComponent/TransferMapComponent";
 import TransferTableComponent from "./TransferTableComponent/TransferTableComponent";
+import Legend from './Legend/Legend'
 import config from "./config";
 import {csv} from "d3";
 
@@ -44,6 +45,7 @@ class App extends Component {
             filterCountry={this.state.filterCountry}
             resetMap={this.state.resetMap}
             handleResetMap={this.handleResetMap} />
+          <Legend />
         </div>
       );
     }

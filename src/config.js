@@ -1,3 +1,24 @@
+const defaultLegendTitleStyle = {
+  paddingLeft: '6px', 
+  height: '19px',
+  color: '#515151',
+  fontFamily: "Open Sans",
+  fontSize: '14px',
+  fontWeight: '700',
+  letterSpacing: '-0.3px',}
+
+const defaultLegendBodyStyle = {
+  height: '44px',
+  color: '#515151',
+  fontFamily: "Open Sans",
+  fontSize: '14px',
+  letterSpacing: '-0.3px',
+}
+const defaultLegendBoxStyle = {
+  paddingLeft: '25px',
+  paddingRight: '25px'
+}
+
 const tableOptions = {
 
   csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmockup_v3.csv?alt=media&token=3294afb4-be79-487a-938e-e919b7969230',
@@ -15,6 +36,7 @@ const tableOptions = {
     "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json"
   },
 
+  
   columns: {
     transactionDateRange: {
       title: "Transaction date range",
@@ -272,7 +294,55 @@ const tableOptions = {
     rowStyle: {
       height: '37px',
     }
-  }
+  },
+
+  legend: {
+    confirmed: {
+      img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c',
+      title: 'Confirmed',
+      body: "Confirmed by U.S. Bank Records",
+      titleStyle: defaultLegendTitleStyle,
+      bodyStyle: defaultLegendBodyStyle,
+      boxStyle: defaultLegendBoxStyle
+    },
+    internal: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
+        title: 'Internal',
+        body: "Saimati’s internal documents (spreadsheet)",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      },
+    bank: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
+        title: 'Bank transfer',
+        body: "Scanned PDF of hard copies of bank transfer",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      },
+    electronic: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
+        title: 'Electronic transfer',
+        body: "Electronic PDF copies of bank transfer",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      },
+    customs: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d',
+        title: 'Customs',
+        body: "Customs’ declaration form as scanned PDF",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      }
+    },
+
 }
 
 

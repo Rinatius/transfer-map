@@ -37,12 +37,6 @@ const theme = createMuiTheme({
 			width: 66
 		},
 
-		// props: {
-		// 	MuiPaper: {
-		// 	elevation: 0
-		// 	},
-		// },
-
 	  overrides: {
 		MuiTableCell: {
 			root: {
@@ -51,6 +45,15 @@ const theme = createMuiTheme({
 				padding: 10,
 				// width: 66
 			},
+		},
+
+		MuiSelect: {
+			root: {
+				color: "#515151",
+				fontFamily: "Open Sans",
+				fontSize: 14,
+				letterSpacing: -0.3,
+			}
 		},
 
 		MuiTableSortLabel: {
@@ -124,9 +127,7 @@ class TransferTableComponent extends Component {
 
 	turnImageToLink = (data) => {
 		let dataCopy = [...data]
-		console.log("Data: ", dataCopy)
 		dataCopy.map(col => {
-			console.log(col.proof, col.proofLink) 
 			col.proof = <a href={col.proofLink}><img src={config.columns.proof.imgLink[col.proof]} alt={col.proof}/></a>
 		})
 		this.setState({data: dataCopy})
@@ -181,9 +182,7 @@ class TransferTableComponent extends Component {
 
 	getFilteredData = () => {
 		filteredData = this.tableRef.current.state.data
-		console.log(this.tableRef.current.state.data)
 		let sumOfFilteredData = filteredData.reduce((a, b) => a + parseFloat(b.amount), 0)
-		console.log(sumOfFilteredData)
 		this.paginationRef.current.setSum(sumOfFilteredData);
 	}
 
