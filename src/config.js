@@ -68,7 +68,7 @@ const tableOptions = {
       width: 66,
     },
     amount: {
-      title: "Amount range",
+      title: "Amount",
       field: "amount",
       hidden: false,
       searchable: true,
@@ -80,6 +80,7 @@ const tableOptions = {
       lookup: '',
       filterPlaceholder: '',
       width: 66,
+      render: rowData => {return '$' + rowData.amount},
       customSort: (a, b) => {
         return parseInt(a.amount) - parseInt(b.amount)
       },
