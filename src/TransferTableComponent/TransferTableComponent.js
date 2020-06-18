@@ -10,6 +10,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MTHeader from './m-table-header';
 import Paper from '@material-ui/core/Paper'
+import Filters from './Filters/Filters'
 
 
 
@@ -79,7 +80,9 @@ class TransferTableComponent extends Component {
 		columns: [],
 		data: [],
 		filterCountry: '',
-		dateRange: null
+		dateRange: null,
+		filteredData: null,
+		filters: false
 	}
 
 	toolbarRef = React.createRef()
@@ -88,6 +91,7 @@ class TransferTableComponent extends Component {
 
 	componentDidMount() {
 		this.setData()
+		this.setFilters()
 	}
 
 	componentDidUpdate(prevProps) {
@@ -98,18 +102,20 @@ class TransferTableComponent extends Component {
 			 (prevProps.resetMap !== this.props.resetMap)) {
 				console.log('update')
 			if (this.props.filterCountry !== '') {
-				// this.setState({filterCountry: this.props.filterCountry})
 				this.filterCountry(this.props.filterCountry)
-				// this.
 			}
 		}
 	}
 
 	setData = () => {
-		this.setState({ data: this.props.data })
+		this.setState({ data: this.props.data, filteredData: [...this.props.data] })
 		let newData = this.getLookupData(this.props.data)
 		this.initLookup(newData)
 		this.loadImage()
+	}
+
+	setFilters = () => {
+		this.setState({filters: true})
 	}
 
 	loadImage = () => {
@@ -199,46 +205,77 @@ class TransferTableComponent extends Component {
 		this.setState({dateRange: dateRange})
 	}
 
+	handleFilterChanged = (columnId, value) => {
+		console.log('columnId: ' + columnId)
+		console.log(value)
+		const data = [...this.state.data]
+		this.setState({filteredData: data})
+		if (value.greaterThan.length === 0){
+			this.setState({filteredData: [...data]})
+		}
+		if (value.greaterThan.length !== 0){
+		}
+		let filteredData = data.filter(rowData => {
+				return parseInt(rowData.amount) > parseInt(value.greaterThan)
+
+		})
+		console.log(this.state.columns[columnId])
+		console.log(this.state.data)
+		// objColumns[columnId].tableData.customFilterAndSearch = (term, rowData) => { return rowData.amount > value.greaterThan }
+		// objColumns.forEach(col => {
+		// 	if (col.field === "country") {
+		// 		col.tableData.filterValue = [country]
+		// 	}
+		// })
+		this.setState({filteredData: filteredData})	
+	}
+
 
 	render() {
+		let filters = null
+		if (this.state.filters) {
+			filters = <Filters columns={this.state.columns} onFilterChanged={this.handleFilterChanged}></Filters>
+		}
 		return (
 			<MuiThemeProvider theme={theme}>
-			<MaterialTable
-				tableRef={this.tableRef}
-				onSearchChange={this.getFilteredData}
-				onFilterChange={this.getFilteredData}
-				columns={this.state.columns}
-				data={this.state.data}
-				components={{
-					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
-					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
-					Toolbar: props => (
-					<div>
-						<Typography variant="" className='explore'>{config.table.textBody}</Typography>
-						<MToolBar {...props} ref={this.toolbarRef}/>
-					</div>
-					),
-					Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
-					Header: props => <MTHeader {...props} />,
-					Container: props => <Paper {...props} elevation={0}/>
-				}}
+				{filters}
+				<MaterialTable
+					tableRef={this.tableRef}
+					onSearchChange={this.getFilteredData}
+					onFilterChange={this.getFilteredData}
+					columns={this.state.columns}
+					data={this.state.filteredData}
+					components={{
+						// FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
+						Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
+						Toolbar: props => (
+						<div>
+							<Typography variant="" className='explore'>{config.table.textBody}</Typography>
+							<MToolBar {...props} ref={this.toolbarRef}/>
+						</div>
+						),
+						Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
+						Header: props => <MTHeader {...props} />,
+						Container: props => <Paper {...props} elevation={0}/>
+					}}
 
-				icons={{ Search: () => <div /> }} 
+					icons={{ Search: () => <div /> }} 
 
-				localization={{
-					toolbar: { searchPlaceholder: "Search the data…" },
-				}}
+					localization={{
+						toolbar: { searchPlaceholder: "Search the data…" },
+					}}
 
-				options={{
-					...config.table,
-					rowStyle: (data, index) => {
-						if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
-							return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
-						}
-						else {return {...config.table.rowStyle}}
-					},
-				}}
-			/></MuiThemeProvider>
+					options={{
+						...config.table,
+						rowStyle: (data, index) => {
+							if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
+								return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
+							}
+							else {return {...config.table.rowStyle}}
+						},
+					}}
+				/>
+			</MuiThemeProvider>
 		)
 	}
 }
