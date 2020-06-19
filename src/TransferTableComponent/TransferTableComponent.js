@@ -138,8 +138,8 @@ class TransferTableComponent extends Component {
 		let field = column.field
 		let link = column.linkColumn
 		console.log(field,link)
-		dataCopy.map(col => {
-			col[field] = <a href={col[link]}><img src={config.columns[field]["imgLink"][col[field]]} alt={col[field]}/></a>
+		dataCopy.map(row => {
+			row[field] = <a href={row[link]}><img src={config.columns[field]["imgLink"][row[field]]} alt={row[field]}/></a>
 		})
 		this.setState({data: dataCopy})
 	}
