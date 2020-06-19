@@ -10,7 +10,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MTHeader from './m-table-header';
 import Paper from '@material-ui/core/Paper'
-import Filters from './Filters/Filters'
+import Filters from './Filters/Filterbox'
 
 
 
@@ -205,28 +205,57 @@ class TransferTableComponent extends Component {
 		this.setState({dateRange: dateRange})
 	}
 
-	handleFilterChanged = (columnId, value) => {
-		console.log('columnId: ' + columnId)
-		console.log(value)
-		const data = [...this.state.data]
-		this.setState({filteredData: data})
-		if (value.greaterThan.length === 0){
-			this.setState({filteredData: [...data]})
+	filterAmountRange = (columnDef, data, value) => {
+		// there must be a better way to compare
+		let	filteredData = [...data]
+        if (value.greaterThan != null && value.lessThan != null) {
+			filteredData = data.filter(rowData => {
+				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
+					&& parseInt(value.lessThan) >= parseInt(rowData.amount)
+			})
+        } else if (value.greaterThan != null && value.lessThan == null) {
+			filteredData = data.filter(rowData => {
+				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
+			})
+        } else if (value.greaterThan == null && value.lessThan != null) {
+			filteredData = data.filter(rowData => {
+				return parseInt(value.lessThan) >= parseInt(rowData.amount)
+			})
 		}
-		if (value.greaterThan.length !== 0){
-		}
-		let filteredData = data.filter(rowData => {
-				return parseInt(rowData.amount) > parseInt(value.greaterThan)
+		return filteredData
+	}
 
-		})
-		console.log(this.state.columns[columnId])
-		console.log(this.state.data)
-		// objColumns[columnId].tableData.customFilterAndSearch = (term, rowData) => { return rowData.amount > value.greaterThan }
-		// objColumns.forEach(col => {
-		// 	if (col.field === "country") {
-		// 		col.tableData.filterValue = [country]
-		// 	}
-		// })
+	filterDefault = (columnDef, data, value) => {
+		let filteredData = [...data]
+		if (value.length > 0) {
+			filteredData = data.filter(rowData => {
+				return rowData[columnDef.field] == value
+			})
+		}
+		return filteredData
+	}
+
+	filterDateRange = (columnDef, data, value) => {
+		let filteredData = [...data]
+		if (value.dateRange != null) {
+			filteredData = data.filter(rowData => {
+				const rowDate = new Date(rowData.transactionDate)
+				return rowDate >= value.dateRange[0] && rowDate <= value.dateRange[1]
+			})
+		}
+		this.setState({dateRange: value.dateRange})
+		return filteredData
+	}
+
+	handleFilterChanged = (columnDef, value) => {
+		let filteredData = [...this.state.data]
+		if (columnDef.type === 'number_range'){
+			filteredData = this.filterAmountRange(columnDef, filteredData, value)
+		} else if (columnDef.type === 'date_range'){
+			filteredData = this.filterDateRange(columnDef, filteredData, value)
+		} else {
+			filteredData = this.filterDefault(columnDef, filteredData, value)
+		}
 		this.setState({filteredData: filteredData})	
 	}
 
@@ -234,7 +263,10 @@ class TransferTableComponent extends Component {
 	render() {
 		let filters = null
 		if (this.state.filters) {
-			filters = <Filters columns={this.state.columns} onFilterChanged={this.handleFilterChanged}></Filters>
+			filters = <Filters 
+				dateRange={this.state.dateRange}
+				columns={this.state.columns} 
+				onFilterChanged={this.handleFilterChanged}></Filters>
 		}
 		return (
 			<MuiThemeProvider theme={theme}>
