@@ -109,7 +109,6 @@ class TransferTableComponent extends Component {
 		this.setState({ data: this.props.data })
 		let newData = this.getLookupData(this.props.data)
 		this.initLookup(newData)
-		this.turnImageToLink(this.props.data)
 		this.loadImage()
 	}
 
@@ -121,14 +120,20 @@ class TransferTableComponent extends Component {
 					obj.lookup[key] = <img src={obj.lookup[key]} alt={key} />
 				})
 			}
+			else if (obj.type === 'image-link') {
+				this.turnImageToLink(obj)
+			}
 		})
 		this.setState({columns: objColumns})
 	}
 
-	turnImageToLink = (data) => {
-		let dataCopy = [...data]
+	turnImageToLink = (column) => {
+		let dataCopy = [...this.props.data]
+		let field = column.field
+		let link = column.linkColumn
+		console.log(field,link)
 		dataCopy.map(col => {
-			col.proof = <a href={col.proofLink}><img src={config.columns.proof.imgLink[col.proof]} alt={col.proof}/></a>
+			col[field] = <a href={col[link]}><img src={config.columns[field]["imgLink"][col[field]]} alt={col[field]}/></a>
 		})
 		this.setState({data: dataCopy})
 	}
