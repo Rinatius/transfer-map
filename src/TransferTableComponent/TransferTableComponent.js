@@ -247,14 +247,22 @@ class TransferTableComponent extends Component {
 		return filteredData
 	}
 
-	handleFilterChanged = (columnDef, value) => {
-		// let filteredData = [...this.state.data]
-		if (columnDef.type === 'number_range'){
-			filteredData = this.filterAmountRange(columnDef, this.state.filteredData, value)
-		} else if (columnDef.type === 'date_range'){
-			filteredData = this.filterDateRange(columnDef, this.state.filteredData, value)
-		} else {
-			filteredData = this.filterDefault(columnDef, this.state.filteredData, value)
+	handleFilterChanged = (filterState) => {
+		let filteredData = [...this.state.data]
+		console.log(filterState)
+		for (let key in filterState) {
+			let columnDef = objColumns[key]
+			let value = filterState[key]
+			console.log(value)
+			if (value != null) {
+				if (objColumns[key].type === 'number_range'){
+					filteredData = this.filterAmountRange(columnDef, filteredData, value)
+				} else if (objColumns[key].type === 'date_range'){
+					filteredData = this.filterDateRange(columnDef, filteredData, value)
+				} else {
+					filteredData = this.filterDefault(columnDef, filteredData, value)
+				}
+			}
 		}
 		this.setState({filteredData: filteredData})	
 	}

@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const amountRangeTypeFilter = (props) => {
     const columnDef = props.columnDef
+    let amountRange = {greaterThan: null, lessThan: null}
     return (
         <>
         <TextField
@@ -17,9 +18,10 @@ const amountRangeTypeFilter = (props) => {
         // value={columnDef['tableData']['filterValue']['greaterThan'] || ''}
         placeholder={columnDef.filterPlaceholder || ''}
         onChange={(event) => {
-            const value = {...columnDef.tableData.filterValue};
-            value.greaterThan = event.target.value;
-            props.onFilterChanged(columnDef, value);
+            // const value = {...columnDef.tableData.filterValue};
+            // value.greaterThan = event.target.value;
+            amountRange.greaterThan = event.target.value
+            props.onFilterChanged(columnDef, amountRange);
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
             startAdornment: (
@@ -40,9 +42,10 @@ const amountRangeTypeFilter = (props) => {
         // value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}
         placeholder={columnDef.filterPlaceholder || ''}
         onChange={(event) => {
-            const value = {...columnDef.tableData.filterValue};
-            value.lessThan = event.target.value;
-            props.onFilterChanged(columnDef, value);
+            // const value = {...columnDef.tableData.filterValue};
+            // value.lessThan = event.target.value;
+            amountRange.lessThan = event.target.value
+            props.onFilterChanged(columnDef, amountRange);
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
             startAdornment: (

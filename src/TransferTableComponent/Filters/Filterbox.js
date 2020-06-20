@@ -4,39 +4,41 @@ import DefaultFilter from './DefaultFilter'
 import DateRangeFilter from './DateRangeFilter'
 
 class Filterbox extends Component {
-    state = {
-        filters: [] 
+    filterComponents = []
+    filterState = {} 
+    updateFilterValues(columnDef, value) {
+        console.log(columnDef)
+        console.log(value)
+        this.filterState[columnDef.tableData.id] = value
+        console.log(this.filterState)
+        this.props.onFilterChanged(this.filterState)
     }
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.columns !== this.props.columns) {
-
-    //     }
-    // }
-    render() {
+    componentDidMount(){
         if (this.props.columns.length > 0) {
             const columns = this.props.columns.filter(column => {return column.filtering})
             columns.forEach(column => {
-                let filters = [...this.state.filters]
-                console.log(filters)
                 if (column.type === 'number_range') {
-                    filters.push(<AmountRangeFilter 
+                    this.filterComponents.push(<AmountRangeFilter 
                         columnDef={column} 
-                        onFilterChanged={(columnDef, value) => this.props.onFilterChanged(columnDef, value)}/>)
+                        onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else if (column.type === 'date_range') {
-                    filters.push(<DateRangeFilter 
+                    this.filterComponents.push(<DateRangeFilter 
                         dateRange={this.props.dateRange}
                         columnDef={column} 
-                        onFilterChanged={(columnDef, value) => this.props.onFilterChanged(columnDef, value)}/>)
+                        onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else {
-                    filters.push(<DefaultFilter 
+                    this.filterComponents.push(<DefaultFilter 
                         columnDef={column} 
-                        onFilterChanged={(columnDef, value) => this.props.onFilterChanged(columnDef, value)}/>)
+                        onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }
-                this.setState({filters: filters})
             })
+            console.log(this.filterComponents)
         }
+
+    }
+    render() {
         return(
-            this.state.filters
+            this.filterComponents
         )
     }
 }
