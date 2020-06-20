@@ -229,7 +229,7 @@ class TransferTableComponent extends Component {
 		let filteredData = [...data]
 		if (value.length > 0) {
 			filteredData = data.filter(rowData => {
-				return rowData[columnDef.field] == value
+				return rowData[columnDef.field] === value
 			})
 		}
 		return filteredData
@@ -248,13 +248,13 @@ class TransferTableComponent extends Component {
 	}
 
 	handleFilterChanged = (columnDef, value) => {
-		let filteredData = [...this.state.data]
+		// let filteredData = [...this.state.data]
 		if (columnDef.type === 'number_range'){
-			filteredData = this.filterAmountRange(columnDef, filteredData, value)
+			filteredData = this.filterAmountRange(columnDef, this.state.filteredData, value)
 		} else if (columnDef.type === 'date_range'){
-			filteredData = this.filterDateRange(columnDef, filteredData, value)
+			filteredData = this.filterDateRange(columnDef, this.state.filteredData, value)
 		} else {
-			filteredData = this.filterDefault(columnDef, filteredData, value)
+			filteredData = this.filterDefault(columnDef, this.state.filteredData, value)
 		}
 		this.setState({filteredData: filteredData})	
 	}
