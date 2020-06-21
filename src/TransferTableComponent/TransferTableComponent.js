@@ -43,9 +43,14 @@ const theme = createMuiTheme({
 			root: {
 				textAlign: 'center',
 				// padding: 'none'
-				padding: 10,
+				padding: 'none',
+				width: 20
 				// width: 66
 			},
+			sizeSmall: {
+				padding: 'none',
+				height: 37
+			}
 		},
 
 		MuiSelect: {

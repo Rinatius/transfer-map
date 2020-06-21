@@ -50,6 +50,7 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: 'Transaction date range',
+      width: 66,
       customSort: (a, b) => {
         return new Date(a.transactionDate) - new Date(b.transactionDate)
       },
@@ -101,7 +102,7 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: '',
-      width: 66,
+      width: 20,
       render: rowData => {return '$' + rowData.amount},
       customSort: (a, b) => {
         return parseInt(a.amount) - parseInt(b.amount)
@@ -163,7 +164,7 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'To country...',
-      width: 120,
+      width: 66,
     },
     purpose: {
       title: "Purpose",
@@ -203,7 +204,7 @@ const tableOptions = {
       lookup: '',
       type: '',
       filterPlaceholder: 'Bank...',
-      width: 120
+      width: 60
     },
     confidence: {
       title: "Confidence",
@@ -217,7 +218,7 @@ const tableOptions = {
       defaultFilter: '',
       type: 'image',
       cellStyle: {textAlign: 'center'},
-      width: 66,
+      width: 30,
     },
     proof: {
       title: "Proof",
@@ -253,11 +254,6 @@ const tableOptions = {
         filterPlaceholder: 'Story...',
         width: 66,
       },
-    proofLink: {
-      field: "proofLink",
-      hidden: true,
-      filtering: false,
-    }
   },
   table: {
     search: true,
