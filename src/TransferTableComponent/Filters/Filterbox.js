@@ -18,15 +18,18 @@ class Filterbox extends Component {
             const columns = this.props.columns.filter(column => {return column.filtering})
             columns.forEach(column => {
                 if (column.type === 'number_range') {
+                    console.log('number range filter')
                     this.filterComponents.push(<AmountRangeFilter 
                         columnDef={column} 
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else if (column.type === 'date_range') {
+                    console.log('date range filter')
                     this.filterComponents.push(<DateRangeFilter 
                         dateRange={this.props.dateRange}
                         columnDef={column} 
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else {
+                    console.log('default filter')
                     this.filterComponents.push(<DefaultFilter 
                         columnDef={column} 
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)

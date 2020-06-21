@@ -208,16 +208,16 @@ class TransferTableComponent extends Component {
 	filterAmountRange = (columnDef, data, value) => {
 		// there must be a better way to compare
 		let	filteredData = [...data]
-        if (value.greaterThan != null && value.lessThan != null) {
+        if (value.greaterThan !== '' && value.lessThan !== '') {
 			filteredData = data.filter(rowData => {
 				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
 					&& parseInt(value.lessThan) >= parseInt(rowData.amount)
 			})
-        } else if (value.greaterThan != null && value.lessThan == null) {
+        } else if (value.greaterThan !== '' && value.lessThan === '') {
 			filteredData = data.filter(rowData => {
 				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
 			})
-        } else if (value.greaterThan == null && value.lessThan != null) {
+        } else if (value.greaterThan === '' && value.lessThan !== '') {
 			filteredData = data.filter(rowData => {
 				return parseInt(value.lessThan) >= parseInt(rowData.amount)
 			})
@@ -256,10 +256,13 @@ class TransferTableComponent extends Component {
 			console.log(value)
 			if (value != null) {
 				if (objColumns[key].type === 'number_range'){
+					console.log('number range ')
 					filteredData = this.filterAmountRange(columnDef, filteredData, value)
 				} else if (objColumns[key].type === 'date_range'){
+					console.log('date range')
 					filteredData = this.filterDateRange(columnDef, filteredData, value)
 				} else {
+					console.log('default')
 					filteredData = this.filterDefault(columnDef, filteredData, value)
 				}
 			}
