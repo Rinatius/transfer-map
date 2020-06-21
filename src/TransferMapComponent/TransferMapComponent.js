@@ -132,7 +132,7 @@ class TransferMapComponent extends Component {
         console.log(this.pairs)
         this.dataScaler = scaleLinear()
           .domain(extent(totals))
-          .range([0.5, 5])
+          .range([1, 5])
         this.capitals = nest()
           .key(d => d.name)
           .map(capitals)
@@ -164,10 +164,12 @@ class TransferMapComponent extends Component {
                   const c = this.state.visibleCountries.has(geo.properties.name);
                   const focusCountry = (this.state.focusCountry === geo.properties.name);
                   let countryFill = config.mapOptions.passive_color;
+                  let hover = {outline: "none"};
                   if (focusCountry) {
                     countryFill = config.mapOptions.focus_color
                   } else if (c) {
                     countryFill = config.mapOptions.active_color
+                    hover = {outline: "none", cursor:"pointer"}
                   };
                 return (
                   <Geography
@@ -178,7 +180,7 @@ class TransferMapComponent extends Component {
                     fill={countryFill}
                     style={{
                       default: {outline: "none"},
-                      hover: {outline: "none"},
+                      hover: hover,
                       pressed: {outline: "none"},
                     }}
                   />
