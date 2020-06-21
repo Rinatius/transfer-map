@@ -9,9 +9,18 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const amountRangeTypeFilter = (props) => {
     const columnDef = props.columnDef
+
+    let style = {}
+    if (columnDef.filterCellStyle) {
+        style = columnDef.filterCellStyle}
+    else {
+        style = props.style
+    }
+
     return (
         <>
         <TextField
+        style={style}
         // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
         // type={columnDef.type === 'numeric' ? 'number' : 'search'}
         // value={columnDef['tableData']['filterValue']['greaterThan'] || ''}
@@ -35,6 +44,7 @@ const amountRangeTypeFilter = (props) => {
         }}
         />
         <TextField
+        style={style}
         // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
         // type={columnDef.type === 'numeric' ? 'number' : 'search'}
         // value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}

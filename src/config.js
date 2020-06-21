@@ -294,6 +294,13 @@ const tableOptions = {
 
     rowStyle: {
       height: '37px',
+    },
+    
+    filterCellStyle: {
+      fontFamily: "Roboto",
+      fontSize: "20px",
+      padding: "none",
+      width: "50px",
     }
   },
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AmountRangeFilter from './AmountRangeFilter'
 import DefaultFilter from './DefaultFilter'
 import DateRangeFilter from './DateRangeFilter'
+import Box from '@material-ui/core/Box'
 
 const filters = (props) => {
     let filters = []
@@ -9,23 +10,37 @@ const filters = (props) => {
         const columns = props.columns.filter(column => {return column.filtering})
         columns.forEach(column => {
             if (column.type === 'number_range') {
-                filters.push(<AmountRangeFilter 
-                    columnDef={column} 
-                    onFilterChanged={(columnDef, value) => props.onFilterChanged(columnDef, value)}/>)
+                filters.push(
+                <Box item px={5}>
+                    <AmountRangeFilter 
+                        style={props.style}
+                        columnDef={column} 
+                        onFilterChanged={(columnDef, value) => props.onFilterChanged(columnDef, value)}/>
+                </Box>)
             } else if (column.type === 'date_range') {
-                filters.push(<DateRangeFilter 
+                filters.push(
+                <Box item px={5}>
+                    <DateRangeFilter 
+                    style={props.style}
                     dateRange={props.dateRange}
                     columnDef={column} 
-                    onFilterChanged={(columnDef, value) => props.onFilterChanged(columnDef, value)}/>)
+                    onFilterChanged={(columnDef, value) => props.onFilterChanged(columnDef, value)}/>
+                </Box>)
             } else {
-                filters.push(<DefaultFilter 
+                filters.push(
+                <Box item px={5}>
+                    <DefaultFilter 
+                    style={props.style}
                     columnDef={column} 
-                    onFilterChanged={(columnDef, value) => props.onFilterChanged(columnDef, value)}/>)
+                    onFilterChanged={(columnDef, value) => props.onFilterChanged(columnDef, value)}/>
+                </Box>)
             }
         })
     }
     return (
-        filters
+        <Box container display="flex" justifyContent="left" m={0} p={0} >
+        {filters}
+        </Box>
     )
 }
 
