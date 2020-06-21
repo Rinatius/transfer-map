@@ -44,12 +44,12 @@ const theme = createMuiTheme({
 				textAlign: 'center',
 				// padding: 'none'
 				padding: 'none',
-				width: 20
+				width: 20,
 				// width: 66
 			},
 			sizeSmall: {
 				padding: 'none',
-				height: 37
+				height: 37,
 			}
 		},
 

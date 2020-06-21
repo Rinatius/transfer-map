@@ -60,7 +60,8 @@ const tableOptions = {
         }
         const rowDate = new Date(rowData.transactionDate)
         return rowDate >= term.dateRange[0] && rowDate <= term.dateRange[1]
-      }
+      },
+      cellStyle: {paddingLeft: 20},
     },
     paidBy: {
       title: "Paid by",
@@ -237,8 +238,8 @@ const tableOptions = {
       linkColumn: 'proofLink',
       defaultFilter: '',
       type: 'image-link',
-      width: 66,
-      cellStyle: {textAlign: 'center'}
+      width: 30,
+      cellStyle: {textAlign: 'center', paddingRight: 20}
     },
     story: {
         title: "Story",
