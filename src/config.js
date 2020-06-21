@@ -62,6 +62,7 @@ const tableOptions = {
         return rowDate >= term.dateRange[0] && rowDate <= term.dateRange[1]
       },
       cellStyle: {paddingLeft: 20},
+      headerStyle: {paddingLeft: 20}
     },
     paidBy: {
       title: "Paid by",

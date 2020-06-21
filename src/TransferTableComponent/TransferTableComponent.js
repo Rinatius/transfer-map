@@ -42,10 +42,8 @@ const theme = createMuiTheme({
 		MuiTableCell: {
 			root: {
 				textAlign: 'center',
-				// padding: 'none'
 				padding: 'none',
 				width: 20,
-				// width: 66
 			},
 			sizeSmall: {
 				padding: 'none',
