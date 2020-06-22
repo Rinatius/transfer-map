@@ -8,7 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import MTPagination from './m-table-stepped-pagination';
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import MTHeader from './m-table-header'
+import MTHeader from './m-table-header';
+import Paper from '@material-ui/core/Paper'
+import Filters from './Filters/Filterbox'
 
 
 
@@ -31,24 +33,38 @@ const theme = createMuiTheme({
 		typography: {
 			color: "#515151",
 			fontFamily: "Open Sans",
-			fontSize: "14px",
-			letterSpacing: "-0.3px",
-			width: "66px"
+			fontSize: 14,
+			letterSpacing: -0.3,
+			width: 66
 		},
-
-		// props: {
-		// 	MuiTableCell: {
-		// 		align: "center"
-		// 	}
-		// },
 
 	  overrides: {
 		MuiTableCell: {
 			root: {
 				textAlign: 'center',
-				// padding: 'none'
-				padding: 10,
+				padding: 'none',
+				width: 20,
 			},
+			sizeSmall: {
+				padding: 'none',
+				height: 37,
+			}
+		},
+
+		MuiInputBase: {
+			root: {
+				fontFamily: "Open Sans",
+				fontSize: 14
+			}
+		},
+
+		MuiSelect: {
+			root: {
+				color: "#515151",
+				fontFamily: "Open Sans",
+				fontSize: 14,
+				letterSpacing: -0.3,
+			}
 		},
 
 		MuiTableSortLabel: {
@@ -56,6 +72,7 @@ const theme = createMuiTheme({
 				opacity: 0.3
 			}
 		},
+
 		MuiTableHead: {
 			root: {
 				borderWidth: 0,
@@ -63,8 +80,6 @@ const theme = createMuiTheme({
 				borderBottomWidth: 2,
 				borderColor: '#931e1d',
 				borderStyle: 'solid',
-				// width: '80px',
-				// height: '29px',
 			}
 		}
 	  }
@@ -75,6 +90,9 @@ class TransferTableComponent extends Component {
 		columns: [],
 		data: [],
 		filterCountry: '',
+		dateRange: null,
+		filteredData: null,
+		filters: false
 	}
 
 	toolbarRef = React.createRef()
@@ -83,6 +101,7 @@ class TransferTableComponent extends Component {
 
 	componentDidMount() {
 		this.setData()
+		this.setFilters()
 	}
 
 	componentDidUpdate(prevProps) {
@@ -93,18 +112,20 @@ class TransferTableComponent extends Component {
 			 (prevProps.resetMap !== this.props.resetMap)) {
 				console.log('update')
 			if (this.props.filterCountry !== '') {
-				// this.setState({filterCountry: this.props.filterCountry})
 				this.filterCountry(this.props.filterCountry)
-				// this.
 			}
 		}
 	}
 
 	setData = () => {
-		this.setState({ data: this.props.data })
+		this.setState({ data: this.props.data, filteredData: [...this.props.data] })
 		let newData = this.getLookupData(this.props.data)
 		this.initLookup(newData)
 		this.loadImage()
+	}
+
+	setFilters = () => {
+		this.setState({filters: true})
 	}
 
 	loadImage = () => {
@@ -115,8 +136,22 @@ class TransferTableComponent extends Component {
 					obj.lookup[key] = <img src={obj.lookup[key]} alt={key} />
 				})
 			}
+			else if (obj.type === 'image-link') {
+				this.turnImageToLink(obj)
+			}
 		})
 		this.setState({columns: objColumns})
+	}
+
+	turnImageToLink = (column) => {
+		let dataCopy = [...this.props.data]
+		let field = column.field
+		let link = column.linkColumn
+		console.log(field,link)
+		dataCopy.map(row => {
+			row[field] = <a href={row[link]}><img src={config.columns[field]["imgLink"][row[field]]} alt={row[field]}/></a>
+		})
+		this.setState({data: dataCopy})
 	}
 
 	
@@ -163,13 +198,12 @@ class TransferTableComponent extends Component {
 		this.setState({columns: objColumns})
 		this.props.handleResetMap()
 		this.toolbarRef.current.onSearchChange("");
+		this.setState({dateRange: null})
 	}
 
 	getFilteredData = () => {
 		filteredData = this.tableRef.current.state.data
-		console.log(this.tableRef.current.state.data)
 		let sumOfFilteredData = filteredData.reduce((a, b) => a + parseFloat(b.amount), 0)
-		console.log(sumOfFilteredData)
 		this.paginationRef.current.setSum(sumOfFilteredData);
 	}
 
@@ -177,45 +211,115 @@ class TransferTableComponent extends Component {
 		numOfRows = value
 	}
 
+	handleDateRange = (dateRange) => {
+		this.setState({dateRange: dateRange})
+	}
+
+	filterAmountRange = (columnDef, data, value) => {
+		// there must be a better way to compare
+		let	filteredData = [...data]
+        if (value.greaterThan != null && value.lessThan != null) {
+			filteredData = data.filter(rowData => {
+				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
+					&& parseInt(value.lessThan) >= parseInt(rowData.amount)
+			})
+        } else if (value.greaterThan != null && value.lessThan == null) {
+			filteredData = data.filter(rowData => {
+				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
+			})
+        } else if (value.greaterThan == null && value.lessThan != null) {
+			filteredData = data.filter(rowData => {
+				return parseInt(value.lessThan) >= parseInt(rowData.amount)
+			})
+		}
+		return filteredData
+	}
+
+	filterDefault = (columnDef, data, value) => {
+		let filteredData = [...data]
+		if (value.length > 0) {
+			filteredData = data.filter(rowData => {
+				return rowData[columnDef.field] == value
+			})
+		}
+		return filteredData
+	}
+
+	filterDateRange = (columnDef, data, value) => {
+		let filteredData = [...data]
+		if (value.dateRange != null) {
+			filteredData = data.filter(rowData => {
+				const rowDate = new Date(rowData.transactionDate)
+				return rowDate >= value.dateRange[0] && rowDate <= value.dateRange[1]
+			})
+		}
+		this.setState({dateRange: value.dateRange})
+		return filteredData
+	}
+
+	handleFilterChanged = (columnDef, value) => {
+		let filteredData = [...this.state.data]
+		if (columnDef.type === 'number_range'){
+			filteredData = this.filterAmountRange(columnDef, filteredData, value)
+		} else if (columnDef.type === 'date_range'){
+			filteredData = this.filterDateRange(columnDef, filteredData, value)
+		} else {
+			filteredData = this.filterDefault(columnDef, filteredData, value)
+		}
+		this.setState({filteredData: filteredData})	
+	}
+
 
 	render() {
+		let filters = null
+		if (this.state.filters) {
+			filters = <Filters
+				cellStyle={config.table.filterCellStyle}
+				boxStyle={config.table.filterBoxStyle}
+				dateRange={this.state.dateRange}
+				columns={this.state.columns} 
+				onFilterChanged={this.handleFilterChanged}></Filters>
+		}
 		return (
 			<MuiThemeProvider theme={theme}>
-			<MaterialTable
-				tableRef={this.tableRef}
-				onSearchChange={this.getFilteredData}
-				onFilterChange={this.getFilteredData}
-				columns={this.state.columns}
-				data={this.state.data}
-				components={{
-					FilterRow: props => <FilterRow {...props}/>,
-					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
-					Toolbar: props => (
-					<div>
-						<Typography variant="" className='explore'>{config.table.textBody}</Typography>
-						<MToolBar {...props} ref={this.toolbarRef}/>
-					</div>
-					),
-					Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
-					Header: props => <MTHeader {...props} />
-				}}
+				{filters}
+				<MaterialTable
+					tableRef={this.tableRef}
+					onSearchChange={this.getFilteredData}
+					onFilterChange={this.getFilteredData}
+					columns={this.state.columns}
+					data={this.state.filteredData}
+					components={{
+						// FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
+						Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
+						Toolbar: props => (
+						<div>
+							<Typography variant="" className='explore'>{config.table.textBody}</Typography>
+							<MToolBar {...props} ref={this.toolbarRef}/>
+						</div>
+						),
+						Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
+						Header: props => <MTHeader {...props} />,
+						Container: props => <Paper {...props} elevation={0}/>
+					}}
 
-				icons={{ Search: () => <div /> }} 
+					icons={{ Search: () => <div /> }} 
 
-				localization={{
-					toolbar: { searchPlaceholder: "Search the data…" },
-				}}
+					localization={{
+						toolbar: { searchPlaceholder: "Search the data…" },
+					}}
 
-				options={{
-					...config.table,
-					rowStyle: (data, index) => {
-						if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
-							return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
-						}
-						else {return {...config.table.rowStyle}}
-					},
-				}}
-			/></MuiThemeProvider>
+					options={{
+						...config.table,
+						rowStyle: (data, index) => {
+							if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
+								return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
+							}
+							else {return {...config.table.rowStyle}}
+						},
+					}}
+				/>
+			</MuiThemeProvider>
 		)
 	}
 }

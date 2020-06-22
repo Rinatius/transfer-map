@@ -1,6 +1,27 @@
+const defaultLegendTitleStyle = {
+  paddingLeft: '6px', 
+  height: '19px',
+  color: '#515151',
+  fontFamily: "Open Sans",
+  fontSize: '14px',
+  fontWeight: '700',
+  letterSpacing: '-0.3px',}
+
+const defaultLegendBodyStyle = {
+  height: '44px',
+  color: '#515151',
+  fontFamily: "Open Sans",
+  fontSize: '14px',
+  letterSpacing: '-0.3px',
+}
+const defaultLegendBoxStyle = {
+  paddingLeft: '25px',
+  paddingRight: '25px'
+}
+
 const tableOptions = {
 
-  csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2Fmockup.csv?alt=media&token=82d1e6d6-e634-492d-a7a7-32223735c25f',
+  csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmockup_v3.csv?alt=media&token=3294afb4-be79-487a-938e-e919b7969230',
 
   mapOptions: {
     "active_color": "#dbabac",
@@ -15,45 +36,80 @@ const tableOptions = {
     "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json"
   },
 
+  
   columns: {
     transactionDateRange: {
       title: "Transaction date range",
       field: "transactionDate",
       hidden: false,
-      searchable: true,
+      searchable: false,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       type: 'date_range',
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: 'Transaction date range',
-      cellStyle: {
-        width: '114px',
-        height: '19px',
-        color: '#515151',
-        fontFamily: 'Open Sans, sans-serif',
-        fontSize: '14px',
-        letterSpacing: '-0.3px',
+      width: 66,
+      customSort: (a, b) => {
+        return new Date(a.transactionDate) - new Date(b.transactionDate)
       },
+      customFilterAndSearch: (term, rowData) => {
+        if (term.dateRange == null){
+          return true
+        }
+        const rowDate = new Date(rowData.transactionDate)
+        return rowDate >= term.dateRange[0] && rowDate <= term.dateRange[1]
+      },
+      cellStyle: {paddingLeft: 20},
+      headerStyle: {paddingLeft: 20}
     },
-    numberRange: {
-      title: "Amount range",
+    paidBy: {
+      title: "Paid by",
+      field: "paidBy",
+      hidden: false,
+      searchable: true,
+      sorting: true,
+      grouping: false,
+      filtering: true,
+      defaultFilter: '',
+      lookup: '',
+      type: '',
+      filterPlaceholder: 'Payer...',
+      width: 66,
+    },
+    paidTo: {
+      title: "Paid to",
+      field: "paidTo",
+      hidden: false,
+      searchable: true,
+      sorting: true,
+      grouping: false,
+      filtering: true,
+      defaultFilter: '',
+      lookup: '',
+      type: '',
+      filterPlaceholder: 'Recipient...',
+      width: 66,
+    },
+    amount: {
+      title: "Amount",
       field: "amount",
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       type: 'number_range',
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: '',
-      width: 66,
+      width: 20,
+      render: rowData => {return '$' + rowData.amount},
+      customSort: (a, b) => {
+        return parseInt(a.amount) - parseInt(b.amount)
+      },
       customFilterAndSearch: (term, rowData) => {
-        console.log('greater: ' + term.greaterThan)
-        console.log('less: ' + term.lessThan)
-        console.log('rowData: ' + rowData.amount)
         // this allows search to work
         if (term[0] != null) {
           return rowData[0] == term[0]
@@ -70,123 +126,33 @@ const tableOptions = {
           return true
         }
       },
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // }
     },
-    transactionDate: {
-      title: "Transaction date",
-      field: "transactionDate",
-      hidden: false,
-      searchable: true,
-      sorting: true,
-      grouping: true,
-      filtering: true,
-      type: 'date',
-      defaultFilter: '',
-      lookup: '',
-      filterPlaceholder: 'Transaction date',
-      width: 66,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
-    },
-    paidBy: {
-      title: "Paid by",
-      field: "paidBy",
-      hidden: false,
-      searchable: true,
-      sorting: true,
-      grouping: true,
-      filtering: true,
-      defaultFilter: '',
-      lookup: '',
-      type: '',
-      filterPlaceholder: 'Payer...',
-      width: 66,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
-    },
-    paidTo: {
-      title: "Paid to",
-      field: "paidTo",
-      hidden: false,
-      searchable: true,
-      sorting: true,
-      grouping: true,
-      filtering: true,
-      defaultFilter: '',
-      lookup: '',
-      type: '',
-      filterPlaceholder: 'Recipient...',
-      width: 66,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
-    },
-    amount: {
-      title: "Amount",
-      field: "amount",
-      hidden: false,
-      searchable: true,
-      sorting: true,
-      grouping: true,
-      filtering: true,
-      defaultFilter: '',
-      lookup: '',
-      type: 'currency',
-      width: 66,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
-    },
+    // amount: {
+    //   title: "Amount",
+    //   field: "amount",
+    //   hidden: true,
+    //   searchable: true,
+    //   sorting: true,
+    //   grouping: false,
+    //   filtering: false,
+    //   defaultFilter: '',
+    //   lookup: '',
+    //   type: 'currency',
+    //   width: 66,
+    // },
     fromCountry: {
       title: "From Country",
       field: "fromCountry",
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
       filterPlaceholder: 'From country',
       width: 66,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
     },
     country: {
       title: "Country",
@@ -194,21 +160,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
       filterPlaceholder: 'To country...',
-      width: 120,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
+      width: 66,
     },
     purpose: {
       title: "Purpose",
@@ -216,20 +174,12 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
       width: 66,
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
     },
     type: {
       title: "Type",
@@ -237,20 +187,12 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
       width: 66,
-      // cellStyle: {
-      //   width: '50px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
     },
     bankSender: {
       title: "Bank sender",
@@ -258,21 +200,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
       filterPlaceholder: 'Bank...',
-      width: 120
-      // cellStyle: {
-      //   width: '114px',
-      //   height: '19px',
-      //   color: '#515151',
-      //   fontFamily: 'Open Sans, sans-serif',
-      //   fontSize: '14px',
-      //   letterSpacing: '-0.3px',
-      // },
+      width: 60
     },
     confidence: {
       title: "Confidence",
@@ -280,13 +214,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: false,
       lookup: {confirmed: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c'},
       defaultFilter: '',
       type: 'image',
       cellStyle: {textAlign: 'center'},
-      width: 66,
+      width: 30,
     },
     proof: {
       title: "Proof",
@@ -294,18 +228,19 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: false,
-      lookup: {
+      imgLink: {
         internal: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
         bank: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
         electronic: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
         customs: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d'
       },
+      linkColumn: 'proofLink',
       defaultFilter: '',
-      type: 'image',
-      width: 66,
-      cellStyle: {textAlign: 'center'}
+      type: 'image-link',
+      width: 30,
+      cellStyle: {textAlign: 'center', paddingRight: 20}
     },
     story: {
         title: "Story",
@@ -313,8 +248,8 @@ const tableOptions = {
         hidden: true,
         searchable: true,
         sorting: true,
-        grouping: true,
-        filtering: true,
+        grouping: false,
+        filtering: false,
         defaultFilter: '',
         lookup: '',
         type: '',
@@ -325,7 +260,7 @@ const tableOptions = {
   table: {
     search: true,
     sorting: true,
-    filtering: true,
+    filtering: false,
     grouping: false,
     paging: true,
     pageSize: 20,
@@ -351,25 +286,73 @@ const tableOptions = {
     },
 
     headerStyle: {
-      borderWidth: 0,
-      borderTopWidth: 2,
-      borderBottomWidth: 2,
-      borderColor: '#931e1d',
-      borderStyle: 'solid',
-      width: '80px',
-      height: '29px',
-      color: '#515151',
-      fontFamily: 'Open Sans, sans-serif',
-      fontSize: '14px',
-      fontWeight: '700',
-      letterSpacing: '-0.3px',
-      lineHeight: '14px',
+      fontWeight: 700,
+      lineHeight: "14px"
     },
 
     rowStyle: {
       height: '37px',
+    },
+
+    filterBoxStyle: {
+      padding: '20px'
+    },
+    
+    filterCellStyle: {
+      fontFamily: "Open Sans",
+      fontSize: "14px",
+      padding: "none",
+      width: "100px",
     }
-  }
+  },
+
+  legend: {
+    confirmed: {
+      img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c',
+      title: 'Confirmed',
+      body: "Confirmed by U.S. Bank Records",
+      titleStyle: defaultLegendTitleStyle,
+      bodyStyle: defaultLegendBodyStyle,
+      boxStyle: defaultLegendBoxStyle
+    },
+    internal: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
+        title: 'Internal',
+        body: "Saimati’s internal documents (spreadsheet)",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      },
+    bank: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
+        title: 'Bank transfer',
+        body: "Scanned PDF of hard copies of bank transfer",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      },
+    electronic: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
+        title: 'Electronic transfer',
+        body: "Electronic PDF copies of bank transfer",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      },
+    customs: 
+      {
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d',
+        title: 'Customs',
+        body: "Customs’ declaration form as scanned PDF",
+        titleStyle: defaultLegendTitleStyle,
+        bodyStyle: defaultLegendBodyStyle,
+        boxStyle: defaultLegendBoxStyle
+      }
+    },
+
 }
 
 
