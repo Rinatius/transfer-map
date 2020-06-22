@@ -248,15 +248,40 @@ class TransferTableComponent extends Component {
 	}
 
 	handleFilterChanged = (filterState) => {
+		this.filter(filterState)
+	}
+
+	handleResetClicked = (filterState) => {
+		console.log('reset clicked')
+		let columns = [...this.state.columns]
+		for (let key in filterState) {
+			let columnDef = objColumns[key]
+			if (objColumns[key].type === 'number_range'){
+				columnDef.tableData.filterValue.greaterThan = ''
+				columnDef.tableData.filterValue.lessThan = ''
+			} else if (objColumns[key].type === 'date_range'){
+				this.setState({dateRange: null})
+			} else {
+				columnDef.tableData.filterValue = ''
+			}
+			columns[key] = columnDef
+		}
+		this.setState({columns: columns})
+		const updatedFilterState = {}
+		columns.forEach((column) => {
+			if (column.tableData.id in Object.keys(filterState)) {
+				updatedFilterState[column.tableData.id] = column.tableData.filterValue
+			}
+		})
+		this.filter()
+	}
+
+	filter = (filterState) => {
 		let filteredData = [...this.state.data]
-		console.log(filterState)
 		for (let key in filterState) {
 			let columnDef = objColumns[key]
 			let columns = [...this.state.columns]
-			console.log(columnDef)
-			console.log(columns)
 			let value = filterState[key]
-			console.log(value)
 			if (value != null) {
 				if (objColumns[key].type === 'number_range'){
 					filteredData = this.filterAmountRange(columnDef, filteredData, value)
@@ -267,24 +292,10 @@ class TransferTableComponent extends Component {
 				}
 				columnDef.tableData.filterValue = value
 				columns[key] = columnDef
-				console.log(columns[key])
 				this.setState({columns: columns})
 			}
 		}
 		this.setState({filteredData: filteredData})	
-	}
-
-	handleResetClicked = (filterState) => {
-		// let filteredData = [...this.state.data]
-		// console.log(filterState)
-		for (let key in filterState) {
-			let columnDef = objColumns[key]
-			let columns = [...this.state.columns]
-			columnDef.tableData.filterValue = ''
-			columns[key] = columnDef
-			console.log(columns[key])
-			this.setState({columns: columns})
-		}
 	}
 
 

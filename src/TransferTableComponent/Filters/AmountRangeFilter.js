@@ -10,19 +10,22 @@ import Tooltip from '@material-ui/core/Tooltip';
 const amountRangeTypeFilter = (props) => {
     const columnDef = props.columnDef
     console.log(columnDef)
-    let amountRange = {greaterThan: '', lessThan: ''}
+    // let amountRange = {greaterThan: '', lessThan: ''}
     return (
         <>
         <TextField
         // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
         // type={columnDef.type === 'numeric' ? 'number' : 'search'}
-        // value={columnDef['tableData']['filterValue']['greaterThan'] || ''}
+        // value={_.get(columnDef, ['tableData', 'filterValue', 'greaterThan']) || ''}
+        value={props.value}
         placeholder={columnDef.filterPlaceholder || ''}
         onChange={(event) => {
             // const value = {...columnDef.tableData.filterValue};
-            // value.greaterThan = event.target.value;
-            amountRange.greaterThan = event.target.value
-            props.onFilterChanged(columnDef, amountRange);
+            const value = props.value
+            console.log(value)
+            value.greaterThan = event.target.value;
+            // amountRange.greaterThan = event.target.value
+            props.onFilterChanged(columnDef, value);
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
             startAdornment: (
@@ -41,12 +44,15 @@ const amountRangeTypeFilter = (props) => {
         // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
         // type={columnDef.type === 'numeric' ? 'number' : 'search'}
         // value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}
+        value={props.value}
         placeholder={columnDef.filterPlaceholder || ''}
         onChange={(event) => {
             // const value = {...columnDef.tableData.filterValue};
-            // value.lessThan = event.target.value;
-            amountRange.lessThan = event.target.value
-            props.onFilterChanged(columnDef, amountRange);
+            const value = props.value
+            console.log(value)
+            value.lessThan = event.target.value;
+            // amountRange.lessThan = event.target.value
+            props.onFilterChanged(columnDef, value);
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
             startAdornment: (
