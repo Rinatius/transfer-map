@@ -11,7 +11,7 @@ const dateRangeFilter = (props) => {
                 // value.dateRange = dateRange
                 console.log('on change')
                 console.log(dateRange)
-                props.onFilterChanged(columnDef, dateRange);
+                props.onFilterChanged(props.configKey, dateRange);
             }}
             value={props.dateRange}
         />

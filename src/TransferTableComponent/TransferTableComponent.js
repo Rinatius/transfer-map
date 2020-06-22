@@ -261,8 +261,8 @@ class TransferTableComponent extends Component {
 
 	handleResetClicked = (filterState) => {
 		console.log('reset clicked')
-		let columns = [Object.keys(config.columns)]
-		console.log(filterState)
+		// let columns = [Object.keys(config.columns)]
+		// console.log(filterState)
 		// for (let key in filterState) {
 		// 	let columnDef = config.columns[key]
 		// 	if (config.columns[key].type === 'number_range'){
@@ -290,6 +290,7 @@ class TransferTableComponent extends Component {
 	filter = (filterState) => {
 		let filteredData = [...this.state.data]
 		for (let key in filterState) {
+			console.log(key)
 			let columnDef = config.columns[key]
 			let value = filterState[key]
 			// if (value != null) {

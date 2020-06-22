@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -11,12 +11,18 @@ import Tooltip from '@material-ui/core/Tooltip';
 const AmountRangeTypeFilter = (props) => {
     const columnDef = props.columnDef
     console.log(columnDef)
-    console.log(props.value)
+    console.log(props)
     // let amountRange = {greaterThan: '', lessThan: ''}
     // let lessThan = ''
     // let greaterThan = ''
     const [greaterThan, setGreater] = useState('')
     const [lessThan, setLess] = useState('')
+    useEffect(() => {
+        if (props.value === '') {
+            setGreater('')
+            setLess('')
+        }
+    }, [props.value])
 
     return (
         <div>
@@ -26,7 +32,8 @@ const AmountRangeTypeFilter = (props) => {
         // value={_.get(columnDef, ['tableData', 'filterValue', 'greaterThan']) || ''}
         // value={_.get(props, ['value']) || ''}
         // value={props.value.greaterThan}
-        value={_.get(props.value, ['greaterThan']) || ''}
+        // value={_.get(props.value, ['greaterThan']) || ''}
+        value={greaterThan}
         placeholder={columnDef.filterPlaceholder || ''}
         onChange={(event) => {
             // const value = {...columnDef.tableData.filterValue};
@@ -35,7 +42,7 @@ const AmountRangeTypeFilter = (props) => {
             // amountRange.greaterThan = event.target.value
             // amountRange.greaterThan = event.target.value
             // console.log(amountRange)
-            props.onFilterChanged(columnDef, {greaterThan: event.target.value, lessThan: lessThan});
+            props.onFilterChanged(props.configKey, {greaterThan: event.target.value, lessThan: lessThan});
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
             startAdornment: (
@@ -54,7 +61,8 @@ const AmountRangeTypeFilter = (props) => {
         // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
         // type={columnDef.type === 'numeric' ? 'number' : 'search'}
         // value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}
-        value={_.get(props.value, ['lessThan']) || ''}
+        // value={_.get(props.value, ['lessThan']) || ''}
+        value={lessThan}
         placeholder={columnDef.filterPlaceholder || ''}
         onChange={(event) => {
             // const value = {...columnDef.tableData.filterValue};
@@ -62,7 +70,7 @@ const AmountRangeTypeFilter = (props) => {
             // amountRange.lessThan = event.target.value
             // amountRange.lessThan = event.target.value
             // console.log(amountRange)
-            props.onFilterChanged(columnDef, {greaterThan: greaterThan, lessThan: event.target.value});
+            props.onFilterChanged(props.configKey, {greaterThan: greaterThan, lessThan: event.target.value});
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
             startAdornment: (

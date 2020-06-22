@@ -11,7 +11,7 @@ const defaultFilter = (props) => {
         <TextField 
             placeholder={columnDef.filterPlaceholder} 
             onChange={event => {
-                props.onFilterChanged(columnDef, event.target.value)
+                props.onFilterChanged(props.configKey, event.target.value)
             }
         }
         value={props.value}

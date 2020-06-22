@@ -5,6 +5,7 @@ import DefaultFilter from './DefaultFilter'
 import DateRangeFilter from './DateRangeFilter'
 import cloneDeep from 'lodash/cloneDeep';
 import * as _ from 'lodash';
+import config from '../../config';
 
 class Filterbox extends Component {
     state = {
@@ -36,21 +37,24 @@ class Filterbox extends Component {
             // let filterComponents = [...this.state.filterComponents]
             console.log(Object.keys(columnsToFilter))
             columnsToFilter.forEach(column => {
-                console.log(column)
+                console.log(config.columns)
                 if (this.props.columns[column].type === 'number_range') {
                     this.filterComponents.push(<AmountRangeFilter 
-                        columnDef={column} 
+                        columnDef={config.columns[column]} 
                         value={this.state.filterState[column]}
+                        configKey={column}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else if (this.props.columns[column].type === 'date_range') {
                     this.filterComponents.push(<DateRangeFilter 
                         dateRange={this.props.dateRange}
-                        columnDef={column} 
+                        columnDef={config.columns[column]} 
+                        configKey={column}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else {
                     this.filterComponents.push(<DefaultFilter 
-                        columnDef={column} 
+                        columnDef={config.columns[column]} 
                         value={this.state.filterState[column]}
+                        configKey={column}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }
 
