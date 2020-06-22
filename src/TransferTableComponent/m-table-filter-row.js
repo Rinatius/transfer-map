@@ -21,6 +21,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
 import { Button } from '@material-ui/core';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import Box from '@material-ui/core/Box'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -241,14 +242,26 @@ class MTableFilterRow extends React.Component {
 
 
   render() {
+    // Оригинал
+    // const columns = this.props.columns
+    //   .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
+    //   .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
+    //   .map(columnDef => (
+    //     <TableCell key={columnDef.tableData.id} style={{ ...this.props.filterCellStyle, ...columnDef.filterCellStyle }}>
+    //       {this.getComponentForColumn(columnDef)}
+    //     </TableCell>
+    //   ));
+
     const columns = this.props.columns
-      .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
-      .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
-      .map(columnDef => (
-        <TableCell key={columnDef.tableData.id} style={{ ...this.props.filterCellStyle, ...columnDef.filterCellStyle }}>
-          {this.getComponentForColumn(columnDef)}
-        </TableCell>
-      ));
+    .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
+    .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
+    .map(columnDef => (
+      <Box key={columnDef.tableData.id} style={{ ...this.props.filterCellStyle, ...columnDef.filterCellStyle }}>
+        {this.getComponentForColumn(columnDef)}
+      </Box>
+    ));
+       
+    this.props.returnFilters(columns)
 
     if (this.props.selection) {
       columns.splice(0, 0, <TableCell padding="none" key="key-selection-column" />);
@@ -310,10 +323,10 @@ class MTableFilterRow extends React.Component {
       });
 
     return (
-      <TableRow style={{ height: 10 }}>
-        {columns}
-      </TableRow>
-      
+      // <TableRow style={{ height: 10 }}>
+      //   {columns}
+      // </TableRow>
+      <div />
     );
   }
 }

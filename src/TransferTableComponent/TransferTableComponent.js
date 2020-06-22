@@ -10,12 +10,14 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MTHeader from './m-table-header';
 import Paper from '@material-ui/core/Paper'
+import Box from '@material-ui/core/Box'
 
 
 
 const objColumns = Object.values(config.columns)
 let filteredData = []
 let numOfRows = 0
+let FILTERS = []
 
 
 const theme = createMuiTheme({
@@ -85,6 +87,7 @@ class TransferTableComponent extends Component {
 	toolbarRef = React.createRef()
 	tableRef = React.createRef()
 	paginationRef = React.createRef()
+	filterRef = React.createRef()
 
 	componentDidMount() {
 		this.setData()
@@ -199,10 +202,20 @@ class TransferTableComponent extends Component {
 		this.setState({dateRange: dateRange})
 	}
 
+	returnFilters = (filters) => {
+		// console.log("FILTERS", filters)
+		FILTERS = filters
+		console.log("FILTERS", FILTERS)
+		return filters
+	}
+
 
 	render() {
 		return (
 			<MuiThemeProvider theme={theme}>
+			<Box>
+				{FILTERS}
+			</Box>
 			<MaterialTable
 				tableRef={this.tableRef}
 				onSearchChange={this.getFilteredData}
@@ -210,7 +223,7 @@ class TransferTableComponent extends Component {
 				columns={this.state.columns}
 				data={this.state.data}
 				components={{
-					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
+					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange} ref={this.filterRef} returnFilters={this.returnFilters} />,
 					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
 					Toolbar: props => (
 					<div>
