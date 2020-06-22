@@ -250,7 +250,7 @@ class MTableFilterRow extends React.Component {
       .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map(columnDef => (
-        <Box item key={columnDef.tableData.id} style={this.props.boxStyle}>
+        <Box key={columnDef.tableData.id} style={this.props.boxStyle}>
           {this.getComponentForColumn(columnDef)}
         </Box>
       ));
@@ -258,7 +258,7 @@ class MTableFilterRow extends React.Component {
     ///////////Здесь был Атай///////////
 
     columns.push(
-    <Box item key={"filters-reset-button"}>
+    <Box key={"filters-reset-button"}>
       <button className={"filters-reset-button"} 
         onClick={this.props.resetFilters}
         style={{

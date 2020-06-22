@@ -292,7 +292,7 @@ const tableOptions = {
       fontFamily: "Open Sans",
       fontSize: "14px",
       padding: "none",
-      width: "100px",
+      width: "90px",
     }
   },
 
