@@ -1,22 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import * as _ from 'lodash';
 
-const defaultFilter = (props) => {
+const DefaultFilter = (props) => {
     let columnDef = props.columnDef
-    // const value = _.get(columnDef, ['tableData', 'filterValue']) || '' 
-    console.log(props.value)
-    // console.log(value)
+    const [value, setValue] = useState('')
+    
+    useEffect(() => {
+            setValue(props.value)
+    }, [props.value])
+
     return (
         <TextField 
             placeholder={columnDef.filterPlaceholder} 
             onChange={event => {
+                setValue(event.target.value)
                 props.onFilterChanged(props.configKey, event.target.value)
             }
         }
-        value={props.value}
+        value={value}
         />
     );
 }
 
-export default defaultFilter
+export default DefaultFilter

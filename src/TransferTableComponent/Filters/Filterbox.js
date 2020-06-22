@@ -50,10 +50,19 @@ class Filterbox extends Component {
                         columnDef={config.columns[column]} 
                         configKey={column}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
+                // } else if (this.props.columns[column].type === 'external') {
+                //     this.filterComponents.push(<ExternalFilter 
+                //         external={this.props.external}
+                //         columnDef={config.columns[column]} 
+                //         value={this.state.filterState[column]}
+                //         configKey={column}
+                //         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
+                    
                 } else {
                     this.filterComponents.push(<DefaultFilter 
+                        // external={this.props.external}
                         columnDef={config.columns[column]} 
-                        value={this.state.filterState[column]}
+                        value={this.props.external[column] ? this.props.external[column] : this.state.filterState[column]}
                         configKey={column}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }

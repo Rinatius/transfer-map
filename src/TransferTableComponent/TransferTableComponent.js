@@ -82,7 +82,8 @@ class TransferTableComponent extends Component {
 		filterCountry: '',
 		dateRange: null,
 		filteredData: null,
-		filters: false
+		filters: false,
+		external: {}
 	}
 
 	toolbarRef = React.createRef()
@@ -177,7 +178,8 @@ class TransferTableComponent extends Component {
 			console.log(rowData)
 			return rowData['country'] = country
 		})
-		this.setState({filteredData: filteredData})
+		this.setState({filteredData: filteredData,
+						external: {country: country}})
 	}
 
 	resetFilters = () => {
@@ -231,6 +233,8 @@ class TransferTableComponent extends Component {
 
 	filterDefault = (columnDef, data, value) => {
 		let filteredData = [...data]
+		console.log(value)
+		console.log(columnDef)
 		if (value.length > 0) {
 			filteredData = data.filter(rowData => {
 				let result = rowData[columnDef.field].search(value)
@@ -239,6 +243,10 @@ class TransferTableComponent extends Component {
 				}
 				return false
 			})
+		} else if (columnDef.field === 'country') {
+			this.setState({external: {}})
+			this.setState({filterCountry: ''})
+			this.props.handleResetMap()
 		}
 		return filteredData
 	}
@@ -261,29 +269,8 @@ class TransferTableComponent extends Component {
 
 	handleResetClicked = (filterState) => {
 		console.log('reset clicked')
-		// let columns = [Object.keys(config.columns)]
-		// console.log(filterState)
-		// for (let key in filterState) {
-		// 	let columnDef = config.columns[key]
-		// 	if (config.columns[key].type === 'number_range'){
-		// 		columnDef.tableData.filterValue.greaterThan = ''
-		// 		columnDef.tableData.filterValue.lessThan = ''
-		// 	} else if (config.columns[key].type === 'date_range'){
-		// 		this.setState({dateRange: null})
-		// 	} else {
-		// 		columnDef.tableData.filterValue = ''
-		// 	}
-		// 	columns[key] = columnDef
-		// }
-		// this.setState({columns: columns})
-
-		// const updatedFilterState = {}
-		// columns.forEach((column) => {
-		// 	if (column in Object.keys(filterState)) {
-		// 		updatedFilterState[column] = ''
-		// 	}
-		// })
-		// console.log(updatedFilterState)
+		this.setState({external: {}})
+		this.props.handleResetMap()
 		this.filter(filterState)
 	}
 
@@ -293,16 +280,14 @@ class TransferTableComponent extends Component {
 			console.log(key)
 			let columnDef = config.columns[key]
 			let value = filterState[key]
-			// if (value != null) {
-				console.log(config.columns[key].type)
-				if (config.columns[key].type === 'number_range'){
-					filteredData = this.filterAmountRange(columnDef, filteredData, value)
-				} else if (config.columns[key].type === 'date_range'){
-					filteredData = this.filterDateRange(columnDef, filteredData, value)
-				} else {
-					filteredData = this.filterDefault(columnDef, filteredData, value)
-				}
-			// }
+			console.log(config.columns[key].type)
+			if (config.columns[key].type === 'number_range'){
+				filteredData = this.filterAmountRange(columnDef, filteredData, value)
+			} else if (config.columns[key].type === 'date_range'){
+				filteredData = this.filterDateRange(columnDef, filteredData, value)
+			} else {
+				filteredData = this.filterDefault(columnDef, filteredData, value)
+			}
 		}
 		this.setState({filteredData: filteredData})	
 	}
@@ -313,6 +298,7 @@ class TransferTableComponent extends Component {
 		if (this.state.filters) {
 			filters = <Filters 
 				dateRange={this.state.dateRange}
+				external={this.state.external}
 				columns={config.columns} 
 				onResetClicked={this.handleResetClicked}
 				onFilterChanged={this.handleFilterChanged}></Filters>
