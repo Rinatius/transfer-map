@@ -4,6 +4,7 @@ import AmountRangeFilter from './AmountRangeFilter'
 import DefaultFilter from './DefaultFilter'
 import DateRangeFilter from './DateRangeFilter'
 import cloneDeep from 'lodash/cloneDeep';
+import * as _ from 'lodash';
 
 class Filterbox extends Component {
     state = {
@@ -11,8 +12,6 @@ class Filterbox extends Component {
     }
     filterComponents = []
     updateFilterValues(columnDef, value) {
-        console.log(columnDef)
-        console.log(value)
         let filterState = cloneDeep(this.state.filterState)
         filterState[columnDef.tableData.id] = value
         this.setState({filterState: filterState})
@@ -31,6 +30,7 @@ class Filterbox extends Component {
                 if (column.type === 'number_range') {
                     this.filterComponents.push(<AmountRangeFilter 
                         columnDef={column} 
+                        value={_.get(column, ['tableData', 'filterValue']) || '' }
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else if (column.type === 'date_range') {
                     this.filterComponents.push(<DateRangeFilter 
@@ -40,15 +40,17 @@ class Filterbox extends Component {
                 } else {
                     this.filterComponents.push(<DefaultFilter 
                         columnDef={column} 
+                        // value={this.state.filterState[column.tableData.id]}
+                        value={_.get(column, ['tableData', 'filterValue']) || '' }
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }
+
             })
             this.filterComponents.push(<Button onClick={() => {
                 this.resetFilterValues()
-                this.props.onResetClicked({})
+                this.props.onResetClicked(this.state.filterState)
             }}>Reset all filters</Button>)
             // this.setState({filterComponents: filterComponents})
-            console.log(this.filterComponents)
         }
         return(
             this.filterComponents
