@@ -299,10 +299,10 @@ const tableOptions = {
     },
     
     filterCellStyle: {
-      fontFamily: "Roboto",
-      fontSize: "20px",
+      fontFamily: "Open Sans",
+      fontSize: "14px",
       padding: "none",
-      width: "50px",
+      width: "100px",
     }
   },
 

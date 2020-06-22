@@ -51,6 +51,13 @@ const theme = createMuiTheme({
 			}
 		},
 
+		MuiInputBase: {
+			root: {
+				fontFamily: "Open Sans",
+				fontSize: 14
+			}
+		},
+
 		MuiSelect: {
 			root: {
 				color: "#515151",
