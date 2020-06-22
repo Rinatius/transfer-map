@@ -172,12 +172,12 @@ class TransferTableComponent extends Component {
 	}
 	
 	filterCountry = (country) => {
-		objColumns.forEach(col => {
-			if (col.field === "country") {
-				col.tableData.filterValue = [country]
-			}
+		let data = [...this.state.data]
+		filteredData = data.filter(rowData => {
+			console.log(rowData)
+			return rowData['country'] = country
 		})
-		this.setState({columns: objColumns})
+		this.setState({filteredData: filteredData})
 	}
 
 	resetFilters = () => {
