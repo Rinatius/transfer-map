@@ -267,7 +267,8 @@ class TransferTableComponent extends Component {
 		let filters = null
 		if (this.state.filters) {
 			filters = <Filters
-				style={config.table.filterCellStyle}
+				cellStyle={config.table.filterCellStyle}
+				boxStyle={config.table.filterBoxStyle}
 				dateRange={this.state.dateRange}
 				columns={this.state.columns} 
 				onFilterChanged={this.handleFilterChanged}></Filters>
