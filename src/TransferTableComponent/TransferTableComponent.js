@@ -237,13 +237,13 @@ class TransferTableComponent extends Component {
 
 	filterDateRange = (columnDef, data, value) => {
 		let filteredData = [...data]
-		if (value.dateRange != null) {
+		if (value != null) {
 			filteredData = data.filter(rowData => {
 				const rowDate = new Date(rowData.transactionDate)
-				return rowDate >= value.dateRange[0] && rowDate <= value.dateRange[1]
+				return rowDate >= value[0] && rowDate <= value[1]
 			})
 		}
-		this.setState({dateRange: value.dateRange})
+		this.setState({dateRange: value})
 		return filteredData
 	}
 
@@ -279,21 +279,18 @@ class TransferTableComponent extends Component {
 	filter = (filterState) => {
 		let filteredData = [...this.state.data]
 		for (let key in filterState) {
-			let columnDef = objColumns[key]
-			let columns = [...this.state.columns]
+			let columnDef = config.columns[key]
 			let value = filterState[key]
-			if (value != null) {
-				if (objColumns[key].type === 'number_range'){
+			// if (value != null) {
+				console.log(config.columns[key].type)
+				if (config.columns[key].type === 'number_range'){
 					filteredData = this.filterAmountRange(columnDef, filteredData, value)
-				} else if (objColumns[key].type === 'date_range'){
+				} else if (config.columns[key].type === 'date_range'){
 					filteredData = this.filterDateRange(columnDef, filteredData, value)
 				} else {
 					filteredData = this.filterDefault(columnDef, filteredData, value)
 				}
-				columnDef.tableData.filterValue = value
-				columns[key] = columnDef
-				this.setState({columns: columns})
-			}
+			// }
 		}
 		this.setState({filteredData: filteredData})	
 	}
@@ -304,7 +301,7 @@ class TransferTableComponent extends Component {
 		if (this.state.filters) {
 			filters = <Filters 
 				dateRange={this.state.dateRange}
-				columns={this.state.columns} 
+				columns={config.columns} 
 				onResetClicked={this.handleResetClicked}
 				onFilterChanged={this.handleFilterChanged}></Filters>
 		}

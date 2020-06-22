@@ -7,9 +7,11 @@ const dateRangeFilter = (props) => {
     return(
         <DateRangePicker
             onChange={(dateRange) => {
-                const value = {...columnDef.tableData.filterValue};
-                value.dateRange = dateRange
-                props.onFilterChanged(columnDef, value);
+                // const value = {...columnDef.tableData.filterValue};
+                // value.dateRange = dateRange
+                console.log('on change')
+                console.log(dateRange)
+                props.onFilterChanged(columnDef, dateRange);
             }}
             value={props.dateRange}
         />

@@ -13,7 +13,8 @@ class Filterbox extends Component {
     filterComponents = []
     updateFilterValues(columnDef, value) {
         let filterState = cloneDeep(this.state.filterState)
-        filterState[columnDef.tableData.id] = value
+        filterState[columnDef] = value
+        console.log(filterState)
         this.setState({filterState: filterState})
         this.props.onFilterChanged(filterState)
     }
@@ -22,17 +23,26 @@ class Filterbox extends Component {
     }
 
     render() {
-        if (this.props.columns.length > 0) {
-            const columns = this.props.columns.filter(column => {return column.filtering})
+        console.log(this.props.columns)
+        if (Object.keys(this.props.columns).length > 0) {
+            let columnsToFilter = []
+            Object.entries(this.props.columns).forEach(([key, value]) => {
+                if (value.filtering) {
+                    columnsToFilter.push(key)
+                }
+            });
+            // const columns = this.props.columns.filter(column => {return column.filtering})
             this.filterComponents = []
             // let filterComponents = [...this.state.filterComponents]
-            columns.forEach(column => {
-                if (column.type === 'number_range') {
+            console.log(Object.keys(columnsToFilter))
+            columnsToFilter.forEach(column => {
+                console.log(column)
+                if (this.props.columns[column].type === 'number_range') {
                     this.filterComponents.push(<AmountRangeFilter 
                         columnDef={column} 
-                        value={_.get(column, ['tableData', 'filterValue']) || '' }
+                        // value={this.state.filterState[column]}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
-                } else if (column.type === 'date_range') {
+                } else if (this.props.columns[column].type === 'date_range') {
                     this.filterComponents.push(<DateRangeFilter 
                         dateRange={this.props.dateRange}
                         columnDef={column} 
@@ -40,12 +50,13 @@ class Filterbox extends Component {
                 } else {
                     this.filterComponents.push(<DefaultFilter 
                         columnDef={column} 
-                        // value={this.state.filterState[column.tableData.id]}
-                        value={_.get(column, ['tableData', 'filterValue']) || '' }
+                        value={this.state.filterState[column]}
+                        // value={_.get(column, ['tableData', 'filterValue']) || '' }
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }
 
             })
+
             this.filterComponents.push(<Button onClick={() => {
                 this.resetFilterValues()
                 this.props.onResetClicked(this.state.filterState)
