@@ -10,6 +10,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MTHeader from './m-table-header';
 import Paper from '@material-ui/core/Paper'
+import MTable from './src'
 
 
 
@@ -41,10 +42,20 @@ const theme = createMuiTheme({
 		MuiTableCell: {
 			root: {
 				textAlign: 'center',
-				// padding: 'none'
-				padding: 10,
-				// width: 66
+				padding: 'none',
+				width: 20,
 			},
+			sizeSmall: {
+				padding: 'none',
+				height: 37,
+			}
+		},
+
+		MuiInputBase: {
+			root: {
+				fontFamily: "Open Sans",
+				fontSize: 14
+			}
 		},
 
 		MuiSelect: {
@@ -203,15 +214,16 @@ class TransferTableComponent extends Component {
 	render() {
 		return (
 			<MuiThemeProvider theme={theme}>
-			<MaterialTable
+			<MTable
 				tableRef={this.tableRef}
 				onSearchChange={this.getFilteredData}
 				onFilterChange={this.getFilteredData}
 				columns={this.state.columns}
 				data={this.state.data}
 				components={{
-					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
-					Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
+					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange} 
+					cellStyle={config.table.filterCellStyle} boxStyle={config.table.filterBoxStyle} resetFilters={this.resetFilters}/>,
+					Body: props => <MTBody {...props} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
 					Toolbar: props => (
 					<div>
 						<Typography variant="" className='explore'>{config.table.textBody}</Typography>

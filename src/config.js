@@ -44,12 +44,13 @@ const tableOptions = {
       hidden: false,
       searchable: false,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       type: 'date_range',
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: 'Transaction date range',
+      width: 66,
       customSort: (a, b) => {
         return new Date(a.transactionDate) - new Date(b.transactionDate)
       },
@@ -59,7 +60,9 @@ const tableOptions = {
         }
         const rowDate = new Date(rowData.transactionDate)
         return rowDate >= term.dateRange[0] && rowDate <= term.dateRange[1]
-      }
+      },
+      cellStyle: {paddingLeft: 20},
+      headerStyle: {paddingLeft: 20}
     },
     paidBy: {
       title: "Paid by",
@@ -67,7 +70,7 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       defaultFilter: '',
       lookup: '',
@@ -81,7 +84,7 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       defaultFilter: '',
       lookup: '',
@@ -95,13 +98,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       type: 'number_range',
       defaultFilter: '',
       lookup: '',
       filterPlaceholder: '',
-      width: 66,
+      width: 20,
       render: rowData => {return '$' + rowData.amount},
       customSort: (a, b) => {
         return parseInt(a.amount) - parseInt(b.amount)
@@ -124,27 +127,14 @@ const tableOptions = {
         }
       },
     },
-    // amount: {
-    //   title: "Amount",
-    //   field: "amount",
-    //   hidden: true,
-    //   searchable: true,
-    //   sorting: true,
-    //   grouping: true,
-    //   filtering: true,
-    //   defaultFilter: '',
-    //   lookup: '',
-    //   type: 'currency',
-    //   width: 66,
-    // },
     fromCountry: {
       title: "From Country",
       field: "fromCountry",
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
@@ -157,13 +147,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       defaultFilter: '',
       lookup: '',
       type: '',
       filterPlaceholder: 'To country...',
-      width: 120,
+      width: 66,
     },
     purpose: {
       title: "Purpose",
@@ -171,8 +161,8 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
@@ -184,8 +174,8 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
-      filtering: true,
+      grouping: false,
+      filtering: false,
       defaultFilter: '',
       lookup: '',
       type: '',
@@ -197,13 +187,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: true,
       defaultFilter: '',
       lookup: '',
       type: '',
       filterPlaceholder: 'Bank...',
-      width: 120
+      width: 60
     },
     confidence: {
       title: "Confidence",
@@ -211,13 +201,13 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: false,
       lookup: {confirmed: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c'},
       defaultFilter: '',
       type: 'image',
       cellStyle: {textAlign: 'center'},
-      width: 66,
+      width: 30,
     },
     proof: {
       title: "Proof",
@@ -225,7 +215,7 @@ const tableOptions = {
       hidden: false,
       searchable: true,
       sorting: true,
-      grouping: true,
+      grouping: false,
       filtering: false,
       imgLink: {
         internal: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
@@ -236,8 +226,8 @@ const tableOptions = {
       linkColumn: 'proofLink',
       defaultFilter: '',
       type: 'image-link',
-      width: 66,
-      cellStyle: {textAlign: 'center'}
+      width: 30,
+      cellStyle: {textAlign: 'center', paddingRight: 20}
     },
     story: {
         title: "Story",
@@ -245,7 +235,7 @@ const tableOptions = {
         hidden: true,
         searchable: true,
         sorting: true,
-        grouping: true,
+        grouping: false,
         filtering: true,
         defaultFilter: '',
         lookup: '',
@@ -253,11 +243,6 @@ const tableOptions = {
         filterPlaceholder: 'Story...',
         width: 66,
       },
-    proofLink: {
-      field: "proofLink",
-      hidden: true,
-      filtering: false,
-    }
   },
   table: {
     search: true,
@@ -294,6 +279,20 @@ const tableOptions = {
 
     rowStyle: {
       height: '37px',
+    },
+
+    filterBoxStyle: {
+      paddingLeft: '5px',
+      paddingRight: '5px',
+      paddingBottom: '10px',
+      paddingTop: 'none'
+    },
+    
+    filterCellStyle: {
+      fontFamily: "Open Sans",
+      fontSize: "14px",
+      padding: "none",
+      width: "100px",
     }
   },
 

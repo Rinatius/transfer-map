@@ -7,17 +7,6 @@ import * as React from 'react';
 /* eslint-enable no-unused-vars */
 
 class MTableBody extends React.Component {
-
-  state = {dataForSum: this.props.renderData} // Атай был от сих
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.renderData !== this.props.renderData)
-    {
-      this.props.getFilteredData()
-      this.props.getNumOfRowsOnPage(this.props.renderData.length)
-    }
-  } // Атай был до сих
-
   renderEmpty(emptyRowCount, renderData) {
     const rowHeight = this.props.options.padding === 'default' ? 49 : 36;
     const localization = { ...MTableBody.defaultProps.localization, ...this.props.localization };
@@ -133,7 +122,6 @@ class MTableBody extends React.Component {
     ));
   }
 
-
   render() {
     let renderData = this.props.renderData;
     const groups = this.props.columns
@@ -147,10 +135,9 @@ class MTableBody extends React.Component {
 
     return (
       <TableBody>
-        {/* {this.props.options.filtering &&
+        {this.props.options.filtering &&
           <this.props.components.FilterRow
-            columns={this.props.columns}
-            // columns={this.props.columns.filter(columnDef => !columnDef.hidden)} // это оригинал
+            columns={this.props.columns.filter(columnDef => !columnDef.hidden)}
             icons={this.props.icons}
             hasActions={this.props.actions.filter(a => a.position === "row" || typeof a === "function").length > 0}
             actionsColumnIndex={this.props.options.actionsColumnIndex}
@@ -161,9 +148,8 @@ class MTableBody extends React.Component {
             isTreeData={this.props.isTreeData}
             filterCellStyle={this.props.options.filterCellStyle}
             hideFilterIcons={this.props.options.hideFilterIcons}
-            resetFilters={this.props.resetFilters} // И тут был Атай
           />
-        } */}
+        }
 
         {this.props.showAddRow && this.props.options.addRowPosition === "first" &&
           <this.props.components.EditRow

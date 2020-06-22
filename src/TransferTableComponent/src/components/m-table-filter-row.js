@@ -1,12 +1,9 @@
 /* eslint-disable no-unused-vars */
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import FilterIcon from '@material-ui/icons/FilterList';
-import * as _ from 'lodash';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
@@ -19,9 +16,6 @@ import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
-import { Button } from '@material-ui/core';
-import DateRangePicker from '@wojtekmaj/react-daterange-picker';
-import Box from '@material-ui/core/Box'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -50,8 +44,7 @@ class MTableFilterRow extends React.Component {
         input={<Input id="select-multiple-checkbox" />}
         renderValue={selecteds => selecteds.map(selected => columnDef.lookup[selected]).join(', ')}
         MenuProps={MenuProps}
-        //style={{marginTop: 0}}
-        style={{...this.props.cellStyle, marginTop: 0}}
+        style={{marginTop: 0}}
       >
         {
           Object.keys(columnDef.lookup).map(key => (
@@ -91,8 +84,7 @@ class MTableFilterRow extends React.Component {
     const FilterIcon = this.props.icons.Filter;
     return (
       <TextField
-        // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
-        style={this.props.cellStyle}
+        style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
         type={columnDef.type === 'numeric' ? 'number' : 'search'}
         value={columnDef.tableData.filterValue || ''}
         placeholder={this.getLocalizedFilterPlaceHolder(columnDef)}
@@ -145,80 +137,6 @@ class MTableFilterRow extends React.Component {
     );
   }
 
-  renderDateRangeTypeFilter = (columnDef) => {
-    return(
-      <DateRangePicker
-        onChange={(dateRange) => {
-          console.log('on change')
-          const value = {...columnDef.tableData.filterValue};
-          console.log(value)
-          value.dateRange = dateRange
-          this.props.dateRangeChange(dateRange)
-          this.props.onFilterChanged(columnDef.tableData.id, value);
-        }}
-        value={this.props.dateRange}
-			/>
-    )
-  }
-
-
-  renderAmountRangeTypeFilter = (columnDef) => {
-    return (
-      <Box display="flex">
-      <TextField
-        //style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
-        style={this.props.cellStyle}
-        type={columnDef.type === 'numeric' ? 'number' : 'search'}
-        value={_.get(columnDef, ['tableData', 'filterValue', 'greaterThan']) || ''}
-        placeholder={columnDef.filterPlaceholder || ''}
-        onChange={(event) => {
-          console.log('on change')
-          const value = {...columnDef.tableData.filterValue};
-          console.log(value)
-          value.greaterThan = event.target.value;
-          this.props.onFilterChanged(columnDef.tableData.id, value);
-        }}
-        InputProps={columnDef.hideFilterIcon ? undefined : {
-          startAdornment: (
-            <InputAdornment position="start">
-              <Tooltip title="Filter greater than">
-                <div style={{display: 'flex'}}>
-                  <FilterIcon />
-                  <Typography>{'>'}</Typography>
-                </div>
-              </Tooltip>
-            </InputAdornment>
-          )
-        }}
-      />
-      <TextField
-        // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
-        style={this.props.cellStyle}
-        type={columnDef.type === 'numeric' ? 'number' : 'search'}
-        value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}
-        placeholder={columnDef.filterPlaceholder || ''}
-        onChange={(event) => {
-          const value = {...columnDef.tableData.filterValue};
-          value.lessThan = event.target.value;
-          this.props.onFilterChanged(columnDef.tableData.id, value);
-        }}
-        InputProps={columnDef.hideFilterIcon ? undefined : {
-          startAdornment: (
-            <InputAdornment position="start">
-              <Tooltip title="Filter less than">
-                <div style={{display: 'flex'}}>
-                  <FilterIcon />
-                  <Typography>{'<'}</Typography>
-                </div>
-              </Tooltip>
-            </InputAdornment>
-          )
-        }}
-      />
-      </Box>
-    );
-  }
-
   getComponentForColumn(columnDef) {
     if (columnDef.filtering === false) {
       return null;
@@ -233,59 +151,61 @@ class MTableFilterRow extends React.Component {
         return this.renderBooleanFilter(columnDef);
       } else if (['date', 'datetime', 'time'].includes(columnDef.type)) {
         return this.renderDateTypeFilter(columnDef);
-      } else if (columnDef.type === 'number_range'){
-        return this.renderAmountRangeTypeFilter(columnDef)
-      } else if (columnDef.type === 'date_range') {
-        return this.renderDateRangeTypeFilter(columnDef)
       } else {
         return this.renderDefaultFilter(columnDef);
       }
     }
   }
 
-
-
   render() {
     const columns = this.props.columns
-      .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
+      .filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map(columnDef => (
-        <Box item key={columnDef.tableData.id} style={this.props.boxStyle}>
+        <TableCell key={columnDef.tableData.id} style={{ ...this.props.filterCellStyle, ...columnDef.filterCellStyle }}>
           {this.getComponentForColumn(columnDef)}
-        </Box>
+        </TableCell>
       ));
 
-    ///////////Здесь был Атай///////////
+    if (this.props.selection) {
+      columns.splice(0, 0, <TableCell padding="none" key="key-selection-column" />);
+    }
 
-    columns.push(
-    <Box item key={"filters-reset-button"}>
-      <button className={"filters-reset-button"} 
-        onClick={this.props.resetFilters}
-        style={{
-          ...this.props.boxStyle,
-          backgroundColor: 'Transparent',
-          backgroundRepeat:'no-repeat',
-          border: 'none',
-          cursor:'pointer',
-          overflow: 'hidden',
-          outline:'none',
-          // position: 'absolute',
-          // right: 0,
-        }} ><Typography variant="body2" style={{width: "96px", fontFamily: "Open Sans",}}>Reset all filters</Typography>
-      </button>
-    </Box>
-    );
-    
-    ///////////Атай был здесь///////////
-    
+    if (this.props.hasActions) {
+      if (this.props.actionsColumnIndex === -1) {
+        columns.push(<TableCell key="key-action-column" />);
+      } else {
+        let endPos = 0;
+        if (this.props.selection) {
+          endPos = 1;
+        }
+        columns.splice(this.props.actionsColumnIndex + endPos, 0, <TableCell key="key-action-column" />);
+      }
+    }
+
+    if (this.props.hasDetailPanel) {
+      columns.splice(0, 0, <TableCell padding="none" key="key-detail-panel-column" />);
+    }
+
+    if (this.props.isTreeData > 0) {
+      columns.splice(0, 0,
+        <TableCell
+          padding="none"
+          key={"key-tree-data-filter"}
+        />
+      );
+    }
+
+    this.props.columns
+      .filter(columnDef => columnDef.tableData.groupOrder > -1)
+      .forEach(columnDef => {
+        columns.splice(0, 0, <TableCell padding="checkbox" key={"key-group-filter" + columnDef.tableData.id} />);
+      });
 
     return (
       <TableRow style={{ height: 10 }}>
-        <Box container display="flex" justifyContent="center">
         {columns}
-        </Box>
       </TableRow>
-      
     );
   }
 }
