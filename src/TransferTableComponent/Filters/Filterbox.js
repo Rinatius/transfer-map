@@ -1,45 +1,55 @@
 import React, { Component } from 'react'
+import { Button } from '@material-ui/core';
 import AmountRangeFilter from './AmountRangeFilter'
 import DefaultFilter from './DefaultFilter'
 import DateRangeFilter from './DateRangeFilter'
+import cloneDeep from 'lodash/cloneDeep';
 
 class Filterbox extends Component {
+    state = {
+        filterState: {} 
+    }
     filterComponents = []
-    filterState = {} 
     updateFilterValues(columnDef, value) {
         console.log(columnDef)
         console.log(value)
-        this.filterState[columnDef.tableData.id] = value
-        console.log(this.filterState)
-        this.props.onFilterChanged(this.filterState)
+        let filterState = cloneDeep(this.state.filterState)
+        filterState[columnDef.tableData.id] = value
+        this.setState({filterState: filterState})
+        this.props.onFilterChanged(filterState)
     }
-    componentDidMount(){
+    resetFilterValues() {
+        this.setState({filterState: {}})
+    }
+
+    render() {
         if (this.props.columns.length > 0) {
             const columns = this.props.columns.filter(column => {return column.filtering})
+            this.filterComponents = []
+            // let filterComponents = [...this.state.filterComponents]
             columns.forEach(column => {
                 if (column.type === 'number_range') {
-                    console.log('number range filter')
                     this.filterComponents.push(<AmountRangeFilter 
                         columnDef={column} 
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else if (column.type === 'date_range') {
-                    console.log('date range filter')
                     this.filterComponents.push(<DateRangeFilter 
                         dateRange={this.props.dateRange}
                         columnDef={column} 
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else {
-                    console.log('default filter')
                     this.filterComponents.push(<DefaultFilter 
                         columnDef={column} 
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }
             })
+            this.filterComponents.push(<Button onClick={() => {
+                this.resetFilterValues()
+                this.props.onResetClicked({})
+            }}>Reset all filters</Button>)
+            // this.setState({filterComponents: filterComponents})
             console.log(this.filterComponents)
         }
-
-    }
-    render() {
         return(
             this.filterComponents
         )

@@ -3,6 +3,7 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
 const dateRangeFilter = (props) => {
     const columnDef = props.columnDef
+    console.log(props)
     return(
         <DateRangePicker
             onChange={(dateRange) => {

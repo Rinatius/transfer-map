@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const amountRangeTypeFilter = (props) => {
     const columnDef = props.columnDef
+    console.log(columnDef)
     let amountRange = {greaterThan: '', lessThan: ''}
     return (
         <>
