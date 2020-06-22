@@ -18,9 +18,9 @@ class Filterbox extends Component {
         this.setState({filterState: filterState})
         this.props.onFilterChanged(filterState)
     }
-    resetFilterValues() {
-        this.setState({filterState: {}})
-    }
+    // resetFilterValues() {
+    //     this.setState({filterState: {}})
+    // }
 
     render() {
         console.log(this.props.columns)
@@ -40,7 +40,7 @@ class Filterbox extends Component {
                 if (this.props.columns[column].type === 'number_range') {
                     this.filterComponents.push(<AmountRangeFilter 
                         columnDef={column} 
-                        // value={this.state.filterState[column]}
+                        value={this.state.filterState[column]}
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 } else if (this.props.columns[column].type === 'date_range') {
                     this.filterComponents.push(<DateRangeFilter 
@@ -51,15 +51,22 @@ class Filterbox extends Component {
                     this.filterComponents.push(<DefaultFilter 
                         columnDef={column} 
                         value={this.state.filterState[column]}
-                        // value={_.get(column, ['tableData', 'filterValue']) || '' }
                         onFilterChanged={(columnDef, value) => this.updateFilterValues(columnDef, value)}/>)
                 }
 
             })
 
             this.filterComponents.push(<Button onClick={() => {
-                this.resetFilterValues()
-                this.props.onResetClicked(this.state.filterState)
+                console.log('reset')
+                const emptyKeys = {}
+                columnsToFilter.forEach(key => {
+                    // if (key === 'amount')
+                    emptyKeys[key] = ''
+                }) 
+                console.log(emptyKeys)
+                this.setState({filterState: emptyKeys})
+                // this.resetFilterValues()
+                this.props.onResetClicked(emptyKeys)
             }}>Reset all filters</Button>)
             // this.setState({filterComponents: filterComponents})
         }

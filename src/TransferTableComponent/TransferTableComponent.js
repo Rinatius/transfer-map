@@ -208,6 +208,10 @@ class TransferTableComponent extends Component {
 	filterAmountRange = (columnDef, data, value) => {
 		// there must be a better way to compare
 		let	filteredData = [...data]
+		if (value === '') {
+			return filteredData
+		}
+		console.log(value)
         if (value.greaterThan !== '' && value.lessThan !== '') {
 			filteredData = data.filter(rowData => {
 				return parseInt(value.greaterThan) <= parseInt(rowData.amount)
@@ -229,7 +233,11 @@ class TransferTableComponent extends Component {
 		let filteredData = [...data]
 		if (value.length > 0) {
 			filteredData = data.filter(rowData => {
-				return rowData[columnDef.field] === value
+				let result = rowData[columnDef.field].search(value)
+				if (result >= 0){
+					return true
+				}
+				return false
 			})
 		}
 		return filteredData
@@ -237,7 +245,7 @@ class TransferTableComponent extends Component {
 
 	filterDateRange = (columnDef, data, value) => {
 		let filteredData = [...data]
-		if (value != null) {
+		if (value !== '' && value !== null) {
 			filteredData = data.filter(rowData => {
 				const rowDate = new Date(rowData.transactionDate)
 				return rowDate >= value[0] && rowDate <= value[1]
@@ -253,27 +261,30 @@ class TransferTableComponent extends Component {
 
 	handleResetClicked = (filterState) => {
 		console.log('reset clicked')
-		let columns = [...this.state.columns]
-		for (let key in filterState) {
-			let columnDef = objColumns[key]
-			if (objColumns[key].type === 'number_range'){
-				columnDef.tableData.filterValue.greaterThan = ''
-				columnDef.tableData.filterValue.lessThan = ''
-			} else if (objColumns[key].type === 'date_range'){
-				this.setState({dateRange: null})
-			} else {
-				columnDef.tableData.filterValue = ''
-			}
-			columns[key] = columnDef
-		}
-		this.setState({columns: columns})
-		const updatedFilterState = {}
-		columns.forEach((column) => {
-			if (column.tableData.id in Object.keys(filterState)) {
-				updatedFilterState[column.tableData.id] = column.tableData.filterValue
-			}
-		})
-		this.filter()
+		let columns = [Object.keys(config.columns)]
+		console.log(filterState)
+		// for (let key in filterState) {
+		// 	let columnDef = config.columns[key]
+		// 	if (config.columns[key].type === 'number_range'){
+		// 		columnDef.tableData.filterValue.greaterThan = ''
+		// 		columnDef.tableData.filterValue.lessThan = ''
+		// 	} else if (config.columns[key].type === 'date_range'){
+		// 		this.setState({dateRange: null})
+		// 	} else {
+		// 		columnDef.tableData.filterValue = ''
+		// 	}
+		// 	columns[key] = columnDef
+		// }
+		// this.setState({columns: columns})
+
+		// const updatedFilterState = {}
+		// columns.forEach((column) => {
+		// 	if (column in Object.keys(filterState)) {
+		// 		updatedFilterState[column] = ''
+		// 	}
+		// })
+		// console.log(updatedFilterState)
+		this.filter(filterState)
 	}
 
 	filter = (filterState) => {
