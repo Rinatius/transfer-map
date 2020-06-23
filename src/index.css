@@ -31,6 +31,21 @@ code {
 	margin-bottom: 10px;
 }
 
+/** Fix input */
+.MuiInputBase-root.MuiInput-underline {
+	/* border-bottom: none !important; */
+}
+.MuiInput-root .MuiInput-input {
+	padding-left:7px;
+	padding-right:7px;
+}
+.MuiInputBase-root.MuiInput-underline::after {
+	display: none;
+}
+.MuiInputBase-root.MuiInput-underline::before {
+	display: none;
+}
+
 /** Fix dropdown */
 .MuiMenu-list .MuiCheckbox-root {
 	padding:2px;
