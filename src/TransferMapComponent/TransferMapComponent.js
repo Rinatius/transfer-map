@@ -22,7 +22,7 @@ import config from '../config';
 
 const { Set } = require('immutable');
 
-const geoUrl = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20'
+const geoUrl = config.mapOptions.geoUrl
 
 const { geoPath, ...projections } = d3Geo
 
