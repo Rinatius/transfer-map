@@ -19,6 +19,10 @@ const defaultLegendBoxStyle = {
   paddingLeft: '25px',
   paddingRight: '25px'
 }
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 
 const tableOptions = {
 
@@ -110,7 +114,9 @@ const tableOptions = {
       lookup: '',
       filterPlaceholder: '',
       width: 20,
-      render: rowData => {return '$' + rowData.amount},
+      render: rowData => {
+        return formatter.format(rowData.amount) 
+      },
       customSort: (a, b) => {
         return parseInt(a.amount) - parseInt(b.amount)
       },
