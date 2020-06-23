@@ -9,6 +9,7 @@ const defaultLegendTitleStyle = {
 
 const defaultLegendBodyStyle = {
   height: '44px',
+  width: '150px',
   color: '#515151',
   fontFamily: "Open Sans",
   fontSize: '14px',
@@ -18,6 +19,10 @@ const defaultLegendBoxStyle = {
   paddingLeft: '25px',
   paddingRight: '25px'
 }
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 
 const tableOptions = {
 
@@ -29,11 +34,15 @@ const tableOptions = {
     "focus_color": "#bd3d3f",
     "label_text_style": {
       fill: '#ffffff',
-      fontSize: '12px',
-      fontWeight: '900',
-      letterSpacing: '-0.26px'
+      fontSize: '17px',
+      fontWeight: '1000',
+      letterSpacing: '-0.60px'
     },
-    "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json"
+    "width": 950,
+    "height": 600,
+    "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json",
+    // "geoUrl": "https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20"
+    "geoUrl": "https://api.jsonbin.io/b/5ef1bb76e2ce6e3b2c77ed07"
   },
 
   
@@ -103,9 +112,11 @@ const tableOptions = {
       type: 'number_range',
       defaultFilter: '',
       lookup: '',
-      filterPlaceholder: '',
+      filterPlaceholder: 'Amount',
       width: 20,
-      render: rowData => {return '$' + rowData.amount},
+      render: rowData => {
+        return formatter.format(rowData.amount) 
+      },
       customSort: (a, b) => {
         return parseInt(a.amount) - parseInt(b.amount)
       },
@@ -114,36 +125,31 @@ const tableOptions = {
         if (term[0] != null) {
           return rowData[0] == term[0]
         }
+        if (!term.greaterThan) {
+          term.greaterThan = ''
+        }
+        if (!term.lessThan) {
+          term.lessThan = ''
+        }
+        console.log(rowData)
+        console.log(term)
         // there must be a better way to compare
-        if (term.greaterThan != null && term.lessThan != null) {
+        if (term.greaterThan != '' && term.lessThan != '') {
           return term.greaterThan <= parseInt(rowData.amount)
             && term.lessThan >= parseInt(rowData.amount)
-        } else if (term.greaterThan != null && term.lessThan == null) {
+        } else if (term.greaterThan != '' && term.lessThan == '') {
           return term.greaterThan <= parseInt(rowData.amount)
-        } else if (term.greaterThan == null && term.lessThan != null) {
+        } else if (term.greaterThan == '' && term.lessThan != '') {
           return term.lessThan >= parseInt(rowData.amount)
         } else {
           return true
         }
       },
     },
-    // amount: {
-    //   title: "Amount",
-    //   field: "amount",
-    //   hidden: true,
-    //   searchable: true,
-    //   sorting: true,
-    //   grouping: false,
-    //   filtering: false,
-    //   defaultFilter: '',
-    //   lookup: '',
-    //   type: 'currency',
-    //   width: 66,
-    // },
     fromCountry: {
       title: "From Country",
       field: "fromCountry",
-      hidden: false,
+      hidden: true,
       searchable: true,
       sorting: true,
       grouping: false,
@@ -161,11 +167,11 @@ const tableOptions = {
       searchable: true,
       sorting: true,
       grouping: false,
-      filtering: false,
+      filtering: true,
       defaultFilter: '',
       lookup: '',
       type: '',
-      filterPlaceholder: 'To country...',
+      filterPlaceholder: 'Country...',
       width: 66,
     },
     purpose: {
@@ -201,7 +207,7 @@ const tableOptions = {
       searchable: true,
       sorting: true,
       grouping: false,
-      filtering: false,
+      filtering: true,
       defaultFilter: '',
       lookup: '',
       type: '',
@@ -249,7 +255,7 @@ const tableOptions = {
         searchable: true,
         sorting: true,
         grouping: false,
-        filtering: false,
+        filtering: true,
         defaultFilter: '',
         lookup: '',
         type: '',
@@ -260,7 +266,7 @@ const tableOptions = {
   table: {
     search: true,
     sorting: true,
-    filtering: false,
+    filtering: true,
     grouping: false,
     paging: true,
     pageSize: 20,
@@ -295,14 +301,17 @@ const tableOptions = {
     },
 
     filterBoxStyle: {
-      padding: '20px'
+      paddingLeft: '5px',
+      paddingRight: '5px',
+      paddingBottom: '10px',
+      paddingTop: 'none'
     },
     
     filterCellStyle: {
       fontFamily: "Open Sans",
       fontSize: "14px",
       padding: "none",
-      width: "100px",
+      width: "140px",
     }
   },
 

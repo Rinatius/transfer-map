@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
 import {
   ComposableMap,
-  ZoomableGroup,
   Geographies,
   Geography,
-  Line,
   Marker,
   Annotation
 } from 'react-simple-maps'
 
 
 import {
-  csv,
   json,
   nest,
   sum,
   extent,
-  scaleLinear,
-  line,
-  curveBasis
+  scaleLinear
 } from 'd3'
 
 import * as d3Geo from "d3-geo"
@@ -27,8 +22,7 @@ import config from '../config';
 
 const { Set } = require('immutable');
 
-const configURL = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmap_config.json?alt=media&token=170acf67-7f33-4da3-ba43-e01b6620469a'
-const geoUrl = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20'
+const geoUrl = config.mapOptions.geoUrl
 
 const { geoPath, ...projections } = d3Geo
 
@@ -47,34 +41,6 @@ class TransferMapComponent extends Component {
     visibleCountries: Set([]),
     visiblePairs: [],
     focusCountry: null
-  }
-
-  makeProjection = ({
-                      projectionConfig = {},
-                      projection = "geoEqualEarth",
-                      width = 800,
-                      height = 600,
-                    }) => {
-    const isFunc = typeof projection === "function"
-
-    if (isFunc) return projection
-
-    let proj = projections[projection]()
-      .translate([width / 2, height / 2])
-
-    const supported = [
-      proj.center ? "center" : null,
-      proj.rotate ? "rotate" : null,
-      proj.scale ? "scale" : null,
-      proj.parallels ? "parallels" : null,
-    ]
-
-    supported.forEach(d => {
-      if (!d) return
-      proj = proj[d](projectionConfig[d] || proj[d]())
-    })
-
-    return proj
   }
 
   extractCountries = (table) => {
@@ -150,14 +116,16 @@ class TransferMapComponent extends Component {
 
     let all = null;
     if (this.state.ready) {
-      const proj = projections["geoEqualEarth"]().rotate([-40, 0]).scale(180)
+      const proj = projections["geoEqualEarth"]().rotate([-25, 0, 0]).scale(245).translate([500, 335])
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
           paddingTop: '25px'
         }}>
           <ComposableMap projection={proj}
-          onClick={this.handleCountryClick}>
+                         width={config.mapOptions.width}
+                         height={config.mapOptions.height}
+                         onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map(geo => {
@@ -169,23 +137,24 @@ class TransferMapComponent extends Component {
                     countryFill = config.mapOptions.focus_color
                   } else if (c) {
                     countryFill = config.mapOptions.active_color
-                    hover = {outline: "none", cursor:"pointer"}
-                  };
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    onClick={() => this.countryClickHandler(geo.properties.name)}
-                    stroke='#FFF'
-                    fill={countryFill}
-                    style={{
-                      default: {outline: "none"},
-                      hover: hover,
-                      pressed: {outline: "none"},
-                    }}
-                  />
-                )
-              })}
+                    hover = {outline: "none", cursor: "pointer"}
+                  }
+
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      onClick={() => this.countryClickHandler(geo.properties.name)}
+                      stroke='#FFF'
+                      fill={countryFill}
+                      style={{
+                        default: {outline: "none"},
+                        hover: hover,
+                        pressed: {outline: "none"},
+                      }}
+                    />
+                  )
+                })}
             </Geographies>
 
             {this.state.visiblePairs.map(fromCountry =>
@@ -211,13 +180,13 @@ class TransferMapComponent extends Component {
                   </g>
                 </Marker>
 
-            })
+              })
             )}
-           
+
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
-                const from=this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
-                const to=this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
+                const from = this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
+                const to = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
                 const fromAbs = proj(from)
                 const toAbs = proj(to)
                 const dx = toAbs[0] - fromAbs[0]
@@ -248,7 +217,7 @@ class TransferMapComponent extends Component {
                     </marker>
                   </defs>
                 </Annotation>
-            })
+              })
             )}
 
             {this.state.visiblePairs.map(fromCountry =>
@@ -272,7 +241,7 @@ class TransferMapComponent extends Component {
                     </clipPath>
                   </defs>
                   <g
-                    transform="translate(-54, -45)"
+                    transform="translate(-66, -51) scale(1.2 1.2)"
                   >
                     <g>
                       <g filter="url(#k4zga)">
@@ -287,7 +256,8 @@ class TransferMapComponent extends Component {
 
                   <text
                     textAnchor="middle"
-                    y={-30}
+                    y={-32}
+                    x={-3}
                     style={config.mapOptions.label_text_style}
                   >
                     {('$' + toCountry.value.total.toLocaleString(('en-US')) + '\n')}
@@ -295,6 +265,7 @@ class TransferMapComponent extends Component {
                   <text
                     textAnchor="middle"
                     y={-15}
+                    x={-3}
                     style={config.mapOptions.label_text_style}
                   >
                     {(toCountry.value.count + ' ' + 'transactions')}
@@ -307,7 +278,7 @@ class TransferMapComponent extends Component {
         </div>
       );
     }
-    return(
+    return (
       <div>
         {all}
       </div>

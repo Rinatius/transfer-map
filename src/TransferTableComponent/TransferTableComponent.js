@@ -10,7 +10,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MTHeader from './m-table-header';
 import Paper from '@material-ui/core/Paper'
-import Filters from './Filters/Filterbox'
+import MTable from './src'
 
 
 
@@ -51,11 +51,34 @@ const theme = createMuiTheme({
 			}
 		},
 
+		MuiMenuItem: {
+			root: {
+				paddingLeft: '10px',
+				fontSize: '13px',
+				color: 'black',
+			}
+		},
+		
+		MuiFormLabel: {
+			root: {
+				paddingLeft: '10px',
+				fontSize: '13px'
+			}
+		},
+
 		MuiInputBase: {
 			root: {
 				fontFamily: "Open Sans",
-				fontSize: 14
-			}
+				fontSize: 14,
+				boxShadow: "0 1px 2px rgba(0, 0, 0, 0.35)",
+				borderRadius: "3px",
+				border: "1px solid #979797",
+			},
+			input: {
+				  fontSize: '13px',
+				  fontFamily: "Open Sans",
+				  color: "#515151",
+			  	}
 		},
 
 		MuiSelect: {
@@ -271,55 +294,45 @@ class TransferTableComponent extends Component {
 
 
 	render() {
-		let filters = null
-		if (this.state.filters) {
-			filters = <Filters
-				cellStyle={config.table.filterCellStyle}
-				boxStyle={config.table.filterBoxStyle}
-				dateRange={this.state.dateRange}
-				columns={this.state.columns} 
-				onFilterChanged={this.handleFilterChanged}></Filters>
-		}
 		return (
 			<MuiThemeProvider theme={theme}>
-				{filters}
-				<MaterialTable
-					tableRef={this.tableRef}
-					onSearchChange={this.getFilteredData}
-					onFilterChange={this.getFilteredData}
-					columns={this.state.columns}
-					data={this.state.filteredData}
-					components={{
-						// FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange}/>,
-						Body: props => <MTBody {...props} resetFilters={this.resetFilters} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
-						Toolbar: props => (
-						<div>
-							<Typography variant="" className='explore'>{config.table.textBody}</Typography>
-							<MToolBar {...props} ref={this.toolbarRef}/>
-						</div>
-						),
-						Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
-						Header: props => <MTHeader {...props} />,
-						Container: props => <Paper {...props} elevation={0}/>
-					}}
+			<MTable
+				tableRef={this.tableRef}
+				onSearchChange={this.getFilteredData}
+				onFilterChange={this.getFilteredData}
+				columns={this.state.columns}
+				data={this.state.data}
+				components={{
+					FilterRow: props => <FilterRow {...props} dateRange={this.state.dateRange} dateRangeChange={this.handleDateRange} 
+					cellStyle={config.table.filterCellStyle} boxStyle={config.table.filterBoxStyle} resetFilters={this.resetFilters}/>,
+					Body: props => <MTBody {...props} getFilteredData={this.getFilteredData} getNumOfRowsOnPage={this.getNumOfRowsOnCurrentPage}/>,
+					Toolbar: props => (
+					<div>
+						<Typography variant="" className='explore'>{config.table.textBody}</Typography>
+						<MToolBar {...props} ref={this.toolbarRef}/>
+					</div>
+					),
+					Pagination: props => <MTPagination {...props} ref={this.paginationRef} numOfRows={numOfRows} totalNumOfRows={this.state.data.length}/>,
+					Header: props => <MTHeader {...props} />,
+					Container: props => <Paper {...props} elevation={0}/>
+				}}
 
-					icons={{ Search: () => <div /> }} 
+				icons={{ Search: () => <div /> }} 
 
-					localization={{
-						toolbar: { searchPlaceholder: "Search the data…" },
-					}}
+				localization={{
+					toolbar: { searchPlaceholder: "Search the data…" },
+				}}
 
-					options={{
-						...config.table,
-						rowStyle: (data, index) => {
-							if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
-								return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
-							}
-							else {return {...config.table.rowStyle}}
-						},
-					}}
-				/>
-			</MuiThemeProvider>
+				options={{
+					...config.table,
+					rowStyle: (data, index) => {
+						if (index % 2 === 0 && !config.table.rowStyle.backgroundColor) {
+							return { ...config.table.rowStyle, backgroundColor: "#e5e5e5" }
+						}
+						else {return {...config.table.rowStyle}}
+					},
+				}}
+			/></MuiThemeProvider>
 		)
 	}
 }
