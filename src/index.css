@@ -15,6 +15,8 @@ code {
 
 /** Mobile CSS overrides **/
 @media screen and (max-width: 768px) {
+
+	/** Fix map **/
 	svg.rsm-svg {
 		overflow: visible;
 	}
@@ -24,9 +26,19 @@ code {
 		transform: scale(1.5, 1.5)
 	}
 	svg.rsm-svg g.rsm-marker.rsm-marker--box > g {
-		transform: scale(1.5, 1.5) translate(-54px, -43px);
+		transform: scale(2, 1.7) translate(-54px, -43px);
 	}
 	svg.rsm-svg g.rsm-marker > g.rsm-disk-marker {
 		transform: translate(-2x, -3x);
 	}
+
+	/** Fix legend **/
+	#legend {
+		justify-content: flex-start;
+	}
+	#legend .MuiGrid-item {
+		max-width: 50%;
+		flex-grow: 1;
+	}
+
 }

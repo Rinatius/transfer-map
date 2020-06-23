@@ -8,8 +8,8 @@ const defaultLegendTitleStyle = {
   letterSpacing: '-0.3px',}
 
 const defaultLegendBodyStyle = {
-  height: '44px',
   width: '150px',
+  paddingBottom: '20px',
   color: '#515151',
   fontFamily: "Open Sans",
   fontSize: '14px',
@@ -34,7 +34,7 @@ const tableOptions = {
     "focus_color": "#bd3d3f",
     "label_text_style": {
       fill: '#ffffff',
-      fontSize: '17px',
+      fontSize: '14px',
       fontWeight: '1000',
       letterSpacing: '-0.60px'
     },
