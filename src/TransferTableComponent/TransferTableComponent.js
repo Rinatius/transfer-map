@@ -51,6 +51,13 @@ const theme = createMuiTheme({
 			}
 		},
 
+		MuiFormLabel: {
+			root: {
+				paddingLeft: '10px',
+				fontSize: '13px'
+			}
+		},
+
 		MuiInputBase: {
 			root: {
 				fontFamily: "Open Sans",
