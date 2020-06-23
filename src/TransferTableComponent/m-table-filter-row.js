@@ -21,7 +21,9 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
 import { Button } from '@material-ui/core';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+//import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
 import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -253,9 +255,12 @@ class MTableFilterRow extends React.Component {
       .filter(columnDef => columnDef.filtering && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map(columnDef => (
-        <Box key={columnDef.tableData.id} style={this.props.boxStyle}>
+        // <Box key={columnDef.tableData.id} style={this.props.boxStyle}>
+        //   {this.getComponentForColumn(columnDef)}
+        // </Box>
+        <Grid item xs="auto" sm="auto" md="auto" key={columnDef.tableData.id} style={this.props.boxStyle}>
           {this.getComponentForColumn(columnDef)}
-        </Box>
+        </Grid>
       ));
 
     ///////////Здесь был Атай///////////
@@ -283,12 +288,14 @@ class MTableFilterRow extends React.Component {
     
 
     return (
-      <TableRow style={{ height: 10 }}>
-        <Box container display="flex" justifyContent="center">
-        {columns}
-        </Box>
+      <TableRow>
+        <Grid container style={{paddingLeft: '20px'}}
+        direction="row"
+        justify="left"
+        alignItems="center">
+          {columns}
+        </Grid>
       </TableRow>
-      
     );
   }
 }

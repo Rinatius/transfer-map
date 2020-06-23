@@ -154,7 +154,7 @@ class TransferMapComponent extends Component {
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
-          paddingTop: '25px'
+          paddingTop: '25px',
         }}>
           <ComposableMap projection={proj}
           onClick={this.handleCountryClick}>

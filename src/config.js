@@ -114,13 +114,21 @@ const tableOptions = {
         if (term[0] != null) {
           return rowData[0] == term[0]
         }
+        if (!term.greaterThan) {
+          term.greaterThan = ''
+        }
+        if (!term.lessThan) {
+          term.lessThan = ''
+        }
+        console.log(rowData)
+        console.log(term)
         // there must be a better way to compare
-        if (term.greaterThan != null && term.lessThan != null) {
+        if (term.greaterThan != '' && term.lessThan != '') {
           return term.greaterThan <= parseInt(rowData.amount)
             && term.lessThan >= parseInt(rowData.amount)
-        } else if (term.greaterThan != null && term.lessThan == null) {
+        } else if (term.greaterThan != '' && term.lessThan == '') {
           return term.greaterThan <= parseInt(rowData.amount)
-        } else if (term.greaterThan == null && term.lessThan != null) {
+        } else if (term.greaterThan == '' && term.lessThan != '') {
           return term.lessThan >= parseInt(rowData.amount)
         } else {
           return true
