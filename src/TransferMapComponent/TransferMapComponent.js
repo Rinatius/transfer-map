@@ -116,7 +116,7 @@ class TransferMapComponent extends Component {
 
     let all = null;
     if (this.state.ready) {
-      const proj = projections["geoEqualEarth"]().rotate([-40, 0]).scale(180)
+      const proj = projections["geoEqualEarth"]().rotate([-40, 0, 0]).scale(188)
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
