@@ -85,7 +85,7 @@ class TransferMapComponent extends Component {
         const table = this.props.data.map(row => {
           return {
             from_country: row[config.columns.fromCountry.field],
-            to_country: row[config.columns.country.field],
+            to_country: row[config.columns.toCountry.field],
             amount: row[config.columns.amount.field]
           }
         })
