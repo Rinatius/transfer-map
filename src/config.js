@@ -26,7 +26,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 const tableOptions = {
 
-  csvUrl: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/data/mockup_v3.csv',
+  csvUrl: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/data/live-data.csv',
 
   mapOptions: {
     "active_color": "#dbabac",
@@ -222,7 +222,7 @@ const tableOptions = {
       sorting: true,
       grouping: false,
       filtering: false,
-      lookup: {confirmed: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c'},
+      lookup: {confirmed: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Confirmed.svg'},
       defaultFilter: '',
       type: 'image',
       cellStyle: {textAlign: 'center'},
@@ -237,10 +237,10 @@ const tableOptions = {
       grouping: false,
       filtering: false,
       imgLink: {
-        internal: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
-        bank: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
-        electronic: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
-        customs: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d'
+        internal: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Internal.svg',
+        bank: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Bank.svg',
+        electronic: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Electronic.svg',
+        customs: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Customs.svg'
       },
       linkColumn: 'proofLink',
       defaultFilter: '',
@@ -317,7 +317,7 @@ const tableOptions = {
 
   legend: {
     confirmed: {
-      img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FConfirmed.svg?alt=media&token=60873b2f-26ed-4c14-b210-8f5467709e1c',
+      img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Confirmed.svg',
       title: 'Confirmed',
       body: "Confirmed by U.S. Bank Records",
       titleStyle: defaultLegendTitleStyle,
@@ -326,7 +326,7 @@ const tableOptions = {
     },
     internal: 
       {
-        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
+        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Internal.svg',
         title: 'Internal',
         body: "Saimati’s internal documents (spreadsheet)",
         titleStyle: defaultLegendTitleStyle,
@@ -335,7 +335,7 @@ const tableOptions = {
       },
     bank: 
       {
-        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
+        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Bank.svg',
         title: 'Bank transfer',
         body: "Scanned PDF of hard copies of bank transfer",
         titleStyle: defaultLegendTitleStyle,
@@ -344,7 +344,7 @@ const tableOptions = {
       },
     electronic: 
       {
-        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
+        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Electronic.svg',
         title: 'Electronic transfer',
         body: "Electronic PDF copies of bank transfer",
         titleStyle: defaultLegendTitleStyle,
@@ -353,7 +353,7 @@ const tableOptions = {
       },
     customs: 
       {
-        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d',
+        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Customs.svg',
         title: 'Customs',
         body: "Customs’ declaration form as scanned PDF",
         titleStyle: defaultLegendTitleStyle,
