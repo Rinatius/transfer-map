@@ -41,8 +41,8 @@ const tableOptions = {
     "width": 950,
     "height": 600,
     "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json",
-    "geoUrl": "https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20"
-
+    // "geoUrl": "https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20"
+    "geoUrl": "https://api.jsonbin.io/b/5ef1bb76e2ce6e3b2c77ed07"
   },
 
   
