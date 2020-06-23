@@ -49,34 +49,6 @@ class TransferMapComponent extends Component {
     focusCountry: null
   }
 
-  makeProjection = ({
-                      projectionConfig = {},
-                      projection = "geoEqualEarth",
-                      width = 800,
-                      height = 600,
-                    }) => {
-    const isFunc = typeof projection === "function"
-
-    if (isFunc) return projection
-
-    let proj = projections[projection]()
-      .translate([width / 2, height / 2])
-
-    const supported = [
-      proj.center ? "center" : null,
-      proj.rotate ? "rotate" : null,
-      proj.scale ? "scale" : null,
-      proj.parallels ? "parallels" : null,
-    ]
-
-    supported.forEach(d => {
-      if (!d) return
-      proj = proj[d](projectionConfig[d] || proj[d]())
-    })
-
-    return proj
-  }
-
   extractCountries = (table) => {
     table.forEach(row => {
       this.countries = this.countries.add(row.from_country)
@@ -154,12 +126,14 @@ class TransferMapComponent extends Component {
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
-          paddingTop: '25px'
+          paddingTop: '25px',
         }}>
           <ComposableMap projection={proj}
-          onClick={this.handleCountryClick}>
+                         width={900}
+                         height={500}
+                         onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
-              {({ geographies }) =>
+              {({geographies}) =>
                 geographies.map(geo => {
                   const c = this.state.visibleCountries.has(geo.properties.name);
                   const focusCountry = (this.state.focusCountry === geo.properties.name);
@@ -169,23 +143,24 @@ class TransferMapComponent extends Component {
                     countryFill = config.mapOptions.focus_color
                   } else if (c) {
                     countryFill = config.mapOptions.active_color
-                    hover = {outline: "none", cursor:"pointer"}
-                  };
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    onClick={() => this.countryClickHandler(geo.properties.name)}
-                    stroke='#FFF'
-                    fill={countryFill}
-                    style={{
-                      default: {outline: "none"},
-                      hover: hover,
-                      pressed: {outline: "none"},
-                    }}
-                  />
-                )
-              })}
+                    hover = {outline: "none", cursor: "pointer"}
+                  }
+                  ;
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      onClick={() => this.countryClickHandler(geo.properties.name)}
+                      stroke='#FFF'
+                      fill={countryFill}
+                      style={{
+                        default: {outline: "none"},
+                        hover: hover,
+                        pressed: {outline: "none"},
+                      }}
+                    />
+                  )
+                })}
             </Geographies>
 
             {this.state.visiblePairs.map(fromCountry =>
@@ -211,13 +186,13 @@ class TransferMapComponent extends Component {
                   </g>
                 </Marker>
 
-            })
+              })
             )}
-           
+
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
-                const from=this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
-                const to=this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
+                const from = this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
+                const to = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
                 const fromAbs = proj(from)
                 const toAbs = proj(to)
                 const dx = toAbs[0] - fromAbs[0]
@@ -248,7 +223,7 @@ class TransferMapComponent extends Component {
                     </marker>
                   </defs>
                 </Annotation>
-            })
+              })
             )}
 
             {this.state.visiblePairs.map(fromCountry =>
@@ -306,7 +281,7 @@ class TransferMapComponent extends Component {
         </div>
       );
     }
-    return(
+    return (
       <div>
         {all}
       </div>

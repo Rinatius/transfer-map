@@ -13,7 +13,7 @@
     "echarts": "^4.8.0",
     "echarts-for-react": "^2.0.16",
     "immutable": "^4.0.0-rc.12",
-    "material-table": "^1.60.0",
+    "material-table": "^1.62.0",
     "react": "^16.13.1",
     "react-daterange-picker": "^2.0.1",
     "react-dom": "^16.13.1",
@@ -44,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.0.0"
+    "gh-pages": "^3.1.0"
   },
   "homepage": "http://rinatius.github.io/transfer-map"
 }

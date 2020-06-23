@@ -114,32 +114,27 @@ const tableOptions = {
         if (term[0] != null) {
           return rowData[0] == term[0]
         }
+        if (!term.greaterThan) {
+          term.greaterThan = ''
+        }
+        if (!term.lessThan) {
+          term.lessThan = ''
+        }
+        console.log(rowData)
+        console.log(term)
         // there must be a better way to compare
-        if (term.greaterThan != null && term.lessThan != null) {
+        if (term.greaterThan != '' && term.lessThan != '') {
           return term.greaterThan <= parseInt(rowData.amount)
             && term.lessThan >= parseInt(rowData.amount)
-        } else if (term.greaterThan != null && term.lessThan == null) {
+        } else if (term.greaterThan != '' && term.lessThan == '') {
           return term.greaterThan <= parseInt(rowData.amount)
-        } else if (term.greaterThan == null && term.lessThan != null) {
+        } else if (term.greaterThan == '' && term.lessThan != '') {
           return term.lessThan >= parseInt(rowData.amount)
         } else {
           return true
         }
       },
     },
-    // amount: {
-    //   title: "Amount",
-    //   field: "amount",
-    //   hidden: true,
-    //   searchable: true,
-    //   sorting: true,
-    //   grouping: false,
-    //   filtering: false,
-    //   defaultFilter: '',
-    //   lookup: '',
-    //   type: 'currency',
-    //   width: 66,
-    // },
     fromCountry: {
       title: "From Country",
       field: "fromCountry",
@@ -161,7 +156,7 @@ const tableOptions = {
       searchable: true,
       sorting: true,
       grouping: false,
-      filtering: false,
+      filtering: true,
       defaultFilter: '',
       lookup: '',
       type: '',
@@ -201,7 +196,7 @@ const tableOptions = {
       searchable: true,
       sorting: true,
       grouping: false,
-      filtering: false,
+      filtering: true,
       defaultFilter: '',
       lookup: '',
       type: '',
@@ -249,7 +244,7 @@ const tableOptions = {
         searchable: true,
         sorting: true,
         grouping: false,
-        filtering: false,
+        filtering: true,
         defaultFilter: '',
         lookup: '',
         type: '',
@@ -260,7 +255,7 @@ const tableOptions = {
   table: {
     search: true,
     sorting: true,
-    filtering: false,
+    filtering: true,
     grouping: false,
     paging: true,
     pageSize: 20,
@@ -295,14 +290,17 @@ const tableOptions = {
     },
 
     filterBoxStyle: {
-      padding: '20px'
+      paddingLeft: '5px',
+      paddingRight: '5px',
+      paddingBottom: '10px',
+      paddingTop: 'none'
     },
     
     filterCellStyle: {
       fontFamily: "Open Sans",
       fontSize: "14px",
       padding: "none",
-      width: "100px",
+      width: "90px",
     }
   },
 

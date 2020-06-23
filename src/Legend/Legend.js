@@ -1,5 +1,6 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import config from '../config';
 
@@ -8,18 +9,21 @@ const legend = props => {
     
     let keys = Object.keys(items)
     let itemList = keys.map(key => {
-        return (<Box item style={items[key].boxStyle}>
+        return (<Grid item style={items[key].boxStyle}>
             <Box display="flex">
                 <img src={items[key].img} alt={key}/>
                 <Typography variant="body2" style={items[key].titleStyle}>{items[key].title}</Typography>
             </Box>
             <Typography variant="body2" style={items[key].bodyStyle}>{items[key].body}</Typography>
-        </Box>)
+        </Grid>)
     })
     return (
-        <Box display="flex" justifyContent="center" pb={'40px'}>
+        <Grid container pb={'40px'}
+        direction="row"
+        justify="center"
+        alignItems="center">
         {itemList}
-        </Box>
+        </Grid>
     )
 }
 
