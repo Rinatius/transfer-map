@@ -195,7 +195,7 @@ class TransferMapComponent extends Component {
                 return <Marker
 
                   coordinates={[x, y]}>
-                  <g transform="translate(-2, -3)">
+                  <g transform="translate(-2, -3)" class="rsm-disk-marker">
                     <g>
                       <image width="17" height="11" transform="translate(-1)"
                              href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/>
@@ -254,7 +254,8 @@ class TransferMapComponent extends Component {
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 return <Marker
-                  coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
+				  coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
+				  class="rsm-marker rsm-marker--box"
                 >
 
                   <defs>

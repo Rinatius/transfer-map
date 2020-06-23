@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/** Mobile CSS overrides **/
+@media screen and (max-width: 768px) {
+	svg.rsm-svg {
+		overflow: visible;
+	}
+	svg.rsm-svg text {
+		/* font-size: 28px !important;
+		line-height: 1 !important; */
+		transform: scale(1.5, 1.5)
+	}
+	svg.rsm-svg g.rsm-marker.rsm-marker--box > g {
+		transform: scale(1.5, 1.5) translate(-54px, -43px);
+	}
+	svg.rsm-svg g.rsm-marker > g.rsm-disk-marker {
+		transform: translate(-2x, -3x);
+	}
+}
