@@ -126,14 +126,14 @@ class TransferMapComponent extends Component {
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
-          paddingTop: '25px',
+          paddingTop: '25px'
         }}>
           <ComposableMap projection={proj}
-                         width={900}
-                         height={500}
+                         width={950}
+                         height={470}
                          onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
-              {({geographies}) =>
+              {({ geographies }) =>
                 geographies.map(geo => {
                   const c = this.state.visibleCountries.has(geo.properties.name);
                   const focusCountry = (this.state.focusCountry === geo.properties.name);
