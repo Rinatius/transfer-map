@@ -12,9 +12,14 @@ code {
     monospace;
 }
 
+.App > .main {
+	max-width: 1024px;
+	margin: auto;
+}
+
 
 /** Mobile CSS overrides **/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 599px) {
 
 	/** Fix map **/
 	svg.rsm-svg {
@@ -39,6 +44,21 @@ code {
 	#legend .MuiGrid-item {
 		max-width: 50%;
 		flex-grow: 1;
+	}
+
+	/** Fix totals **/
+	#totals-container {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	#totals-container p {
+		position: static !important;
+	}
+
+	/** Fix table headers **/
+	#table-header {
+		margin-left: -10px;
 	}
 
 }

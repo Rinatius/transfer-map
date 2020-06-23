@@ -290,7 +290,8 @@ class MTableFilterRow extends React.Component {
 
     return (
       <TableRow>
-        <Grid container style={{paddingLeft: '20px'}}
+		<Grid container style={{paddingLeft: '20px'}}
+		id="table-header"
         direction="row"
         justify="left"
         alignItems="center">

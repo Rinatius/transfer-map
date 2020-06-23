@@ -35,7 +35,7 @@ class App extends Component {
     let all = null;
     if (this.state.ready) {
       all = (
-        <div>
+        <div class="main">
           <TransferMapComponent 
             data={this.state.data}
             handleCountryClick={this.handleCountryClick}
