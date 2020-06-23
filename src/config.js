@@ -112,7 +112,7 @@ const tableOptions = {
       type: 'number_range',
       defaultFilter: '',
       lookup: '',
-      filterPlaceholder: '',
+      filterPlaceholder: 'Amount',
       width: 20,
       render: rowData => {
         return formatter.format(rowData.amount) 
@@ -149,7 +149,7 @@ const tableOptions = {
     fromCountry: {
       title: "From Country",
       field: "fromCountry",
-      hidden: false,
+      hidden: true,
       searchable: true,
       sorting: true,
       grouping: false,
@@ -171,7 +171,7 @@ const tableOptions = {
       defaultFilter: '',
       lookup: '',
       type: '',
-      filterPlaceholder: 'To country...',
+      filterPlaceholder: 'Country...',
       width: 66,
     },
     purpose: {

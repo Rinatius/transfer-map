@@ -172,7 +172,8 @@ class MTableFilterRow extends React.Component {
         style={this.props.cellStyle}
         type={columnDef.type === 'numeric' ? 'number' : 'search'}
         value={_.get(columnDef, ['tableData', 'filterValue', 'greaterThan']) || ''}
-        placeholder={columnDef.filterPlaceholder || ''}
+        //placeholder={columnDef.filterPlaceholder || ''}
+        placeholder={this.getLocalizedFilterPlaceHolder(columnDef)}
         onChange={(event) => {
           console.log('on change')
           const value = {...columnDef.tableData.filterValue};
