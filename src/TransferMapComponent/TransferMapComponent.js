@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
 import {
   ComposableMap,
-  ZoomableGroup,
   Geographies,
   Geography,
-  Line,
   Marker,
   Annotation
 } from 'react-simple-maps'
 
 
 import {
-  csv,
   json,
   nest,
   sum,
   extent,
-  scaleLinear,
-  line,
-  curveBasis
+  scaleLinear
 } from 'd3'
 
 import * as d3Geo from "d3-geo"
@@ -27,7 +22,6 @@ import config from '../config';
 
 const { Set } = require('immutable');
 
-const configURL = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmap_config.json?alt=media&token=170acf67-7f33-4da3-ba43-e01b6620469a'
 const geoUrl = 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20'
 
 const { geoPath, ...projections } = d3Geo
@@ -145,7 +139,7 @@ class TransferMapComponent extends Component {
                     countryFill = config.mapOptions.active_color
                     hover = {outline: "none", cursor: "pointer"}
                   }
-                  ;
+
                   return (
                     <Geography
                       key={geo.rsmKey}
