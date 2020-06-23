@@ -17,8 +17,30 @@ code {
 	margin: auto;
 }
 
+/** Fix table body **/
 .MuiTableCell-body {
 	padding: 1px 3px;
+}
+
+
+/** Fix table header  */
+#table-header {
+	margin-top: 10px;
+}
+#table-header > div {
+	margin-bottom: 10px;
+}
+
+/** Fix dropdown */
+.MuiMenu-list .MuiCheckbox-root {
+	padding:2px;
+}
+.MuiSelect-select.MuiSelect-select {
+	padding-left: 10px;
+}
+
+.filters-reset-button > p{
+	font-size: 12px;
 }
 
 /** Mobile CSS overrides **/
