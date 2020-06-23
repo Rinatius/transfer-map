@@ -73,7 +73,12 @@ const theme = createMuiTheme({
 				boxShadow: "0 1px 2px rgba(0, 0, 0, 0.35)",
 				borderRadius: "3px",
 				border: "1px solid #979797",
-			}
+			},
+			input: {
+				  fontSize: '13px',
+				  fontFamily: "Open Sans",
+				  color: "#515151",
+			  	}
 		},
 
 		MuiSelect: {
