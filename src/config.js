@@ -9,6 +9,7 @@ const defaultLegendTitleStyle = {
 
 const defaultLegendBodyStyle = {
   height: '44px',
+  width: '150px',
   color: '#515151',
   fontFamily: "Open Sans",
   fontSize: '14px',
