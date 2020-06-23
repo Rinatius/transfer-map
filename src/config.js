@@ -40,9 +40,9 @@ const tableOptions = {
     },
     "width": 950,
     "height": 600,
-    "capitals": "https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/data/countries.json",
+    "capitals": "https://gist.githubusercontent.com/erdem/8c7d26765831d0f9a8c62f02782ae00d/raw/248037cd701af0a4957cce340dabb0fd04e38f4c/countries.json",
     // "geoUrl": "https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fcountries-110m.json?alt=media&token=94f12c4b-592b-46d9-8761-a20a94c09b20"
-    "geoUrl": "https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/data/geoURL.json"
+    "geoUrl": "https://api.jsonbin.io/b/5ef1bb76e2ce6e3b2c77ed07"
   },
 
   
@@ -237,10 +237,10 @@ const tableOptions = {
       grouping: false,
       filtering: false,
       imgLink: {
-        internal: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Internal.svg',
-        bank: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Bank.svg',
-        electronic: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Electronic.svg',
-        customs: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Customs.svg'
+        internal: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
+        bank: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
+        electronic: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
+        customs: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d'
       },
       linkColumn: 'proofLink',
       defaultFilter: '',
@@ -316,17 +316,9 @@ const tableOptions = {
   },
 
   legend: {
-    confirmed: {
-      img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Confirmed.svg',
-      title: 'Confirmed',
-      body: "Confirmed by U.S. Bank Records",
-      titleStyle: defaultLegendTitleStyle,
-      bodyStyle: defaultLegendBodyStyle,
-      boxStyle: defaultLegendBoxStyle
-    },
     internal: 
       {
-        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Internal.svg',
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FInternal.svg?alt=media&token=ea2ac9bf-5026-45ff-8074-0e5bd08b5e8a',
         title: 'Internal',
         body: "Saimati’s internal documents (spreadsheet)",
         titleStyle: defaultLegendTitleStyle,
@@ -335,7 +327,7 @@ const tableOptions = {
       },
     bank: 
       {
-        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Bank.svg',
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FBank.svg?alt=media&token=cf2d58c9-c18e-48e1-9033-8739f85a66eb',
         title: 'Bank transfer',
         body: "Scanned PDF of hard copies of bank transfer",
         titleStyle: defaultLegendTitleStyle,
@@ -344,7 +336,7 @@ const tableOptions = {
       },
     electronic: 
       {
-        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Electronic.svg',
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FElectronic.svg?alt=media&token=0a7b3d35-71a8-4f46-85a0-9bf681e7c2b0',
         title: 'Electronic transfer',
         body: "Electronic PDF copies of bank transfer",
         titleStyle: defaultLegendTitleStyle,
@@ -353,7 +345,7 @@ const tableOptions = {
       },
     customs: 
       {
-        img:'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/assets/Customs.svg',
+        img:'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-table%2FCustoms.svg?alt=media&token=71ecfae4-1c9e-459d-82a3-e8da707dbb9d',
         title: 'Customs',
         body: "Customs’ declaration form as scanned PDF",
         titleStyle: defaultLegendTitleStyle,
