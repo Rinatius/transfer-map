@@ -51,6 +51,14 @@ const theme = createMuiTheme({
 			}
 		},
 
+		MuiMenuItem: {
+			root: {
+				paddingLeft: '10px',
+				fontSize: '13px',
+				color: 'black',
+			}
+		},
+		
 		MuiFormLabel: {
 			root: {
 				paddingLeft: '10px',
