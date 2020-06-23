@@ -26,7 +26,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 const tableOptions = {
 
-  csvUrl: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/data/data.csv',
+  csvUrl: 'https://cdn.test.occrp.org:10443/projects/plunder-transfer-map/data/mockup_v3.csv',
 
   mapOptions: {
     "active_color": "#dbabac",
