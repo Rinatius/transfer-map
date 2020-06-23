@@ -303,7 +303,7 @@ const tableOptions = {
       fontFamily: "Open Sans",
       fontSize: "14px",
       padding: "none",
-      width: "90px",
+      width: "140px",
     }
   },
 
