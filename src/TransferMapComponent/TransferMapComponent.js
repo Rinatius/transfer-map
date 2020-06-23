@@ -116,15 +116,15 @@ class TransferMapComponent extends Component {
 
     let all = null;
     if (this.state.ready) {
-      const proj = projections["geoEqualEarth"]().rotate([-40, 0, 0]).scale(188)
+      const proj = projections["geoEqualEarth"]().rotate([-25, 0, 0]).scale(245).translate([500, 335])
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
           paddingTop: '25px'
         }}>
           <ComposableMap projection={proj}
-                         width={950}
-                         height={470}
+                         width={config.mapOptions.width}
+                         height={config.mapOptions.height}
                          onClick={this.handleCountryClick}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
@@ -240,7 +240,7 @@ class TransferMapComponent extends Component {
                     </clipPath>
                   </defs>
                   <g
-                    transform="translate(-54, -45)"
+                    transform="translate(-66, -51) scale(1.2 1.2)"
                   >
                     <g>
                       <g filter="url(#k4zga)">
@@ -255,7 +255,8 @@ class TransferMapComponent extends Component {
 
                   <text
                     textAnchor="middle"
-                    y={-30}
+                    y={-32}
+                    x={-3}
                     style={config.mapOptions.label_text_style}
                   >
                     {('$' + toCountry.value.total.toLocaleString(('en-US')) + '\n')}
@@ -263,6 +264,7 @@ class TransferMapComponent extends Component {
                   <text
                     textAnchor="middle"
                     y={-15}
+                    x={-3}
                     style={config.mapOptions.label_text_style}
                   >
                     {(toCountry.value.count + ' ' + 'transactions')}
