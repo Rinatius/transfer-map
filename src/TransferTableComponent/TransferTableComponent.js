@@ -54,7 +54,10 @@ const theme = createMuiTheme({
 		MuiInputBase: {
 			root: {
 				fontFamily: "Open Sans",
-				fontSize: 14
+				fontSize: 14,
+				boxShadow: "0 1px 2px rgba(0, 0, 0, 0.35)",
+				borderRadius: "3px",
+				border: "1px solid #979797",
 			}
 		},
 

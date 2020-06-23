@@ -50,8 +50,8 @@ class MTableFilterRow extends React.Component {
         input={<Input id="select-multiple-checkbox" />}
         renderValue={selecteds => selecteds.map(selected => columnDef.lookup[selected]).join(', ')}
         MenuProps={MenuProps}
-        //style={{marginTop: 0}}
         style={{...this.props.cellStyle, marginTop: 0}}
+        disableUnderline
       >
         {
           Object.keys(columnDef.lookup).map(key => (
@@ -178,7 +178,9 @@ class MTableFilterRow extends React.Component {
           value.greaterThan = event.target.value;
           this.props.onFilterChanged(columnDef.tableData.id, value);
         }}
-        InputProps={columnDef.hideFilterIcon ? undefined : {
+        InputProps={
+          columnDef.hideFilterIcon ? undefined : {
+          disableUnderline: true,
           startAdornment: (
             <InputAdornment position="start">
               <Tooltip title="Filter greater than">
@@ -203,6 +205,7 @@ class MTableFilterRow extends React.Component {
           this.props.onFilterChanged(columnDef.tableData.id, value);
         }}
         InputProps={columnDef.hideFilterIcon ? undefined : {
+          disableUnderline: true,
           startAdornment: (
             <InputAdornment position="start">
               <Tooltip title="Filter less than">
