@@ -17,6 +17,9 @@ code {
 	margin: auto;
 }
 
+.MuiTableCell-body {
+	padding: 1px 3px;
+}
 
 /** Mobile CSS overrides **/
 @media screen and (max-width: 599px) {
