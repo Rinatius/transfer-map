@@ -1,8 +1,8 @@
 # testing environment
 master-cdn-deploy:
-	stage: deploy
-	before_script: 
-	- rsync -av --delete ./public/data/ /output/plunder-transfer-map/data/
+    stage: deploy
+    before_script: 
+    - rsync -av --delete ./public/data/ /output/plunder-transfer-map/data/
     script:
     - npm install
     - npm run build
