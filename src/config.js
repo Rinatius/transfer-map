@@ -27,7 +27,6 @@ const formatter = new Intl.NumberFormat('en-US', {
 const tableOptions = {
 
   csvUrl: 'https://firebasestorage.googleapis.com/v0/b/newagent-b0720.appspot.com/o/transfer-map%2Fmockup_v3.csv?alt=media&token=3294afb4-be79-487a-938e-e919b7969230',
-
   mapOptions: {
     "active_color": "#dbabac",
     "passive_color": "#DDD",
