@@ -32,7 +32,7 @@ const theme = createMuiTheme({
 
 		typography: {
 			color: "#515151",
-			fontFamily: "Open Sans",
+			fontFamily: "'Open Sans', sans-serif",
 			fontSize: 14,
 			letterSpacing: -0.3,
 			width: 66
@@ -68,7 +68,7 @@ const theme = createMuiTheme({
 
 		MuiInputBase: {
 			root: {
-				fontFamily: "Open Sans",
+				fontFamily: "'Open Sans', sans-serif",
 				fontSize: 14,
 				boxShadow: "0 1px 2px rgba(0, 0, 0, 0.35)",
 				borderRadius: "3px",
@@ -76,7 +76,7 @@ const theme = createMuiTheme({
 			},
 			input: {
 				  fontSize: '13px',
-				  fontFamily: "Open Sans",
+				  fontFamily: "'Open Sans', sans-serif",
 				  color: "#515151",
 			  	}
 		},
@@ -84,7 +84,7 @@ const theme = createMuiTheme({
 		MuiSelect: {
 			root: {
 				color: "#515151",
-				fontFamily: "Open Sans",
+				fontFamily: "'Open Sans', sans-serif",
 				fontSize: 14,
 				letterSpacing: -0.3,
 			}

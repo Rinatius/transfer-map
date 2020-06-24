@@ -154,6 +154,7 @@ class MTablePaginationInner extends React.Component {
       }
       </Box>
         <Typography variant="body2" style={{
+          fontFamily: "'Open Sans', sans-serif",
           position: "absolute",
           right: "5%",
           marginTop: "13px",
@@ -163,6 +164,7 @@ class MTablePaginationInner extends React.Component {
       <Box  display="flex" justifyContent="center" mb="50px">
       <Typography className={classes.root} variant="body2"
         style={{
+          fontFamily: "'Open Sans', sans-serif",
           width: "241px",
           display: "flex",
           justifyContent: "center",

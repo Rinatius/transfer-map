@@ -280,7 +280,7 @@ class MTableFilterRow extends React.Component {
           outline:'none',
           // position: 'absolute',
           // right: 0,
-        }} ><Typography variant="body2" style={{width: "96px", fontFamily: "Open Sans",}}>Reset all filters</Typography>
+        }} ><Typography variant="body2">Reset all filters</Typography>
       </button>
     </Box>
     );

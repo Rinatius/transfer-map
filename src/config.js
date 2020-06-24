@@ -307,7 +307,7 @@ const tableOptions = {
     },
     
     filterCellStyle: {
-      fontFamily: "Open Sans",
+      fontFamily: "'Open Sans', sans-serif",
       fontSize: "14px",
       padding: "none",
       width: "140px",
