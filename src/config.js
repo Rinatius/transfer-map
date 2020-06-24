@@ -2,7 +2,7 @@ const defaultLegendTitleStyle = {
   paddingLeft: '6px', 
   height: '19px',
   color: '#515151',
-  fontFamily: "Open Sans",
+  fontFamily: "'Open Sans', sans-serif",
   fontSize: '14px',
   fontWeight: '700',
   letterSpacing: '-0.3px',}
@@ -11,7 +11,7 @@ const defaultLegendBodyStyle = {
   width: '150px',
   paddingBottom: '20px',
   color: '#515151',
-  fontFamily: "Open Sans",
+  fontFamily: "'Open Sans', sans-serif",
   fontSize: '14px',
   letterSpacing: '-0.3px',
 }
