@@ -115,7 +115,7 @@ class TransferTableComponent extends Component {
 		filterCountry: '',
 		dateRange: null,
 		filteredData: null,
-		filters: false
+		applyUrlParams: true
 	}
 
 	toolbarRef = React.createRef()
@@ -124,17 +124,17 @@ class TransferTableComponent extends Component {
 
 	componentDidMount() {
 		this.setData()
-		this.setFilters()
+		// this.setFilters()
 	}
 
 	componentDidUpdate(prevProps) {
 		console.log('reset map: ' + prevProps.resetMap + ' => ' + this.props.resetMap )
 		console.log('country ' + prevProps.filterCountry + '=> ' + this.props.filterCountry )
 		console.log(prevProps.urlFilters)
-		// if (prevProps.urlFilters !== this.props.urlFilters) {
-			console.log(this.props.urlFilters)
-			// this.setFilters()
-		// }
+		if (this.state.applyUrlParams) {
+			this.setFilters()
+			this.setState({applyUrlParams: false})
+		}
 		if (prevProps.filterCountry !== this.props.filterCountry || 
 			 (prevProps.resetMap !== this.props.resetMap)) {
 				console.log('update')
@@ -152,24 +152,13 @@ class TransferTableComponent extends Component {
 	}
 
 	setFilters = () => {
-		console.log(this.props.urlFilters)
 		const keys = Object.keys(config.columns)
-		console.log(objColumns)
 		const urlFilters = this.props.urlFilters
-		console.log(urlFilters)
 		Object.entries(urlFilters).forEach((filter) => {
-			console.log(filter)
 			const index = keys.findIndex((value) => {return value === filter[0]}) 
-			console.log(index)
-			console.log(objColumns[index])
 			if (objColumns[index].tableData) {
-				console.log('table data')
-				objColumns[index].tableData.filterValue = filter[1]
-			} else {
-				console.log('no table data')
-				console.log(objColumns[index].tableData)
+				objColumns[index].tableData.filterValue = [filter[1]]
 			}
-			console.log(objColumns[index])
 		})
 		this.setState({columns: objColumns})
 	}
