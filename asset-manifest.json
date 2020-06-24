@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/transfer-map/static/css/main.456c1173.chunk.css",
-    "main.js": "/transfer-map/static/js/main.17522ff8.chunk.js",
-    "main.js.map": "/transfer-map/static/js/main.17522ff8.chunk.js.map",
-    "runtime-main.js": "/transfer-map/static/js/runtime-main.a3ccc828.js",
-    "runtime-main.js.map": "/transfer-map/static/js/runtime-main.a3ccc828.js.map",
-    "static/css/2.294a05d7.chunk.css": "/transfer-map/static/css/2.294a05d7.chunk.css",
-    "static/js/2.24c38804.chunk.js": "/transfer-map/static/js/2.24c38804.chunk.js",
-    "static/js/2.24c38804.chunk.js.map": "/transfer-map/static/js/2.24c38804.chunk.js.map",
-    "index.html": "/transfer-map/index.html",
-    "precache-manifest.64ee8c2a712f8fcf99f163c409e9547a.js": "/transfer-map/precache-manifest.64ee8c2a712f8fcf99f163c409e9547a.js",
-    "service-worker.js": "/transfer-map/service-worker.js",
-    "static/css/2.294a05d7.chunk.css.map": "/transfer-map/static/css/2.294a05d7.chunk.css.map",
-    "static/css/main.456c1173.chunk.css.map": "/transfer-map/static/css/main.456c1173.chunk.css.map",
-    "static/js/2.24c38804.chunk.js.LICENSE.txt": "/transfer-map/static/js/2.24c38804.chunk.js.LICENSE.txt"
+    "main.css": "/projects/plunder-transfer-map/static/css/main.52965b5a.chunk.css",
+    "main.js": "/projects/plunder-transfer-map/static/js/main.6bc8884f.chunk.js",
+    "main.js.map": "/projects/plunder-transfer-map/static/js/main.6bc8884f.chunk.js.map",
+    "runtime-main.js": "/projects/plunder-transfer-map/static/js/runtime-main.d88ff204.js",
+    "runtime-main.js.map": "/projects/plunder-transfer-map/static/js/runtime-main.d88ff204.js.map",
+    "static/css/2.294a05d7.chunk.css": "/projects/plunder-transfer-map/static/css/2.294a05d7.chunk.css",
+    "static/js/2.d12a9b21.chunk.js": "/projects/plunder-transfer-map/static/js/2.d12a9b21.chunk.js",
+    "static/js/2.d12a9b21.chunk.js.map": "/projects/plunder-transfer-map/static/js/2.d12a9b21.chunk.js.map",
+    "index.html": "/projects/plunder-transfer-map/index.html",
+    "precache-manifest.3725b8b1a1d3f5b64c7892e448d8879c.js": "/projects/plunder-transfer-map/precache-manifest.3725b8b1a1d3f5b64c7892e448d8879c.js",
+    "service-worker.js": "/projects/plunder-transfer-map/service-worker.js",
+    "static/css/2.294a05d7.chunk.css.map": "/projects/plunder-transfer-map/static/css/2.294a05d7.chunk.css.map",
+    "static/css/main.52965b5a.chunk.css.map": "/projects/plunder-transfer-map/static/css/main.52965b5a.chunk.css.map",
+    "static/js/2.d12a9b21.chunk.js.LICENSE.txt": "/projects/plunder-transfer-map/static/js/2.d12a9b21.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a3ccc828.js",
+    "static/js/runtime-main.d88ff204.js",
     "static/css/2.294a05d7.chunk.css",
-    "static/js/2.24c38804.chunk.js",
-    "static/css/main.456c1173.chunk.css",
-    "static/js/main.17522ff8.chunk.js"
+    "static/js/2.d12a9b21.chunk.js",
+    "static/css/main.52965b5a.chunk.css",
+    "static/js/main.6bc8884f.chunk.js"
   ]
 }

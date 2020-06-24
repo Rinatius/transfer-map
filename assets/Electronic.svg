@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25"><defs><clipPath id="ftila"><path fill="#fff" d="M4.93 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1z"/></clipPath><clipPath id="ftilb"><path fill="#fff" d="M6.93 9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1z"/></clipPath></defs><g><g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M3.93 3.5h13"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M3.93 22.5h13"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M14.93 1.62v0l2 1.94v0l-2 1.94v0"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M5.93 20.5v0l-2 2v0l2 1.955v0"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" stroke-width="2" d="M4.93 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1z" clip-path="url(&quot;#ftila&quot;)"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" stroke-width="2" d="M6.93 9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1z" clip-path="url(&quot;#ftilb&quot;)"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M16.93 9.5h2.5"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M2.43 9.5h2.5"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M16.93 13h2.5"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M2.43 13h2.5"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M16.93 16.5h2.5"/></g><g><path fill="none" stroke="#4c4c4c" stroke-miterlimit="20" d="M2.43 16.5h2.5"/></g><g><path fill="#4c4c4c" d="M20.43 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></g><g><path fill="#4c4c4c" d="M1.43 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></g><g><path fill="#4c4c4c" d="M20.43 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></g><g><path fill="#4c4c4c" d="M1.43 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></g><g><path fill="#4c4c4c" d="M20.43 14.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></g><g><path fill="#4c4c4c" d="M1.43 14.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></g></g></g><style id="stylish-1" class="stylish" type="text/css">.occrp-story p, .occrp-story li {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+body {
+    color: #000;
+}</style><style id="stylish-3" class="stylish" type="text/css">
+.occrp-inset-box {
+    box-shadow: none !important;
+    background-color: #f9f7f7;
+    font-family: Noto Serif, serif !important;
+}
+.occrp-inset-box .subheader p {
+	font-style: normal;
+    font-family: Noto Serif, serif !important;
+
+}
+.occrp-inset-box .inner h3.occrp-section {
+	font-family: Noto Serif, serif !important;
+    text-transform: none;
+    font-size: 1.8rem;
+}
+.occrp-inset-box .text p {
+    font-family: Noto Serif, serif !important;
+    font-weight: 500 !important;
+}
+.box-side {
+    box-shadow: none !important;
+    background-color: #f9f7f7;
+    padding: 8px !important;
+    font-family: Noto Serif, serif !important;
+
+}
+.box-side &gt; i {
+    top: 1.6em; 
+
+}
+aside.box-side p {
+	font-weight: 500 !important;
+    font-family: Noto Serif, serif !important;
+
+}
+.box-side h3.occrp-section {
+    font-family: Noto Serif, serif !important;
+	text-transform: none;
+}
+.occrp-story .full-image, .occrp-story .inset-image img, .occrp-story .inset-image-wide img {
+    box-shadow: none;
+    transition: box-shadow 0.3s;
+}
+.links .nav {
+	box-shadow: none !important;
+    border-radius: 0;
+}
+.links .nav h3.occrp-section {
+	text-shadow: none;
+    font-size: 1.3rem;
+}
+.links .nav ul li a {
+	text-shadow: none;
+}
+.occrp-shelf-full .story {
+	transition: box-shadow 0.3s, background-color 0.3s;
+}</style></svg>
