@@ -18,10 +18,11 @@ const legend = props => {
         </Grid>)
     })
     return (
-        <Grid container pb={'40px'}
+		<Grid container pb={'40px'}
+		id="legend"
         direction="row"
         justify="center"
-        alignItems="center">
+        alignItems="flex-start">
         {itemList}
         </Grid>
     )

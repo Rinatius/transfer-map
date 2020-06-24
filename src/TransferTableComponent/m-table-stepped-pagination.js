@@ -94,7 +94,7 @@ class MTablePaginationInner extends React.Component {
 
     return (
       <Box>
-      <Box className={classes.root} style={{
+      <Box id="totals-container" className={classes.root} style={{
           width: "auto",
           display: "flex",
           justifyContent: "center",
