@@ -197,8 +197,16 @@ class TransferMapComponent extends Component {
 
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
-                let x = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[0] - 2
-                let y = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[1] + 0.5
+				let x, y;
+				if (this.capitals.get(toCountry.key)){
+
+					x = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[0] - 2
+					y = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[1] + 0.5
+				} else {
+					x = 0;
+					y = 0;
+					console.log(toCountry.key + ' not found in countries json');
+				}
                 return <Marker
 
                   coordinates={[x, y]}>
