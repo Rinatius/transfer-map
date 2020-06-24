@@ -159,6 +159,9 @@ class MTableFilterRow extends React.Component {
           this.props.onFilterChanged(columnDef.tableData.id, value);
         }}
         value={this.props.dateRange}
+        dayPlaceholder="DD"
+        monthPlaceholder="MM"
+        yearPlaceholder="YYYY"
 			/>
     )
   }

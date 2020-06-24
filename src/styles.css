@@ -64,6 +64,8 @@
     flex-grow: 1;
     padding: 0 2px;
     box-sizing: content-box;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
   }
   .react-daterange-picker__inputGroup__divider {
     padding: 1px 0;
