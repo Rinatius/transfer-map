@@ -40,7 +40,8 @@ class TransferMapComponent extends Component {
     data: [],
     visibleCountries: Set([]),
     visiblePairs: [],
-    focusCountry: null
+    focusCountry: null,
+    showArrows: false
   }
 
   extractCountries = (table) => {
@@ -80,6 +81,7 @@ class TransferMapComponent extends Component {
   }
 
   componentDidMount() {
+    this.setState({showArrows: config.mapOptions.showArrows})
     json(config.mapOptions.capitals, c => c)
       .then(capitals => {
         const table = this.props.data.map(row => {
@@ -117,6 +119,45 @@ class TransferMapComponent extends Component {
     let all = null;
     if (this.state.ready) {
       const proj = projections["geoEqualEarth"]().rotate([-25, 0, 0]).scale(245).translate([500, 335])
+      let arrows = null
+      if (this.state.showArrows) {
+          arrows = this.state.visiblePairs.map(fromCountry =>
+                fromCountry.values.map(toCountry => {
+                  const from = this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
+                  const to = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
+                  const fromAbs = proj(from)
+                  const toAbs = proj(to)
+                  const dx = toAbs[0] - fromAbs[0]
+                  const dy = toAbs[1] - fromAbs[1]
+                  const connectorProps = {
+                    stroke: "#931e1d",
+                    strokeWidth: this.dataScaler(toCountry.value.total),
+                    strokeLinecap: "butt",
+                    markerStart: "url(#triangle)"
+                  }
+                  //const connectorPath = `M${0}, ${0} l${-dx},${-dy}`
+                  return <Annotation
+                    subject={from}
+                    dx={dx}
+                    dy={dy}
+                    connectorProps={connectorProps}
+                  >
+                    {/*<path d={connectorPath} {...connectorProps}/>*/}
+
+                    <defs>
+
+                      <marker id="triangle" viewBox="0 0 10 10"
+                              refX="3" refY="5"
+                              markerUnits="strokeWidth"
+                              markerWidth="2.5" markerHeight="5"
+                              orient="auto">
+                        <path d="M 10 0 L 10 10 L 0 5 z" fill="#931e1d"/>
+                      </marker>
+                    </defs>
+                  </Annotation>
+                })
+              )
+      }
       all = (
         <div style={{
           borderTop: '2px solid #931e1d',
@@ -182,43 +223,7 @@ class TransferMapComponent extends Component {
 
               })
             )}
-
-            {this.state.visiblePairs.map(fromCountry =>
-              fromCountry.values.map(toCountry => {
-                const from = this.capitals.get(fromCountry.key)[0].latlng.slice().reverse()
-                const to = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()
-                const fromAbs = proj(from)
-                const toAbs = proj(to)
-                const dx = toAbs[0] - fromAbs[0]
-                const dy = toAbs[1] - fromAbs[1]
-                const connectorProps = {
-                  stroke: "#931e1d",
-                  strokeWidth: this.dataScaler(toCountry.value.total),
-                  strokeLinecap: "butt",
-                  markerStart: "url(#triangle)"
-                }
-                //const connectorPath = `M${0}, ${0} l${-dx},${-dy}`
-                return <Annotation
-                  subject={from}
-                  dx={dx}
-                  dy={dy}
-                  connectorProps={connectorProps}
-                >
-                  {/*<path d={connectorPath} {...connectorProps}/>*/}
-
-                  <defs>
-
-                    <marker id="triangle" viewBox="0 0 10 10"
-                            refX="3" refY="5"
-                            markerUnits="strokeWidth"
-                            markerWidth="2.5" markerHeight="5"
-                            orient="auto">
-                      <path d="M 10 0 L 10 10 L 0 5 z" fill="#931e1d"/>
-                    </marker>
-                  </defs>
-                </Annotation>
-              })
-            )}
+            {arrows}
 
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
