@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
-    this.setState({urlFilters: urlParams.get('filters')});
+    this.setState({urlFilters: urlParams});
     csv(config.csvUrl)
       .then(d => this.setState({data: d, ready: true}))
   }
