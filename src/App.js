@@ -20,13 +20,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams)
-    // this.setState({urlFilters: urlParams});
-    // this.setState({urlFilters: queryString.parse('?country=China')}) 
+    this.setState({urlFilters: queryString.parse(window.location.search)}) 
     csv(config.csvUrl)
       .then(d => this.setState({data: d, ready: true}))
-      // .then(d => this.setState({urlFilters: queryString.parse('?country=China')}))
   }
   
   handleCountryClick = (country) => {
