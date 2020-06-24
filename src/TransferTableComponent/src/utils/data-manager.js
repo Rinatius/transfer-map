@@ -20,7 +20,7 @@ export default class DataManager {
   treeDataMaxLevel = 0;
   groupedDataLength = 0;
   defaultExpanded = false;
-  
+
   data = [];
   columns = [];
 
@@ -58,7 +58,7 @@ export default class DataManager {
     this.filtered = false;
   }
 
-  setColumns(columns) {    
+  setColumns(columns) {
     const undefinedWidthColumns = columns.filter(c => c.width === undefined);
     let usedWidth = ["0px"];
 
@@ -67,14 +67,14 @@ export default class DataManager {
         columnOrder: index,
         filterValue: columnDef.defaultFilter,
         groupOrder: columnDef.defaultGroupOrder,
-        groupSort: columnDef.defaultGroupSort || 'asc',     
-        width: columnDef.width,   
+        groupSort: columnDef.defaultGroupSort || 'asc',
+        width: columnDef.width,
         ...columnDef.tableData,
         id: index,
       };
 
-      if(columnDef.width !== undefined) {
-        if(typeof columnDef.width === "number") {
+      if (columnDef.width !== undefined) {
+        if (typeof columnDef.width === "number") {
           usedWidth.push(columnDef.width + "px");
         }
         else {
@@ -256,7 +256,7 @@ export default class DataManager {
     this.sorted = false;
   }
 
-    changeColumnHidden(column, hidden) {
+  changeColumnHidden(column, hidden) {
     column.hidden = hidden;
   }
 
@@ -314,8 +314,8 @@ export default class DataManager {
 
       // get the effective start and end considering hidden columns
       const sorted = this.columns
-          .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
-          .filter(column => column.tableData.groupOrder === undefined);
+        .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
+        .filter(column => column.tableData.groupOrder === undefined);
       let numHiddenBeforeStart = 0;
       let numVisibleBeforeStart = 0;
       for (let i = 0; i < sorted.length && numVisibleBeforeStart <= start; i++) {
@@ -600,7 +600,13 @@ export default class DataManager {
           } else {
             this.filteredData = this.filteredData.filter(row => {
               const value = this.getFieldValue(row, columnDef);
-              return value && value.toString().toUpperCase().includes(tableData.filterValue.toUpperCase());
+              let filterValue;
+              if (typeof tableData.filterValue === 'string') {
+                filterValue = tableData.filterValue;
+              } else if (Array.isArray(tableData.filterValue)) {
+                filterValue = tableData.filterValue[0];
+              }
+              return value && value.toString().toUpperCase().includes(filterValue.toUpperCase());
             });
           }
         }
@@ -658,7 +664,7 @@ export default class DataManager {
 
         if (!group) {
           const path = [...(o.path || []), value];
-          let oldGroup = this.findGroupByGroupPath(this.groupedData, path) || { isExpanded: (typeof this.defaultExpanded ==='boolean') ? this.defaultExpanded : false };
+          let oldGroup = this.findGroupByGroupPath(this.groupedData, path) || { isExpanded: (typeof this.defaultExpanded === 'boolean') ? this.defaultExpanded : false };
 
           group = { value, groups: [], groupsIndex: {}, data: [], isExpanded: oldGroup.isExpanded, path: path };
           o.groups.push(group);
@@ -747,7 +753,7 @@ export default class DataManager {
     this.data.forEach(rowData => {
       if (!this.searchText && !this.columns.some(columnDef => columnDef.tableData.filterValue)) {
         if (rowData.tableData.isTreeExpanded === undefined) {
-          var isExpanded = (typeof this.defaultExpanded ==='boolean') ? this.defaultExpanded : this.defaultExpanded(rowData);
+          var isExpanded = (typeof this.defaultExpanded === 'boolean') ? this.defaultExpanded : this.defaultExpanded(rowData);
           rowData.tableData.isTreeExpanded = isExpanded;
         }
       }

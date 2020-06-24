@@ -237,7 +237,9 @@ class TransferTableComponent extends Component {
 
 	getFilteredData = () => {
 		filteredData = this.tableRef.current.state.data
-		let sumOfFilteredData = filteredData.reduce((a, b) => a + parseFloat(b.amount), 0)
+		let sumOfFilteredData = filteredData.reduce((a, b) => {
+			return b.amount ? a + parseFloat(b.amount) : a;
+		}, 0)
 		this.paginationRef.current.setSum(sumOfFilteredData);
 	}
 
