@@ -172,7 +172,12 @@ class TransferTableComponent extends Component {
 		let link = column.linkColumn
 		console.log(field,link)
 		dataCopy.map(row => {
-			row[field] = <a href={ (config.downloadsPrefix ? config.downloadsPrefix : '') + row[link]}><img src={config.columns[field]["imgLink"][row[field]]} alt={row[field]}/></a>
+			if (row[link] === '') {
+				row[field] = <img style={{opacity: 0.4}} src={config.columns[field]["imgLink"][row[field]]} alt={row[field]}/>
+			}
+			else {
+				row[field] = <a href={ (config.downloadsPrefix ? config.downloadsPrefix : '') + row[link]}><img src={config.columns[field]["imgLink"][row[field]]} alt={row[field]}/></a>
+			}
 		})
 		this.setState({data: dataCopy})
 	}
