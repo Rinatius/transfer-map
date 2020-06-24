@@ -20,8 +20,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
 import { Button } from '@material-ui/core';
-import DateRangePicker from '@wojtekmaj/react-daterange-picker';
-//import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
+//import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 
