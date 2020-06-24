@@ -115,7 +115,7 @@ class TransferTableComponent extends Component {
 		filterCountry: '',
 		dateRange: null,
 		filteredData: null,
-		filters: false
+		applyUrlParams: true
 	}
 
 	toolbarRef = React.createRef()
@@ -124,13 +124,17 @@ class TransferTableComponent extends Component {
 
 	componentDidMount() {
 		this.setData()
-		this.setFilters()
+		// this.setFilters()
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log('reset map: ' + prevProps.resetMap + '=> ' + this.props.resetMap )
-		console.log('country' + prevProps.filterCountry + '=> ' + this.props.filterCountry )
-		
+		console.log('reset map: ' + prevProps.resetMap + ' => ' + this.props.resetMap )
+		console.log('country ' + prevProps.filterCountry + '=> ' + this.props.filterCountry )
+		console.log(prevProps.urlFilters)
+		if (this.state.applyUrlParams) {
+			this.setFilters()
+			this.setState({applyUrlParams: false})
+		}
 		if (prevProps.filterCountry !== this.props.filterCountry || 
 			 (prevProps.resetMap !== this.props.resetMap)) {
 				console.log('update')
@@ -148,7 +152,15 @@ class TransferTableComponent extends Component {
 	}
 
 	setFilters = () => {
-		this.setState({filters: true})
+		const keys = Object.keys(config.columns)
+		const urlFilters = this.props.urlFilters
+		Object.entries(urlFilters).forEach((filter) => {
+			const index = keys.findIndex((value) => {return value === filter[0]}) 
+			if (objColumns[index].tableData) {
+				objColumns[index].tableData.filterValue = [filter[1]]
+			}
+		})
+		this.setState({columns: objColumns})
 	}
 
 	loadImage = () => {

@@ -5,6 +5,7 @@ import TransferTableComponent from "./TransferTableComponent/TransferTableCompon
 import Legend from './Legend/Legend'
 import config from "./config";
 import {csv} from "d3";
+import queryString from 'query-string'
 
 import './styles.css'
 
@@ -19,8 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const urlParams = new URLSearchParams(window.location.search);
-    this.setState({urlFilters: urlParams});
+    this.setState({urlFilters: queryString.parse(window.location.search)}) 
     csv(config.csvUrl)
       .then(d => this.setState({data: d, ready: true}))
   }
@@ -47,6 +47,7 @@ class App extends Component {
             data={this.state.data}
             filterCountry={this.state.filterCountry}
             resetMap={this.state.resetMap}
+            urlFilters={this.state.urlFilters}
             handleResetMap={this.handleResetMap} />
           <Legend />
         </div>

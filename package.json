@@ -14,6 +14,7 @@
     "echarts-for-react": "^2.0.16",
     "immutable": "^4.0.0-rc.12",
     "material-table": "^1.62.0",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-daterange-picker": "^2.0.1",
     "react-dom": "^16.13.1",
