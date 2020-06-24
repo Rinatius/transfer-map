@@ -14,10 +14,13 @@ class App extends Component {
     ready: false,
     data: {},
     filterCountry: '',
+    urlFilters: '',
     resetMap: false
   }
 
   componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.setState({urlFilters: urlParams.get('filters')});
     csv(config.csvUrl)
       .then(d => this.setState({data: d, ready: true}))
   }
