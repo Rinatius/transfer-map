@@ -1,3 +1,5 @@
+import trans from "./lang";
+
 const defaultLegendTitleStyle = {
   paddingLeft: '6px', 
   height: '19px',
@@ -271,7 +273,7 @@ const tableOptions = {
     paging: true,
     pageSize: 20,
 
-    textBody: 'Explore the dataset of transactions below:',
+    textBody: trans.tableTitle,
 
     hideFilterIcons: true,
     showTitle: false,
