@@ -65,7 +65,6 @@ class TransferMapComponent extends Component {
   }
 
   countryClickHandler = (country) => {
-    console.log('country click')
     if (this.countries.has(country)) {
       this.setState({
         focusCountry: country
@@ -97,14 +96,12 @@ class TransferMapComponent extends Component {
         this.pairs.forEach(d => d.values.forEach(t => {
           totals.push(t.value.total)
         }))
-        console.log(this.pairs)
         this.dataScaler = scaleLinear()
           .domain(extent(totals))
           .range([1, 5])
         this.capitals = nest()
           .key(d => d.name)
           .map(capitals)
-        console.log(this.capitals)
         this.setState({
           data: table,
           ready: true,

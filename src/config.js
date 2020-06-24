@@ -133,8 +133,6 @@ const tableOptions = {
         if (!term.lessThan) {
           term.lessThan = ''
         }
-        console.log(rowData)
-        console.log(term)
         // there must be a better way to compare
         if (term.greaterThan != '' && term.lessThan != '') {
           return term.greaterThan <= parseInt(rowData.amount)

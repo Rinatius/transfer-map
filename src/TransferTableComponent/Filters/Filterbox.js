@@ -8,7 +8,6 @@ const filters = (props) => {
     let filters = []
     if (props.columns.length > 0) {
         const columns = props.columns.filter(column => {return column.filtering})
-        console.log("Box style", props.boxStyle)
         columns.forEach(column => {
             if (column.type === 'number_range') {
                 filters.push(

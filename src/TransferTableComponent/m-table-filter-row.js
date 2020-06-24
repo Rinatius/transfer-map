@@ -151,9 +151,7 @@ class MTableFilterRow extends React.Component {
     return(
       <DateRangePicker
         onChange={(dateRange) => {
-          console.log('on change')
           const value = {...columnDef.tableData.filterValue};
-          console.log(value)
           value.dateRange = dateRange
           this.props.dateRangeChange(dateRange)
           this.props.onFilterChanged(columnDef.tableData.id, value);
@@ -178,9 +176,7 @@ class MTableFilterRow extends React.Component {
         //placeholder={columnDef.filterPlaceholder || ''}
         placeholder={this.getLocalizedFilterPlaceHolder(columnDef)}
         onChange={(event) => {
-          console.log('on change')
           const value = {...columnDef.tableData.filterValue};
-          console.log(value)
           value.greaterThan = event.target.value;
           this.props.onFilterChanged(columnDef.tableData.id, value);
         }}

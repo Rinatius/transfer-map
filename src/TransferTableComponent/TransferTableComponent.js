@@ -128,16 +128,12 @@ class TransferTableComponent extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log('reset map: ' + prevProps.resetMap + ' => ' + this.props.resetMap )
-		console.log('country ' + prevProps.filterCountry + '=> ' + this.props.filterCountry )
-		console.log(prevProps.urlFilters)
 		if (this.state.applyUrlParams) {
 			this.setFilters()
 			this.setState({applyUrlParams: false})
 		}
 		if (prevProps.filterCountry !== this.props.filterCountry || 
 			 (prevProps.resetMap !== this.props.resetMap)) {
-				console.log('update')
 			if (this.props.filterCountry !== '') {
 				this.filterCountry(this.props.filterCountry)
 			}
@@ -182,7 +178,6 @@ class TransferTableComponent extends Component {
 		let dataCopy = [...this.props.data]
 		let field = column.field
 		let link = column.linkColumn
-		console.log(field,link)
 		dataCopy.map(row => {
 			if (row[link] === '') {
 				row[field] = <img style={{opacity: 0.4}} src={config.columns[field]["imgLink"][row[field]]} alt={row[field]}/>
@@ -234,7 +229,6 @@ class TransferTableComponent extends Component {
 		objColumns.forEach(col => {
 			col.tableData.filterValue = ""
 		})
-		console.log('reset click')
 		this.setState({columns: objColumns})
 		this.props.handleResetMap()
 		this.toolbarRef.current.onSearchChange("");
