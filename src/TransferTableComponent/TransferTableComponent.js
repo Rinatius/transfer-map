@@ -209,8 +209,18 @@ class TransferTableComponent extends Component {
 
 		keys.map(key => {
 			objColumns.forEach(col => {
-				if (col.field === key && col.lookup === '' && (col.type === '' || col.type === 'numeric')) {
-					col.lookup = newData[key]
+				if (col.field === key && col.lookup === '' && col.type === '') {
+					col.lookup = {}
+					for (const [k, value] of Object.entries(newData[key])) {
+						if (config.table.hideEmptyFilters) {
+							if (value.replace(/ /g, '') !== '') {
+								col.lookup[k] = value
+							}
+						}
+						else {
+							col.lookup[k] = value
+						}
+					}
 				}
 			})
 		})
