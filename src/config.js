@@ -282,6 +282,7 @@ const tableOptions = {
     searchFieldVariant: 'standard',
     loadingType: 'overlay',
     draggable: false,
+    hideEmptyFilters: true,
 
     searchFieldStyle: {
       width: '100%',
