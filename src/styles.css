@@ -402,3 +402,29 @@ table.MuiTable-root td:first-child {
 table.MuiTable-root td:nth-child(2) {
 	white-space: nowrap;
 }
+
+.controls {
+  display: flex;
+  position: fixed;
+  top: 47%;
+  left: 92%;
+  margin: 1.25rem 0;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.controls > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  height: 2rem;
+  width: 2rem;
+  background: #931e1d;
+  color: #fff;
+  border-radius: 100%;
+  border: 0;
+}
+.controls > button:first-child {
+  margin-right: 0.25rem;
+}
