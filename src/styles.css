@@ -393,3 +393,12 @@
 	}
 
 }
+
+/** Force date to be on one line only **/
+table.MuiTable-root td:first-child {
+	white-space: nowrap;
+}
+/** Force payer to be on one line only **/
+table.MuiTable-root td:nth-child(2) {
+	white-space: nowrap;
+}
