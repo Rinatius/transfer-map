@@ -303,3 +303,93 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
 }
+
+
+/** Fix table body **/
+.MuiTableCell-body {
+	padding: 1px 7px;
+}
+.MuiTableCell-root {
+	font-size: 13px !important;
+}
+
+
+/** Fix table header  */
+#table-header {
+	margin-top: 10px;
+}
+#table-header > div {
+	margin-bottom: 10px;
+}
+
+/** Fix input */
+.MuiInputBase-root.MuiInput-underline {
+	/* border-bottom: none !important; */
+}
+.MuiInput-root .MuiInput-input {
+	padding-left:7px;
+	padding-right:7px;
+}
+.MuiInputBase-root.MuiInput-underline::after {
+	display: none;
+}
+.MuiInputBase-root.MuiInput-underline::before {
+	display: none;
+}
+
+/** Fix dropdown */
+.MuiMenu-list .MuiCheckbox-root {
+	padding:2px;
+}
+.MuiSelect-select.MuiSelect-select {
+	padding-left: 10px;
+}
+
+.filters-reset-button > p{
+	font-size: 12px;
+}
+
+/** Mobile CSS overrides **/
+@media screen and (max-width: 599px) {
+
+	/** Fix map **/
+	svg.rsm-svg {
+		overflow: visible;
+	}
+	svg.rsm-svg text {
+		/* font-size: 28px !important;
+		line-height: 1 !important; */
+		transform: scale(1.5, 1.5)
+	}
+	svg.rsm-svg g.rsm-marker.rsm-marker--box > g {
+		transform: scale(2, 1.7) translate(-54px, -43px);
+	}
+	svg.rsm-svg g.rsm-marker > g.rsm-disk-marker {
+		transform: translate(-2x, -3x);
+	}
+
+	/** Fix legend **/
+	#legend {
+		justify-content: flex-start;
+	}
+	#legend .MuiGrid-item {
+		max-width: 50%;
+		flex-grow: 1;
+	}
+
+	/** Fix totals **/
+	#totals-container {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	#totals-container p {
+		position: static !important;
+	}
+
+	/** Fix table headers **/
+	#table-header {
+		margin-left: -10px;
+	}
+
+}
