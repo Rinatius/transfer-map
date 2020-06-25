@@ -79,6 +79,11 @@ class TransferMapComponent extends Component {
 
   }
 
+  handlePopupClick( el ) {
+    let parent = el.currentTarget.parentNode;
+    parent.appendChild(el.currentTarget);
+  }
+
   componentDidMount() {
     this.setState({showArrows: config.mapOptions.showArrows})
     json(config.mapOptions.capitals, c => c)
@@ -233,8 +238,9 @@ class TransferMapComponent extends Component {
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
                 return <Marker
-				  coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-				  class="rsm-marker rsm-marker--box"
+        				  coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
+                  class="rsm-marker rsm-marker--box"
+                  onMouseEnter={this.handlePopupClick.bind(this)}
                 >
 
                   <defs>
@@ -251,7 +257,7 @@ class TransferMapComponent extends Component {
                     </clipPath>
                   </defs>
                   <g
-                    transform="translate(-66, -51) scale(1.2 1.2)"
+                    transform="translate(-56, -45) scale(1 1)"
                   >
                     <g>
                       <g filter="url(#k4zga)">

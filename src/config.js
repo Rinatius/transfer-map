@@ -35,7 +35,7 @@ const tableOptions = {
     "focus_color": "#bd3d3f",
     "label_text_style": {
       fill: '#ffffff',
-      fontSize: '14px',
+      fontSize: '11px',
       fontWeight: '1000',
       letterSpacing: '-0.60px'
     },
