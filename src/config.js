@@ -72,7 +72,7 @@ const tableOptions = {
         const rowDate = new Date(rowData.transactionDate)
         return rowDate >= term.dateRange[0] && rowDate <= term.dateRange[1]
       },
-      cellStyle: {paddingLeft: 20},
+      cellStyle: {paddingLeft: 5},
       headerStyle: {paddingLeft: 0}
     },
     paidBy: {

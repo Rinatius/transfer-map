@@ -29,6 +29,9 @@
 .MuiToolbar-gutters {
     padding: 0 !important;
 }
+.MuiTableCell-sizeSmall  {
+	width: auto !important;
+}
 
 
 
