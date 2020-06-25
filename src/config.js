@@ -312,7 +312,7 @@ const tableOptions = {
       fontFamily: "'Open Sans', sans-serif",
       fontSize: "14px",
       padding: "none",
-      width: "140px",
+      width: "180px",
     }
   },
 
