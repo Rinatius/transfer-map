@@ -21,6 +21,9 @@ code {
 .MuiTableCell-body {
 	padding: 1px 7px;
 }
+.MuiTableCell-root {
+	font-size: 13px !important;
+}
 
 
 /** Fix table header  */
