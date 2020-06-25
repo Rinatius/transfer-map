@@ -207,29 +207,25 @@ class TransferMapComponent extends Component {
 
 					x = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[0] - 2
 					y = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[1] + 0.5
-				} else {
-					x = 0;
-					y = 0;
-					console.log(toCountry.key + ' not found in countries json');
-				}
-                return <Marker
+					return <Marker
 
-                  coordinates={[x, y]}>
-                  <g transform="translate(-2, -3)" class="rsm-disk-marker">
-                    <g>
-                      <image width="17" height="11" transform="translate(-1)"
-                             href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/>
-                    </g>
-                    <g>
-                      <path fill="#fff"
-                            d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874"/>
-                    </g>
-                    <g>
-                      <path fill="none" stroke="#666" stroke-miterlimit="20" stroke-width=".25"
-                            d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874z"/>
-                    </g>
-                  </g>
-                </Marker>
+					coordinates={[x, y]}>
+					<g transform="translate(-2, -3)" class="rsm-disk-marker">
+						<g>
+						<image width="17" height="11" transform="translate(-1)"
+								href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/>
+						</g>
+						<g>
+						<path fill="#fff"
+								d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874"/>
+						</g>
+						<g>
+						<path fill="none" stroke="#666" stroke-miterlimit="20" stroke-width=".25"
+								d="M12.122 4.664c0 1.035-2.12 1.874-4.735 1.874-2.616 0-4.737-.839-4.737-1.874 0-1.035 2.121-1.874 4.737-1.874 2.615 0 4.735.839 4.735 1.874z"/>
+						</g>
+					</g>
+					</Marker>
+				}
 
               })
             )}
@@ -237,6 +233,10 @@ class TransferMapComponent extends Component {
 
             {this.state.visiblePairs.map(fromCountry =>
               fromCountry.values.map(toCountry => {
+				  let coords;
+				if (this.capitals.get(toCountry.key)){
+					coords = this.capitals.get(toCountry.key)[0].latlng.slice().reverse();
+				 
                 return <Marker
         				  coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
                   class="rsm-marker rsm-marker--box"
@@ -284,10 +284,10 @@ class TransferMapComponent extends Component {
                     x={-3}
                     style={config.mapOptions.label_text_style}
                   >
-                    {(toCountry.value.count + ' ' + 'transactions')}
+					{toCountry.key}
                   </text>
                 </Marker>
-
+				}
               })
             )}
           </ComposableMap>
