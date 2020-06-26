@@ -55,7 +55,8 @@ class App extends Component {
           <TransferMapComponent 
             data={this.state.data}
             handleCountryClick={this.handleCountryClick}
-            resetMap={this.state.resetMap} />
+            resetMap={this.state.resetMap}
+            handleComponentUpdate={this.resizeIframe} />
           <TransferTableComponent 
             data={this.state.data}
             filterCountry={this.state.filterCountry}

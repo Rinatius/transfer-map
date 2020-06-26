@@ -78,8 +78,8 @@ class TransferMapComponent extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.resetMap !== this.props.resetMap && this.props.resetMap) {
       this.setState({focusCountry: null})
-    }
-
+	}
+	this.props.handleComponentUpdate();
   }
 
   handlePopupClick(el) {
