@@ -238,7 +238,8 @@ class TransferMapComponent extends Component {
                     y = this.capitals.get(toCountry.key)[0].latlng.slice().reverse()[1]
                     return <Marker coordinates={[x, y]}>
                       <g transform={`scale(${counterScale} ${counterScale})`}>
-                        <g transform="translate(-9, -5)">
+                        <g transform="translate(-9, -5)"
+                        className="rsm-disk-marker">
                           <g>
                             <image width="17" height="11" transform="translate(-1)"
                                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAALCAYAAACZIGYHAAABAklEQVQoU63SOUtEQRAE4G+9bxA8MBHFTM0EM03M/MGGBpoZmKiZgZiIGggeKK4Xtcw8HrKJYEPTPQNVXV0zHf8QnT4cuRtoZc7fJT/xVfoG2iZJP4IJTJYcxxA+8IqXVnYrWSVJDWABq1gu/QyGEcAjbnGNq9K/haiSZFoItrCDdcwXNYNlhWfc4QLHOMV9VFaSTMv0PexjE7NlvfgTH97xgDMc4LCo6raVLGIbu9jAXPEnSmJoPMnkcxzhpChrlIQshi5hDStlnemWsXWd+HGJm0LceJLnCtFo8SHgKYyhKomJIXoqNevl6XvA35G7AONFav0n9Y+k9sA1+pH8+Q//AP87QAx5oVJdAAAAAElFTkSuQmCC"/>
@@ -272,7 +273,6 @@ class TransferMapComponent extends Component {
 
                     return <Marker
                       coordinates={this.capitals.get(toCountry.key)[0].latlng.slice().reverse()}
-                      class="rsm-marker rsm-marker--box"
                       onMouseEnter={this.handlePopupClick.bind(this)}
                     >
 
@@ -292,6 +292,7 @@ class TransferMapComponent extends Component {
                       <g
                         transform={`scale(${counterScale} ${counterScale})`}
                       >
+                        <g className="rsm-marker rsm-marker--box">
                         <g
                           transform="translate(-56, -45)"
                         >
@@ -310,6 +311,7 @@ class TransferMapComponent extends Component {
                           textAnchor="middle"
                           y={-32}
                           x={-3}
+                          className="rsm-svg"
                           style={config.mapOptions.label_text_style}
                         >
                           {('$' + toCountry.value.total.toLocaleString(('en-US')) + '\n')}
@@ -318,10 +320,12 @@ class TransferMapComponent extends Component {
                           textAnchor="middle"
                           y={-15}
                           x={-3}
+                          className="rsm-svg"
                           style={config.mapOptions.label_text_style}
                         >
                           {toCountry.key}
                         </text>
+                          </g>
                       </g>
                     </Marker>
                   }
