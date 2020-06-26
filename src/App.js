@@ -37,6 +37,7 @@ class App extends Component {
   }
   resizeIframe = () => {
 	let height = document.body.scrollHeight + 30;
+	console.log('Resize '+height);
 	window.parent.postMessage('OCCRP_IFRAME_SET_HEIGHT: '+height, '*');
   }
 
