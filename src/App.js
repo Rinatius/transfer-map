@@ -23,8 +23,8 @@ class App extends Component {
     this.setState({urlFilters: queryString.parse(window.location.search)}) 
     csv(config.csvUrl)
 	  .then(d => this.setState({data: d, ready: true}))
-	this.resizeIframe();
-	window.addEventListener('resize', this.resizeIframe);
+    this.resizeIframe();
+    window.addEventListener('resize', this.resizeIframe);
   }
   
   handleCountryClick = (country) => {
@@ -36,7 +36,6 @@ class App extends Component {
                    filterCountry: ''})
   }
   resizeIframe = () => {
-	  var _this = this;
     window.requestAnimationFrame(function(){
       let height = document.body.scrollHeight + 30;
       console.log('Resize '+height);
