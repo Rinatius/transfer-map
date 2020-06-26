@@ -27,6 +27,10 @@ class App extends Component {
     window.addEventListener('resize', this.resizeIframe);
   }
   
+  componentDidUpdate() {
+    this.resizeIframe();
+  }
+  
   handleCountryClick = (country) => {
     this.setState({filterCountry: country,
                    resetMap: false})
