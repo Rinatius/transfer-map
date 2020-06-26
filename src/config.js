@@ -2,7 +2,7 @@ import trans from "./lang";
 
 const defaultLegendTitleStyle = {
   paddingLeft: '6px', 
-  height: '19px',
+  height: 'auto',
   color: '#515151',
   fontFamily: "'Open Sans', sans-serif",
   fontSize: '14px',
