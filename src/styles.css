@@ -357,12 +357,10 @@
 		overflow: visible;
 	}
 	svg.rsm-svg text {
-		/* font-size: 28px !important;
-		line-height: 1 !important; */
 		transform: scale(1.5, 1.5)
 	}
 	svg.rsm-svg g.rsm-marker.rsm-marker--box > g {
-		transform: scale(2, 1.7) translate(-54px, -43px);
+		transform: scale(2, 1.7) translate(0, 0);
 	}
 	svg.rsm-svg g.rsm-marker > g.rsm-disk-marker {
 		transform: translate(-2x, -3x);
