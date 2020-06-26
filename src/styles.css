@@ -405,12 +405,11 @@ table.MuiTable-root td:nth-child(2) {
 
 .controls {
   display: flex;
-  position: fixed;
-  top: 47%;
-  left: 92%;
+  position: absolute;
+  top: 0;
+  left: 0;
   margin: 1.25rem 0;
   text-align: center;
-  transform: translateX(-50%);
 }
 
 .controls > button {
@@ -424,6 +423,12 @@ table.MuiTable-root td:nth-child(2) {
   color: #fff;
   border-radius: 100%;
   border: 0;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.1s, box-shadow 0.1s;
+}
+.controls > button:hover {
+  background-color: #ac3f3e;
 }
 .controls > button:first-child {
   margin-right: 0.25rem;
