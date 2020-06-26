@@ -36,9 +36,12 @@ class App extends Component {
                    filterCountry: ''})
   }
   resizeIframe = () => {
-	let height = document.body.scrollHeight + 30;
-	console.log('Resize '+height);
-	window.parent.postMessage('OCCRP_IFRAME_SET_HEIGHT: '+height, '*');
+	  var _this = this;
+    window.requestAnimationFrame(function(){
+      let height = document.body.scrollHeight + 30;
+      console.log('Resize '+height);
+      window.parent.postMessage('OCCRP_IFRAME_SET_HEIGHT: '+height, '*');
+    });
   }
 
   render() {
