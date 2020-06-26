@@ -56,7 +56,6 @@ class TransferMapComponent extends Component {
 
   nestPairs = (data) => {
     return nest()
-      .key(d => d.from_country)
       .key(d => d.to_country)
       .rollup(value => {
         return {
@@ -102,9 +101,9 @@ class TransferMapComponent extends Component {
         this.extractCountries(table)
         this.pairs = this.nestPairs(table);
         const totals = []
-        this.pairs.forEach(d => d.values.forEach(t => {
+        this.pairs.forEach(t => {
           totals.push(t.value.total)
-        }))
+        })
         this.dataScaler = scaleLinear()
           .domain(extent(totals))
           .range([1, 5])
@@ -206,8 +205,7 @@ class TransferMapComponent extends Component {
                   })}
               </Geographies>
 
-              {this.state.visiblePairs.map(fromCountry =>
-                fromCountry.values.map(toCountry => {
+              {this.state.visiblePairs.map(toCountry => {
                   let x, y;
                   if (this.capitals.get(toCountry.key)) {
 
@@ -234,11 +232,10 @@ class TransferMapComponent extends Component {
                   }
 
                 })
-              )}
+              }
               {arrows}
 
-              {this.state.visiblePairs.map(fromCountry =>
-                fromCountry.values.map(toCountry => {
+              {this.state.visiblePairs.map(toCountry => {
                   let coords;
                   if (this.capitals.get(toCountry.key)) {
                     coords = this.capitals.get(toCountry.key)[0].latlng.slice().reverse();
@@ -299,7 +296,7 @@ class TransferMapComponent extends Component {
                     </Marker>
                   }
                 })
-              )}
+              }
             </ZoomableGroup>
           </ComposableMap>
           <div className="controls">
