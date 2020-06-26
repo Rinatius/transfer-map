@@ -54,6 +54,20 @@ class TransferMapComponent extends Component {
     })
   }
 
+  // How it used to be
+  // nestPairs = (data) => {
+  //   return nest()
+  //     .key(d => d.from_country)
+  //     .key(d => d.to_country)
+  //     .rollup(value => {
+  //       return {
+  //         count: value.length,
+  //         total: sum(value, d => d.amount)
+  //       }
+  //     })
+  //     .entries(data)
+  // }
+
   nestPairs = (data) => {
     return nest()
       .key(d => d.to_country)
@@ -101,6 +115,12 @@ class TransferMapComponent extends Component {
         this.extractCountries(table)
         this.pairs = this.nestPairs(table);
         const totals = []
+
+        // How it used to be
+        // this.pairs.forEach(d => d.values.forEach(t => {
+        //   totals.push(t.value.total)
+        // }))
+
         this.pairs.forEach(t => {
           totals.push(t.value.total)
         })
@@ -205,6 +225,11 @@ class TransferMapComponent extends Component {
                   })}
               </Geographies>
 
+              {/* How code below started with */}
+              {/* {this.state.visiblePairs.map(fromCountry =>
+                fromCountry.values.map(toCountry => {
+                  let x, y; */}
+
               {this.state.visiblePairs.map(toCountry => {
                   let x, y;
                   if (this.capitals.get(toCountry.key)) {
@@ -234,6 +259,11 @@ class TransferMapComponent extends Component {
                 })
               }
               {arrows}
+
+              {/* How code below started with */}
+              {/* {this.state.visiblePairs.map(fromCountry =>
+                fromCountry.values.map(toCountry => {
+                  let coords; */}
 
               {this.state.visiblePairs.map(toCountry => {
                   let coords;
