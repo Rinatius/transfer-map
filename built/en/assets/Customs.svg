@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25"><g><g><path fill="#4c4c4c" d="M12.603.62c6.57 0 11.863 5.324 11.863 11.863a11.84 11.84 0 0 1-11.863 11.863C6.064 24.346.74 19.053.74 12.483.74 5.944 6.064.62 12.603.62zM2.233 12.484c0 5.761 4.64 10.4 10.37 10.4 5.76 0 10.4-4.64 10.4-10.4 0-5.73-4.64-10.37-10.4-10.37-5.73 0-10.37 4.64-10.37 10.37zm6.697 1.805h-.001zm1.494-.249c.186 1.308 1.027 1.838 2.304 1.838.872 0 2.025-.311 2.025-1.402 0-.935-1.277-1.121-1.993-1.308-1.525-.374-3.58-.747-3.58-2.741 0-1.558 1.276-2.368 2.677-2.524v-.965h1.526v.996c1.494.219 2.335.904 2.584 2.43l-1.494.218c-.125-1.09-.904-1.495-1.931-1.495-.716 0-1.9.186-1.9 1.152 0 .935 1.401 1.121 2.086 1.308 1.557.436 3.581.747 3.581 2.773 0 1.65-1.463 2.586-2.926 2.772v.935h-1.526v-.966c-1.681-.218-2.616-1.09-2.927-2.771z"/></g></g><style id="stylish-1" class="stylish" type="text/css">.occrp-story p, .occrp-story li {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+body {
+    color: #000;
+}</style><style id="stylish-3" class="stylish" type="text/css">
+.occrp-inset-box {
+    box-shadow: none !important;
+    background-color: #f9f7f7;
+    font-family: Noto Serif, serif !important;
+}
+.occrp-inset-box .subheader p {
+	font-style: normal;
+    font-family: Noto Serif, serif !important;
+
+}
+.occrp-inset-box .inner h3.occrp-section {
+	font-family: Noto Serif, serif !important;
+    text-transform: none;
+    font-size: 1.8rem;
+}
+.occrp-inset-box .text p {
+    font-family: Noto Serif, serif !important;
+    font-weight: 500 !important;
+}
+.box-side {
+    box-shadow: none !important;
+    background-color: #f9f7f7;
+    padding: 8px !important;
+    font-family: Noto Serif, serif !important;
+
+}
+.box-side &gt; i {
+    top: 1.6em; 
+
+}
+aside.box-side p {
+	font-weight: 500 !important;
+    font-family: Noto Serif, serif !important;
+
+}
+.box-side h3.occrp-section {
+    font-family: Noto Serif, serif !important;
+	text-transform: none;
+}
+.occrp-story .full-image, .occrp-story .inset-image img, .occrp-story .inset-image-wide img {
+    box-shadow: none;
+    transition: box-shadow 0.3s;
+}
+.links .nav {
+	box-shadow: none !important;
+    border-radius: 0;
+}
+.links .nav h3.occrp-section {
+	text-shadow: none;
+    font-size: 1.3rem;
+}
+.links .nav ul li a {
+	text-shadow: none;
+}
+.occrp-shelf-full .story {
+	transition: box-shadow 0.3s, background-color 0.3s;
+}</style></svg>

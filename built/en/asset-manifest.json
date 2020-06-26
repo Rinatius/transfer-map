@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "http://transfer-map.test:8080/built/en/static/css/main.77ead407.chunk.css",
+    "main.js": "http://transfer-map.test:8080/built/en/static/js/main.781951b8.chunk.js",
+    "main.js.map": "http://transfer-map.test:8080/built/en/static/js/main.781951b8.chunk.js.map",
+    "runtime-main.js": "http://transfer-map.test:8080/built/en/static/js/runtime-main.a6468167.js",
+    "runtime-main.js.map": "http://transfer-map.test:8080/built/en/static/js/runtime-main.a6468167.js.map",
+    "static/js/2.ac039be0.chunk.js": "http://transfer-map.test:8080/built/en/static/js/2.ac039be0.chunk.js",
+    "static/js/2.ac039be0.chunk.js.map": "http://transfer-map.test:8080/built/en/static/js/2.ac039be0.chunk.js.map",
+    "index.html": "http://transfer-map.test:8080/built/en/index.html",
+    "precache-manifest.caf2e30dcb84a9efe14fc1dc14d0635c.js": "http://transfer-map.test:8080/built/en/precache-manifest.caf2e30dcb84a9efe14fc1dc14d0635c.js",
+    "service-worker.js": "http://transfer-map.test:8080/built/en/service-worker.js",
+    "static/css/main.77ead407.chunk.css.map": "http://transfer-map.test:8080/built/en/static/css/main.77ead407.chunk.css.map",
+    "static/js/2.ac039be0.chunk.js.LICENSE.txt": "http://transfer-map.test:8080/built/en/static/js/2.ac039be0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a6468167.js",
+    "static/js/2.ac039be0.chunk.js",
+    "static/css/main.77ead407.chunk.css",
+    "static/js/main.781951b8.chunk.js"
+  ]
+}
