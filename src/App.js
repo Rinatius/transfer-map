@@ -22,7 +22,9 @@ class App extends Component {
   componentDidMount() {
     this.setState({urlFilters: queryString.parse(window.location.search)}) 
     csv(config.csvUrl)
-      .then(d => this.setState({data: d, ready: true}))
+	  .then(d => this.setState({data: d, ready: true}))
+	this.resizeIframe();
+	window.addEventListener('resize', this.resizeIframe);
   }
   
   handleCountryClick = (country) => {
@@ -32,6 +34,10 @@ class App extends Component {
   handleResetMap = () => {
     this.setState({resetMap: true,
                    filterCountry: ''})
+  }
+  resizeIframe = () => {
+	let height = document.body.scrollHeight
+	window.parent.postMessage('OCCRP_IFRAME_SET_HEIGHT: '+height, '*');
   }
 
   render() {
