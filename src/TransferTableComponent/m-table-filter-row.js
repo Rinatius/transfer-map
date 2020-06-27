@@ -170,7 +170,7 @@ class MTableFilterRow extends React.Component {
       <Box display="flex">
       <TextField
         //style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
-        style={this.props.cellStyle}
+        style={{...this.props.cellStyle, width: '140px'}}
         type={columnDef.type === 'numeric' ? 'number' : 'search'}
         value={_.get(columnDef, ['tableData', 'filterValue', 'greaterThan']) || ''}
         //placeholder={columnDef.filterPlaceholder || ''}
@@ -197,7 +197,7 @@ class MTableFilterRow extends React.Component {
       />
       <TextField
         // style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
-        style={this.props.cellStyle}
+        style={{...this.props.cellStyle, width: '140px'}}
         type={columnDef.type === 'numeric' ? 'number' : 'search'}
         value={_.get(columnDef, ['tableData', 'filterValue', 'lessThan']) || ''}
         placeholder={columnDef.filterPlaceholder || ''}

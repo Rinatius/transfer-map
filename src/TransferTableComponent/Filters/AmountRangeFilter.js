@@ -15,7 +15,8 @@ const amountRangeTypeFilter = (props) => {
         style = columnDef.filterCellStyle}
     else {
         style = props.style
-    }
+	}
+	console.log(style.width);
 
     return (
         <>
