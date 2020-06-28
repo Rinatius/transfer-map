@@ -16,7 +16,7 @@ if (process.env.REACT_APP_LANG){
 			break;
 		
 		case 'ky':
-			langStrings.setLanguage('ru');
+			langStrings.setLanguage('ky');
 			break;
 		default:
 			langStrings.setLanguage('en');
